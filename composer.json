@@ -31,7 +31,9 @@
         "wpackagist-plugin/autoptimize": "*",
 
         "vlucas/phpdotenv": "*",
-        "oscarotero/env": "*"
+        "oscarotero/env": "*",
+
+        "idleberg/wordpress-vite-assets": "^0.6.0"
     },
 
     "require-dev": {

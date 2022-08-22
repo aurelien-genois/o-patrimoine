@@ -64,6 +64,7 @@ define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
 /**
  * Debugging Settings
  */
+define('WP_ENV', env('WP_ENV'));
 if(env('WP_ENV') && env('WP_ENV') === 'local') {
     define('WP_DEBUG', true);
     define('WP_DEBUG_DISPLAY', false);
