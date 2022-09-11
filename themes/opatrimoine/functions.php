@@ -1,14 +1,53 @@
 <?php
+declare(strict_types=1);
+
+remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
+add_action( 'shutdown', function() {
+    while ( @ob_end_flush() );
+ } );
 
 add_action(
-    'after_setup_theme',
+    'after_setup_theme', // fire at each pages load
+    'opatrimoine_load_theme',
+);
+add_action(
+    'after_switch_theme', // fire only when the theme change
     'opatrimoine_initialize_theme',
 );
 
-function opatrimoine_initialize_theme() {
+function opatrimoine_load_theme() {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     add_theme_support('menus');
+    add_theme_support( 'responsive-embeds' );
+    add_theme_support( 'wp-block-styles' );
+    add_theme_support( 'align-wide' );
+    add_theme_support( 'editor-styles' );
+    add_theme_support('post-formats', array('video','link','image','quote','audio'));
+    add_theme_support('html5', [
+        'caption',
+        'comment-form',
+        'comment-list',
+        'gallery',
+        'search-form',
+        'widgets',
+    ]);
+
+    // hide admin bar on front if not a admin
+    if (!current_user_can('administrator') && !is_admin() && !current_user_can('customer')) {
+        show_admin_bar(false);
+    }
+}
+
+function opatrimoine_initialize_theme() {
+    update_option('blogname', 'O\'Patrimoine'); // define site title, not necessaty here because default is "OPatrimoine"
+    update_option('blogdescription', 'Des visites chaque semaine'); // define site tagline
+
+    // Register navigation menus.
+    register_nav_menus([
+        'navigation' => __('Navigation', 'aka_theme'),
+        'footer' => __('Pied de page', 'aka_theme'),
+    ]);
 };
 
 function includeCustomsAssets($entry = null): void
