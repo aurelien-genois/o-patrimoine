@@ -53,6 +53,17 @@ function opatrimoine_initialize_theme() {
 function includeCustomsAssets($entry = null): void
 {
     if($entry){
+        // ---- ACF COLORS ----
+        $colors = get_field('options_colors', 'option');
+        if(is_array($colors) && count($colors)){
+            $custom_css = "html{";
+            foreach ($colors as $name => $color){
+                $custom_css .= "--color_".$name.": ".$color.";";
+            }
+            $custom_css .="}";
+            echo '<style>'.$custom_css.'</style>';
+        }
+
         //INCLUDE CSS / JS FILES
         if(WP_ENV === 'local'){
             //VITE LOCAL DEVELOPMENT (CSS & JS included)
@@ -79,3 +90,5 @@ function includeCustomsAssets($entry = null): void
 add_action( 'wp_head',function () {
     includeCustomsAssets('resources/js/app.js');
 }, 5);
+
+include_once 'functions/settings.php';

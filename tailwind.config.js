@@ -2,6 +2,7 @@ module.exports = {
     content: [
         './themes/opatrimoine/templates/**/*.php',
         './themes/opatrimoine/**/*.php',
+        './themes/opatrimoine/*.php',
     ],
     theme: {
         colors: {
