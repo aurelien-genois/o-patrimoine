@@ -1,0 +1,114 @@
+#btnMenu {
+    @apply
+        h-8 w-8
+        flex md:hidden
+        flex-col justify-between
+        cursor-pointer
+    ;
+
+    span {
+        @apply
+        w-full h-1
+        bg-main;
+    }
+}
+
+#deskMenu {
+    .sub-menu-back {
+        @apply hidden
+    }
+    .header__menu {
+        ul {
+            @apply flex justify-between;
+            transform: translateX(0) !important;
+    
+            & > li {
+                &:hover{
+                    .sub-menu {
+                        @apply block;
+                    }
+                }
+            }
+    
+            .sub-menu {
+                @apply
+                hidden
+                min-w-[180px]
+                absolute z-30
+                overflow-hidden
+                bg-black/50 text-sm
+                normal-case
+                p-2
+                ;
+    
+                a{
+                    @apply 
+                        my-3
+                        ;
+                }
+            }
+        }
+    }
+}
+
+#navMenu {
+    @apply
+        w-[320px] max-w-full
+        p-4
+        fixed left-0 inset-y-0 z-50
+        bg-fourth
+        transform -translate-x-full transition-all duration-300 ease-in-out
+    ;
+
+    &.open {
+        @apply translate-x-0;
+    }
+
+    #mobileMenu {
+        .sub-menu-back{
+            @apply block py-2 text-white hover:text-main cursor-pointer;
+        }
+
+        .header__menu {
+            @apply
+                pr-10
+                relative
+                transform transition-all duration-300 ease-in-out
+            ;
+
+            ul {
+                & > li {
+                    &.menu-item-has-children {
+                        @apply relative;
+                        & > a {
+                            @apply
+                                relative
+                            ;
+                        }
+                        & > p {
+                            @apply
+                                content-['>']
+                                cursor-pointer
+                                flex justify-center items-center
+                                absolute top-[5px] right-[20%]
+                            ;
+                        }
+                    }
+                }
+                .sub-menu{
+                    @apply
+                        w-full
+                        absolute top-0 left-0
+                        hidden
+
+                        transition-all duration-300 ease-in-out transform translate-x-[120%]
+                    ;
+
+                    &.open{
+                        @apply translate-x-0;
+                    }
+                }
+            }
+        }
+    }
+}

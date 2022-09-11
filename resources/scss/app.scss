@@ -5,7 +5,4 @@
 @tailwind components;
 @tailwind utilities;
 
-// todo add LAYOUTS + COMPONENTS
-.site-title {
-    @apply underline font-bold text-lg text-third;
-}
+@import "elements/header";

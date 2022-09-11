@@ -37,17 +37,17 @@ function opatrimoine_load_theme() {
     if (!current_user_can('administrator') && !is_admin() && !current_user_can('customer')) {
         show_admin_bar(false);
     }
+
+    // Register menus locations
+    register_nav_menus([
+        'header' => __('Navigation', 'opatrimoine'),
+        'footer' => __('Pied de page', 'opatrimoine'),
+    ]);
 }
 
 function opatrimoine_initialize_theme() {
     update_option('blogname', 'O\'Patrimoine'); // define site title, not necessaty here because default is "OPatrimoine"
     update_option('blogdescription', 'Des visites chaque semaine'); // define site tagline
-
-    // Register navigation menus.
-    register_nav_menus([
-        'navigation' => __('Navigation', 'aka_theme'),
-        'footer' => __('Pied de page', 'aka_theme'),
-    ]);
 };
 
 function includeCustomsAssets($entry = null): void
