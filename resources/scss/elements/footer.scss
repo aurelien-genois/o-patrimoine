@@ -1,0 +1,10 @@
+.footer {
+    &__socials {
+        svg {
+            @apply w-full h-full;
+            path {
+                fill : theme("colors.main") !important;
+            }
+        }
+    }
+}

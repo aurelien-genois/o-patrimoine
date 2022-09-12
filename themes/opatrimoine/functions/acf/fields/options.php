@@ -66,6 +66,62 @@ acf_add_local_field_group(
                     ],
                 ],
             ],
+            [
+                'key' => 'field_options_adress',
+                'name' => 'options_adress',
+                'label' => 'Adresse',
+                'type' => 'textarea',
+                'instructions' => 'Adresse à afficher dans le footer',
+                'placeholder' => 'Adresse...',
+                'new_lines' => 'br',
+                'rows' => '5',
+                'maxlength' => '',
+            ],
+            [
+                'key' => 'field_options_tab_socials',
+                'name' => '',
+                'label' => 'Réseaux sociaux',
+                'type' => 'tab',
+                'placement' => 'top',
+            ],
+            [
+                'key' => 'field_options_socials_links',
+                'name' => 'options_socials_links',
+                'label' => 'Liens réseaux sociaux',
+                'instructions' => '5 liens maximum',
+                'type' => 'repeater',
+                'min' => 0,
+                'max' => 5,
+                'button_label' => 'Ajouter un réseau social',
+                'layout' => 'block',
+                'sub_fields' => [
+                    [
+                        'key' => 'field_options_socials_link',
+                        'name' => 'link',
+                        'label' => 'Réseaux sociaux',
+                        'type' => 'link',
+                        'wrapper' => array(
+                            'width' => '50',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                    ],
+                    array(
+                        'key' => 'group_option_socials_icon',
+                        'label' => 'Icon',
+                        'name' => 'icon',
+                        'type' => 'image',
+                        'return_format' => 'id',
+                        'preview_size' => 'thumbnail',
+                        'library' => 'all',
+                        'wrapper' => array(
+                            'width' => '50',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                    ),
+                ],
+            ]
         ],
         'location' => array(
             array(
