@@ -6,5 +6,5 @@ import '../scss/app.scss';
 
 /* JS FILES */
 import './elements/header';
+import './elements/carousel';
 
-// todo set up glide for home slider

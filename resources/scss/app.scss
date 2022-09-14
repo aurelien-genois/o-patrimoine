@@ -5,5 +5,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
+
 @import "elements/header";
 @import "elements/footer";
+@import "elements/carousel";
+@import "elements/btn";

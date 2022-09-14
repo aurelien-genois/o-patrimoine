@@ -1,0 +1,34 @@
+//Glide banner
+.glide{
+    &__bullet{
+        &--active{
+            @apply
+            bg-greyLight;
+        }
+    }
+}
+
+.page-banner {
+    @apply
+    h-[250px] sm:h-[400px]
+    flex
+    items-end
+    justify-start
+    overflow-hidden
+    bg-greyLight
+    bg-cover
+    bg-center
+    bg-no-repeat
+    ;
+    &__text {
+
+        p, .term-description {
+            @apply
+            my-10
+            text-sm
+            ;
+        }
+    }
+}
+
+
