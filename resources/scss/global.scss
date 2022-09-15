@@ -1,0 +1,12 @@
+section {
+    @apply mx-4 mb-4 md:mb-8 ;
+    p {
+        @apply mb-2 md:mb-4;
+    }
+    a {
+        @apply text-second hover:text-fourth hover:underline visited:text-third;
+    }
+    .titles {
+        @apply text-second sm:text-lg md:text-xl lg:text-2xl font-bold mb-4;
+    }
+}

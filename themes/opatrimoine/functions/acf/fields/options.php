@@ -32,6 +32,7 @@ acf_add_local_field_group(
                         'key' => 'field_options_color_main',
                         'name' => 'main',
                         'label' => 'Principal',
+                        'instructions' => 'Textes',
                         'type' => 'color_picker',
                         'wrapper' => array(
                             'width' => '25',
@@ -40,7 +41,8 @@ acf_add_local_field_group(
                     [
                         'key' => 'field_options_color_second',
                         'name' => 'second',
-                        'label' => 'Second',
+                        'label' => 'Seconde',
+                        'instructions' => 'Titres, boutons, liens',
                         'type' => 'color_picker',
                         'wrapper' => array(
                             'width' => '25',
@@ -50,6 +52,7 @@ acf_add_local_field_group(
                         'key' => 'field_options_color_third',
                         'name' => 'third',
                         'label' => 'Troisième',
+                        'instructions' => 'Boutons secondaires, liens visités',
                         'type' => 'color_picker',
                         'wrapper' => array(
                             'width' => '25',
@@ -59,6 +62,7 @@ acf_add_local_field_group(
                         'key' => 'field_options_color_fourth',
                         'name' => 'fourth',
                         'label' => 'Quatrième',
+                        'instructions' => 'Boutons (survol), liens (survol)',
                         'type' => 'color_picker',
                         'wrapper' => array(
                             'width' => '25',

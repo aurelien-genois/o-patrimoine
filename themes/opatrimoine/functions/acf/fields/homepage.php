@@ -6,8 +6,17 @@ acf_add_local_field_group(
         'title' => 'Page d\'accueil',
         'fields' => [
             [
-                'key' => 'field_home_banner_slides',
+                'key' => 'field_home_banner_accordion',
                 'label' => 'Bannière',
+                'name' => '',
+                'type' => 'tab',
+                'required' => 0,
+                'placement' => 'top',
+                'endpoint' => 0,
+            ],
+            [
+                'key' => 'field_home_banner_slides',
+                'label' => 'Slides',
                 'name' => 'home_banner_slides',
                 'instructions' => '5 slides maximum',
                 'type' => 'repeater',
@@ -63,6 +72,64 @@ acf_add_local_field_group(
                      ],
                 ],
             ],
+            [
+                'key' => 'field_home_sections',
+                'label' => 'Sections',
+                'name' => '',
+                'type' => 'tab',
+                'required' => 0,
+                'placement' => 'top',
+                'endpoint' => 0,
+            ],
+            [
+                'key' => 'field_home_presentation_title',
+                'label' => 'Titre section présentation',
+                'name' => 'home_presentation_title',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_home_visit_of_the_day_title',
+                'label' => 'Titre section visites du jour',
+                'name' => 'home_visit_of_the_day_title',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_home_visit_of_the_day_link_text',
+                'label' => 'Texte du lien des visites du jour',
+                'name' => 'home_visit_of_the_day_link_text',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_home_location_highlight_title',
+                'label' => 'Titre section mise en avant d\'un lieu',
+                'name' => 'home_location_highlight_title',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_home_location_highlight_link_text',
+                'label' => 'Texte du lien pour le lieu mis en avant',
+                'name' => 'home_location_highlight_link_text',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_home_location_highlight',
+                'label' => 'lieu',
+                'name' => 'home_location_highlight',
+                'type' => 'post_object',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'post_type' => 'location',
+                'taxonomy' => '',
+                'allow_null' => 0,
+                'multiple' => 0,
+                'return_format' => 'id',
+                'ui' => 1,
+            ],
+
+            // * title presentation section
+            // * title visite section
+            // * title highlight lieux section
         ],
         'location' => array(
             array(

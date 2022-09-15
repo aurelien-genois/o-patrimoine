@@ -3,7 +3,7 @@
     &__bullet{
         &--active{
             @apply
-            bg-greyLight;
+            bg-fourth;
         }
     }
 }
@@ -15,7 +15,7 @@
     items-end
     justify-start
     overflow-hidden
-    bg-greyLight
+    bg-fourth
     bg-cover
     bg-center
     bg-no-repeat

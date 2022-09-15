@@ -11,6 +11,7 @@
     <?php wp_head();?>
 </head>
 
-<body>
-<?php
-get_template_part('templates/header');
+<body id="opatrimoine">
+<?php get_template_part('templates/header'); ?>
+    <main>
+        

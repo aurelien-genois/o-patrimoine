@@ -33,7 +33,7 @@ if(bodyWidth >= breakpointMobile){
 createMenu(type);
 
 window.addEventListener('resize', () => {
-    bodyWidth = document.body.clientWidth;
+    bodyWidth = window.innerWidth;
 
     if(bodyWidth >= breakpointMobile && type == 'mobile'){
         type = 'desk';

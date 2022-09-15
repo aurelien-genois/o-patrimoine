@@ -9,20 +9,18 @@
     span {
         @apply
         w-full h-1
-        bg-main;
+        bg-second;
     }
 }
 
 #deskMenu {
-    .sub-menu-back {
-        @apply hidden
-    }
     .header__menu {
-        ul {
+        & > ul {
             @apply flex justify-between;
             transform: translateX(0) !important;
     
             & > li {
+                @apply text-center;
                 &:hover{
                     .sub-menu {
                         @apply block;
@@ -32,20 +30,14 @@
     
             .sub-menu {
                 @apply
-                hidden
-                min-w-[180px]
-                absolute z-30
-                overflow-hidden
-                bg-black/50 text-sm
-                normal-case
-                p-2
+                    hidden
+                    min-w-[180px]
+                    absolute z-30
+                    overflow-hidden
+                    bg-third
+                    normal-case
+                    py-4 px-2
                 ;
-    
-                a{
-                    @apply 
-                        my-3
-                        ;
-                }
             }
         }
     }
@@ -54,9 +46,9 @@
 #navMenu {
     @apply
         w-[320px] max-w-full
-        p-4
+        py-4 pr-4 pl-8
         fixed left-0 inset-y-0 z-50
-        bg-fourth
+        bg-second
         transform -translate-x-full transition-all duration-300 ease-in-out
     ;
 
@@ -65,10 +57,6 @@
     }
 
     #mobileMenu {
-        .sub-menu-back{
-            @apply block py-2 text-white hover:text-main cursor-pointer;
-        }
-
         .header__menu {
             @apply
                 pr-10
@@ -78,6 +66,10 @@
 
             ul {
                 & > li {
+                    @apply text-left;
+                    a {
+                        @apply text-white hover:underline;
+                    }
                     &.menu-item-has-children {
                         @apply relative;
                         & > a {
@@ -90,7 +82,10 @@
                                 content-['>']
                                 cursor-pointer
                                 flex justify-center items-center
-                                absolute top-[5px] right-[20%]
+                                h-5 w-5
+                                hover:border hover:rounded-3xl hover:border-white
+                                font-bold
+                                absolute top-1/2 -translate-y-1/2 right-[20%]
                             ;
                         }
                     }

@@ -7,10 +7,17 @@
         rounded-lg
         text-sm
 
-        hover:bg-main
+        hover:bg-fourth
+        hover:text-white
 
         md:text-base
     ;
 }
 
-// only two types of btn light / dark
+.btn-2 {
+    @extend .btn;
+
+    @apply
+        bg-third
+    ;
+}

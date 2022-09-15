@@ -3,7 +3,15 @@
         svg {
             @apply w-full h-full;
             path {
-                fill : theme("colors.main") !important;
+                transition: fill;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 150ms;
+                fill : theme("colors.second") !important;
+            }
+            &:hover {
+                path {
+                    fill : theme("colors.fourth") !important;
+                }
             }
         }
     }
