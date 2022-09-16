@@ -1,0 +1,23 @@
+.btn {
+    @apply
+        bg-second
+        text-white
+        font-bold
+        px-2 py-1
+        rounded-lg
+        text-sm
+
+        hover:bg-fourth
+        hover:text-white
+
+        md:text-base
+    ;
+}
+
+.btn-2 {
+    @extend .btn;
+
+    @apply
+        bg-third
+    ;
+}

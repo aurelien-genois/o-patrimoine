@@ -5,8 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
-// todo add LAYOUTS + COMPONENTS
-.site-title {
-    @apply underline font-bold text-lg;
-    color: green;
-}
+@import "../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
+
+@import "global";
+@import "elements/header";
+@import "elements/footer";
+@import "elements/carousel";
+@import "elements/btn";

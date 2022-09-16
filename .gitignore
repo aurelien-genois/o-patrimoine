@@ -5,6 +5,8 @@ uploads
 upgrade
 plugins/*
 !plugins/opatrimoine
+themes/*
+!themes/opatrimoine
 themes/opatrimoine/assets/*
 .htaccess
 
@@ -186,5 +188,8 @@ fabric.properties
 ### PhpStorm Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 .idea/
+_install/*
+_public/*
 opatrimoine-key.pem
 opatrimoine.pem
+autoptimize_404_handler.php
