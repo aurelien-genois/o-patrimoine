@@ -91,4 +91,5 @@ add_action( 'wp_head',function () {
     includeCustomsAssets('resources/js/app.js');
 }, 5);
 
+include_once 'functions/helpers.php';
 include_once 'functions/settings.php';

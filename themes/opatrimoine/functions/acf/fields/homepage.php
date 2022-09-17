@@ -118,7 +118,6 @@ acf_add_local_field_group(
                 'type' => 'post_object',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 0,
                 'post_type' => 'location',
                 'taxonomy' => '',
                 'allow_null' => 0,
@@ -126,10 +125,6 @@ acf_add_local_field_group(
                 'return_format' => 'id',
                 'ui' => 1,
             ],
-
-            // * title presentation section
-            // * title visite section
-            // * title highlight lieux section
         ],
         'location' => array(
             array(
