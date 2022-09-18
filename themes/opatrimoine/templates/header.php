@@ -12,7 +12,7 @@ $nav = wp_get_nav_menu_items($menu_obj->slug, array());
 ?>
 <header class="header flex justify-between items-center p-4">
     <div class="flex items-center">
-        <a class="block max-w-[50px]" href="'.home_url().'">
+        <a class="block max-w-[50px]" href="<?= home_url() ?>">
             <?= $logo ?>
         </a>
         <h1 class="md:hidden lg:block ml-4"><?= $blogTitle ?></h1>

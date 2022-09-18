@@ -61,6 +61,7 @@ add_action( 'init', function () {
                 'show_in_rest'      => true,
                 'rewrite'           => $taxonomy['rewrite'],
                 'show_tagcloud'     => false,
+                'show_admin_column' => true,
                 'capabilities'      => [
                                         'manage_terms' => 'manage_'.$taxonomy['id'].'s',
                                         'edit_terms' => 'edit_'.$taxonomy['id'].'s',
