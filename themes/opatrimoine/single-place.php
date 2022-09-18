@@ -69,7 +69,11 @@ $guidedTours = new WP_Query([
         <section>
             <h3 class="titles">Visites</h3>
             <?php if($guidedTours->have_posts()) : ?>
-                <form action="" method="get" class="filter-auto"> 
+                <form action="<?= admin_url( 'admin-ajax.php' ) ?>" method="get" class="filter-auto"> 
+                    
+                    <input type="hidden" name="place_id" value="<?= get_the_id() ?>">
+                    <input type="hidden" name="nonce" value="<?= wp_create_nonce('opatrimoine_filter_guided_tours') ?>">
+                    <input type="hidden" name="action" value="filter_guided_tours">
                     <!-- // todo AJAX -->
                     <input type="date" name="tour_date" id="">
                     <?php wp_dropdown_categories([
@@ -90,14 +94,14 @@ $guidedTours = new WP_Query([
                             'selected' => filter_input(INPUT_GET, 'tour_accessibility', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? '',
                             'class' => 'mx-1 sm:mx-2',
                     ]); ?>
-                    <!-- select disponibilité -->
+                    <!-- // todo select disponibilité -->
                 </form>
-                <div>
+                <div class="guided_tours">
                     <?php while($guidedTours->have_posts()) {
                             $guidedTours->the_post();
                             get_template_part('templates/partials/guided-tour');
-                            wp_reset_postdata();
-                    } ?>
+                    } 
+                    wp_reset_postdata(); ?>
                     <!-- btn Voir plus -->
                 </div>
             <?php else : ?>
