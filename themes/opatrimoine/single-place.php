@@ -69,13 +69,12 @@ $guidedTours = new WP_Query([
         <section>
             <h3 class="titles">Visites</h3>
             <?php if($guidedTours->have_posts()) : ?>
-                <form action="<?= admin_url( 'admin-ajax.php' ) ?>" method="get" class="filter-auto"> 
+                <form action="<?= admin_url( 'admin-ajax.php' ) ?>" method="get" class="filter-auto mb-2 sm:mb-4"> 
                     
                     <input type="hidden" name="place_id" value="<?= get_the_id() ?>">
                     <input type="hidden" name="nonce" value="<?= wp_create_nonce('opatrimoine_filter_guided_tours') ?>">
                     <input type="hidden" name="action" value="filter_guided_tours">
-                    <!-- // todo AJAX -->
-                    <input type="date" name="tour_date" id="">
+                    <input type="date" name="tour_date" id="tour_date" class="input">
                     <?php wp_dropdown_categories([
                             'taxonomy' => 'tour_thematic',
                             'name' => 'tour_thematic',
@@ -83,16 +82,17 @@ $guidedTours = new WP_Query([
                             'value_field' => 'slug',
                             'show_option_all' => __('Thèmatiques','aka_theme'),
                             'selected' => filter_input(INPUT_GET, 'tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? '',
-                            'class' => 'mx-1 sm:mx-2',
+                            'class' => 'input mx-1 sm:mx-2',
                     ]); ?>
+                    Accessible pour :
                     <?php wp_dropdown_categories([
-                            'taxonomy' => 'tour_accessibility',
-                            'name' => 'tour_accessibility',
-                            'id' => 'tour_accessibility_select_filter',
+                            'taxonomy' => 'tour_constraint',
+                            'name' => 'tour_constraint',
+                            'id' => 'tour_constraint_select_filter',
                             'value_field' => 'slug',
                             'show_option_all' => __('Accessibilité','aka_theme'),
-                            'selected' => filter_input(INPUT_GET, 'tour_accessibility', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? '',
-                            'class' => 'mx-1 sm:mx-2',
+                            'selected' => filter_input(INPUT_GET, 'tour_constraint', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? '',
+                            'class' => 'input mx-1 sm:mx-2',
                     ]); ?>
                     <!-- // todo select disponibilité -->
                 </form>

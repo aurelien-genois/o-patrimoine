@@ -9,13 +9,13 @@ function filter_guided_tours() {
     	wp_send_json_error( 'Vous n\'avez pas l\'autorisation d\'effectuer cette action.', 403 );
   	}
     // post data are defined in ajax, not the same name as php
-    if(!isset($_POST['placeId']) || !isset($_POST['date']) || !isset($_POST['thematic']) || !isset($_POST['accessibility'])) {
+    if(!isset($_POST['placeId']) || !isset($_POST['date']) || !isset($_POST['thematic']) || !isset($_POST['constraint'])) {
     	wp_send_json_error( 'Il manque des données pour effectuer cette action.', 403 );
     }
     $placeId = intval($_POST['placeId']);
     $date = sanitize_text_field($_POST['date']);
     $thematic = sanitize_text_field($_POST['thematic']);
-    $accessibility = sanitize_text_field($_POST['accessibility']);
+    $constraint = sanitize_text_field($_POST['constraint']);
 
     if( get_post_status( $placeId ) !== 'publish' ) {
     	wp_send_json_error( 'Ce lieu n\'est pas publié.', 403 );
@@ -33,10 +33,11 @@ function filter_guided_tours() {
         'compare' => '=',
     ];
     if(!empty($date)) {
-        // ! date include hour
+        // $date format is 2022-09-29
+        // guided_tour_date format is 20220929 in BDD
         $meta_query[] = [
             'key' => 'guided_tour_date',
-            'value' => $date,
+            'value' => str_replace('-','',$date), 
             'compare' => '=',
         ];
     }
@@ -49,11 +50,12 @@ function filter_guided_tours() {
             'terms' => $thematic,
         ];
     }
-    if(!empty($accessibility)) {
+    if(!empty($constraint)) {
         $tax_query[] = [
-            'taxonomy' => 'tour_accessibility',
+            'taxonomy' => 'tour_constraint',
             'field' => 'slug',
-            'terms' => $accessibility,
+            'terms' => $constraint,
+            'operator' => 'NOT IN',
         ];
     }
     $args['meta_query'] = $meta_query;
