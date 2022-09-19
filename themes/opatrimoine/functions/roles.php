@@ -37,10 +37,10 @@ add_action( 'init',function(){
     $role->add_cap('delete_tour_thematics');
     $role->add_cap('assign_tour_thematics');
 
-    $role->add_cap('manage_tour_accessibilitys');
-    $role->add_cap('edit_tour_accessibilitys');
-    $role->add_cap('delete_tour_accessibilitys');
-    $role->add_cap('assign_tour_accessibilitys');
+    $role->add_cap('manage_tour_constraints');
+    $role->add_cap('edit_tour_constraints');
+    $role->add_cap('delete_tour_constraints');
+    $role->add_cap('assign_tour_constraints');
 
     // var_dump($role->capabilities);die();
     // todo add roles

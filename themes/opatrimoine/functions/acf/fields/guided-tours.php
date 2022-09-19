@@ -41,15 +41,6 @@ acf_add_local_field_group(
                 'required' => 0,
                 'readonly' => 1,
             ],
-            [   
-                'key' => 'field_guided_tour_total_reservations',
-                'label' => 'Nombre de places réservées',
-                'name' => 'guided_tour_total_reservations',
-                'type' => 'text',
-                'wrapper' => ['width' => '50'],
-                'required' => 0,
-                'readonly' => 1,
-            ],
             [
                 'key' => 'field_guided_tour_place',
                 'label' => 'Lieu',

@@ -22,12 +22,12 @@ add_action( 'init', function () {
     ];
     $taxonomies[] = [
         'cpt' => ['guided_tour'],
-        'id' => 'tour_accessibility',
-        'name' => 'Accessibilité',
-        'name_plural' => 'Accessibilités',
+        'id' => 'tour_constraint',
+        'name' => 'Contrainte d\'accessibilités',
+        'name_plural' => 'Contraintes d\'accessibilités',
         'hierarchical' => false,
         'public' => true,
-        'rewrite' => ['slug'=>'accessibilite']
+        'rewrite' => ['slug'=>'constraint']
     ];
 
 

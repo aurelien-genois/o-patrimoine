@@ -29,7 +29,7 @@ $guidedTours = new WP_Query([
             <h2 class="titles text-center sm:text-left"><?= get_the_title() ?></h2>
 
             <div class="flex flex-col sm:flex-row justify-between">
-                <p class="text-center sm:text-left text-sm sm:text-base"><?= $types = the_terms(get_the_ID(),'place_type'); ?></p>
+                <p class="text-center sm:text-left text-sm sm:text-base"><?= the_terms(get_the_ID(),'place_type'); ?></p>
 
                 <div class="flex justify-between sm:justify-end">
                     <!-- // todo note 
