@@ -12,7 +12,7 @@ $departments = get_departments();
         Rechercher 
         <i class="fa-solid fa-chevron-down transition-all"></i>
     </button>
-    <form action="get" class="flex flex-col lg:flex-row justify-between mb-8 max-h-0 lg:max-h-52 
+    <form method="get" class="flex flex-col lg:flex-row justify-between mb-8 max-h-0 lg:max-h-52 
         overflow-hidden lg:overflow-visible transition-all duration-500 ease-out">
         <fieldset class="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-2">
             <?php
@@ -23,15 +23,6 @@ $departments = get_departments();
                     'value_field' => 'slug',
                     'show_option_all' => __('Types de lieux','aka_theme'),
                     'selected' => filter_input(INPUT_GET, 'place_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? '',
-                    'class' => 'input mx-1 sm:mx-2 max-w-[150px]',
-                ]);
-                wp_dropdown_categories([
-                    'taxonomy' => 'tour_thematic',
-                    'name' => 'tour_thematic',
-                    'id' => 'tour_thematic_select_filter',
-                    'value_field' => 'slug',
-                    'show_option_all' => __('Types de lieux','aka_theme'),
-                    'selected' => filter_input(INPUT_GET, 'tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? '',
                     'class' => 'input mx-1 sm:mx-2 max-w-[150px]',
                 ]);
             ?>
@@ -49,11 +40,9 @@ $departments = get_departments();
     </form>
 
     <section class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center gap-4 lg:gap-6">
-        <?php
+        <?php 
             if(have_posts()) {
                 while (have_posts()) {
-                    the_post();
-        
                     get_template_part('templates/partials/place-thumbnail');
                 }
             }
