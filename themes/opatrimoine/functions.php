@@ -92,4 +92,5 @@ add_action( 'wp_head',function () {
 }, 5);
 
 include_once 'functions/helpers.php';
-include_once 'functions/settings.php';
+include_once 'functions/config/config.php';
+include_once 'functions/queries/queries.php';
