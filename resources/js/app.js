@@ -8,4 +8,5 @@ import '../scss/app.scss';
 import './elements/form';
 import './elements/header';
 import './elements/carousel';
+import './elements/accordion';
 
