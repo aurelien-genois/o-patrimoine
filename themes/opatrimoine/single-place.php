@@ -12,7 +12,8 @@ $coordinates = get_field('place_coordinates',get_the_ID());
 // $types = get_the_terms(get_the_ID(),'place_type'); // if need more custom structure
 
 $guidedTours = new WP_Query([
-    'posts_per_page' => -1,
+    'posts_per_page' => 5,
+    'paged' => 1,
     'post_type' => 'guided_tour',
     'meta_key' => 'guided_tour_place',
     'meta_value' => get_the_ID(),
@@ -74,7 +75,7 @@ $guidedTours = new WP_Query([
                     <input type="hidden" name="place_id" value="<?= get_the_id() ?>">
                     <input type="hidden" name="nonce" value="<?= wp_create_nonce('opatrimoine_filter_guided_tours') ?>">
                     <input type="hidden" name="action" value="filter_guided_tours">
-                    <input type="date" name="tour_date" id="tour_date" class="input">
+                    <input type="date" name="tour_date" id="tour_date" class="input" value="<?= filter_input(INPUT_GET, 'tour_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? '' ?>">
                     <?php wp_dropdown_categories([
                             'taxonomy' => 'tour_thematic',
                             'name' => 'tour_thematic',
@@ -102,8 +103,16 @@ $guidedTours = new WP_Query([
                             get_template_part('templates/partials/guided-tour');
                     } 
                     wp_reset_postdata(); ?>
-                    <!-- btn Voir plus -->
                 </div>
+                <button class="block btn mx-auto load-more-guided-tours-btn"
+                    data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>"
+                    data-nonce="<?php echo wp_create_nonce('opatrimoine_load_guided_tours'); ?>"
+                    data-action="load_guided_tours"
+                    data-place_id="<?= get_the_id() ?>"
+                    data-page="1"
+                >
+                Voir plus de lieux
+            </button>
             <?php else : ?>
                 <p>Pas encore de visites sur ce lieux.</p>
             <?php endif; ?>

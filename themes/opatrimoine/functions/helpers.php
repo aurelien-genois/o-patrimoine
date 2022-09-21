@@ -1,5 +1,7 @@
 <?php
 
+include_once 'duplicate-posts.php';
+
 function get_departments() {
     // $resource = curl_init('https://geo.api.gouv.fr/departements');
     // curl_setopt_array($resource, [

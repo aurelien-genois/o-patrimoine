@@ -31,7 +31,7 @@ $constraints = get_the_terms(get_the_ID(),'tour_constraint');
     
         <div class="w-1/2 sm:w-1/3 order-2 sm:order-3 text-right">
             <?php if(is_array($constraints) && !empty($constraints)) : ?>
-                <p class="flex justify-end">
+                <div class="flex justify-end">
                     Déconseillé&nbsp;:&nbsp;
                     <?php foreach($constraints as $constraint) {
                         $iconId = get_field('constraint_icon',$constraint);
@@ -44,9 +44,9 @@ $constraints = get_the_terms(get_the_ID(),'tour_constraint');
                         }
                         echo '</span>';
                     }; ?>
-                </p>
+                </div>
             <?php endif; ?>
-            <p><?= the_terms(get_the_ID(),'tour_thematic'); ?></p>
+            <div><?= the_terms(get_the_ID(),'tour_thematic'); ?></div>
         </div>
 
         <!-- contact organisateur 
