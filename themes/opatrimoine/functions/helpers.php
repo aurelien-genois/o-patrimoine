@@ -126,8 +126,8 @@ function get_departments() {
 }
 
 function limit_excerpt_length( $excerpt ) {
-    if(mb_strlen($excerpt) > 180) {
-        return mb_substr($excerpt,0,180).'...';
+    if(mb_strlen($excerpt) > 145) {
+        return mb_substr($excerpt,0,145).'...';
     } else {
         return $excerpt;
     }

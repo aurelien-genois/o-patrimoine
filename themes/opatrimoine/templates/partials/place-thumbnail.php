@@ -1,8 +1,4 @@
-<?php
-the_post();
-?>
-
-<article class="shadow-xl flex flex-col h-[400px] max-w-sm">
+<li class="shadow-xl flex flex-col h-[400px] max-w-sm">
     <figure class="">
         <?php the_post_thumbnail('medium',['class' => 'h-32 w-full object-cover']); ?>
     </figure>
@@ -27,4 +23,4 @@ the_post();
             </a>  
         </div>
     </div>
-</article>
+</li>

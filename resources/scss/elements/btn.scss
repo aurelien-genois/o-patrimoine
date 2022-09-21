@@ -1,6 +1,5 @@
 .btn {
     @apply
-        block
         bg-second
         text-white
         font-bold
@@ -8,6 +7,7 @@
         rounded-lg
         text-sm
         cursor-pointer
+        w-fit
 
         hover:bg-fourth
         hover:text-white

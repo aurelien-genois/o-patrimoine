@@ -3,7 +3,7 @@ $slides = get_field('home_banner_slides',get_the_ID());
 
 ?>
 
-<section class="home-banner mb-4">
+<div class="home-banner mb-4">
     <?php if (is_array($slides) && !empty($slides)) : ?>
         <div class="glide slider-homepage" data-autoplay='5000'>
             <div class="glide__track" data-glide-el="track">
@@ -41,4 +41,4 @@ $slides = get_field('home_banner_slides',get_the_ID());
             </div>
         </div>
     <?php endif; ?>
-</section>
+</div>
