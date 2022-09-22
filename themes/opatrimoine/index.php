@@ -5,7 +5,7 @@ the_post();
 
 
     <?php get_template_part('templates/partials/banner') ?>
-    <div class="container mx-auto">
+    <div class="container mx-auto px-5 md:px-8 lg:px-12 xl:px-18 2xl:px-28mx-auto">
         
         <!-- //* title présentation -->
         <section>

@@ -5,6 +5,8 @@ import 'vite/modulepreload-polyfill';
 import '../scss/app.scss';
 
 /* JS FILES */
+import './elements/form';
 import './elements/header';
 import './elements/carousel';
+import './elements/accordion';
 

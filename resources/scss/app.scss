@@ -12,3 +12,12 @@
 @import "elements/footer";
 @import "elements/carousel";
 @import "elements/btn";
+
+.constraint-icon {
+    height: 20px;
+    width: 20px;
+    svg, img {
+        height: inherit;
+        width: inherit;
+    }
+}

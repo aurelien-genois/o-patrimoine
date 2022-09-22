@@ -7,6 +7,6 @@ section {
         @apply text-second hover:text-fourth hover:underline visited:text-third;
     }
     .titles {
-        @apply text-second sm:text-lg md:text-xl lg:text-2xl font-bold mb-4;
+        @apply text-second sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-4;
     }
 }
