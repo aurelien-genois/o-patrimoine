@@ -25,36 +25,36 @@ acf_add_local_field_group(
                 'button_label' => 'Ajouter une slide',
                 'layout' => 'block',
                 'sub_fields' => [
-                     [
+                    [
                         'key' => 'field_home_banner_slide_bg',
                         'label' => 'Image de fond',
                         'name' => 'bg',
                         'type' => 'image',
                         'required' => 0,
                         'return_format' => 'array',
-                     ],
-                     [
+                    ],
+                    [
                         'key' => 'field_home_banner_slide_bg_mobile',
                         'label' => 'Image mobile',
                         'name' => 'bg_mobile',
                         'type' => 'image',
                         'required' => 0,
                         'return_format' => 'array',
-                     ],
-                     [
+                    ],
+                    [
                         'key' => 'field_home_banner_slide_title',
                         'label' => 'Titre',
                         'name' => 'title',
                         'type' => 'text',
-                     ],
-                     [
+                    ],
+                    [
                         'key' => 'field_home_banner_slide_link',
                         'label' => 'Lien',
                         'name' => 'link',
                         'type' => 'link',
                         'return_format' => 'array',
-                     ],
-                     [
+                    ],
+                    [
                         'key' => 'field_home_banner_slide_text_color',
                         'label' => 'Couleur du texte',
                         'name' => 'text_color',
@@ -69,7 +69,7 @@ acf_add_local_field_group(
                         'multiple' => 0,
                         'ui' => 0,
                         'return_format' => 'value',
-                     ],
+                    ],
                 ],
             ],
             [
@@ -99,6 +99,7 @@ acf_add_local_field_group(
                 'name' => 'home_visit_of_the_day_link_text',
                 'type' => 'text',
             ],
+            // ! mise en avant d'un département ?
             [
                 'key' => 'field_home_location_highlight_title',
                 'label' => 'Titre section mise en avant d\'un lieu',
@@ -118,7 +119,7 @@ acf_add_local_field_group(
                 'type' => 'post_object',
                 'instructions' => '',
                 'required' => 0,
-                'post_type' => 'location',
+                'post_type' => 'place',
                 'taxonomy' => '',
                 'allow_null' => 0,
                 'multiple' => 0,
@@ -145,4 +146,3 @@ acf_add_local_field_group(
         'description' => '',
     ]
 );
-

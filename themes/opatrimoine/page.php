@@ -1,7 +1,7 @@
 <?php
-if(is_front_page()){
-	get_template_part('index');
-	exit();
+if (is_front_page()) {
+    get_template_part('index');
+    exit();
 }
 
 get_header();

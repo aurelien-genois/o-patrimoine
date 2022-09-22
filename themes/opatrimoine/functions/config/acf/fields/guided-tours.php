@@ -42,7 +42,7 @@ acf_add_local_field_group(
                 'wrapper' => ['width' => '50'],
                 'required' => 1,
             ],
-            [   
+            [
                 'key' => 'field_guided_tour_total_reservations',
                 'label' => 'Nombre de réservations',
                 'name' => 'guided_tour_total_reservations',
@@ -85,5 +85,3 @@ acf_add_local_field_group(
         'description' => '',
     ]
 );
-
-

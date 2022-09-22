@@ -1,6 +1,6 @@
 <?php
 
-if( function_exists('acf_add_local_field_group') ):
+if (function_exists('acf_add_local_field_group')) :
 
     acf_add_local_field_group([
         'key' => 'group_constraint',
@@ -42,5 +42,5 @@ if( function_exists('acf_add_local_field_group') ):
         'active' => true,
         'description' => '',
     ]);
-    
-    endif;
+
+endif;

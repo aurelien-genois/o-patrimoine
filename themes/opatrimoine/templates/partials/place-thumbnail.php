@@ -1,6 +1,6 @@
 <li class="shadow-xl flex flex-col h-[400px] max-w-sm">
     <figure class="">
-        <?php the_post_thumbnail('medium',['class' => 'h-32 w-full object-cover']); ?>
+        <?php the_post_thumbnail('medium', ['class' => 'h-32 w-full object-cover']); ?>
     </figure>
     <div class="p-3 flex flex-col justify-between h-full">
         <div class="">
@@ -14,13 +14,13 @@
                 <?= get_the_excerpt(); ?>
             </p>
         </div>
-        
+
         <div class="flex flex-row-reverse justify-between">
-            <!-- // todo note 
+            <!-- // todo note
             <span>note</span> -->
             <a class="self-end" href="<?php the_permalink(); ?>">
                 Voir le lieu
-            </a>  
+            </a>
         </div>
     </div>
 </li>

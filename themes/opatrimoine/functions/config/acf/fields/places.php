@@ -41,7 +41,7 @@ acf_add_local_field_group(
                 'multiple' => 0,
                 'ui' => 0,
                 'return_format' => 'value',
-             ],
+            ],
             // exemple from googlemap lat 50.69095245841029, lng 3.181566614446075
             [
                 'key' => 'field_place_coordinates',
@@ -100,4 +100,3 @@ acf_add_local_field_group(
         'description' => '',
     ]
 );
-
