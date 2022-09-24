@@ -17,6 +17,15 @@ $duration = get_field('guided_tour_duration', get_the_ID());
 $totalPersons = get_field('guided_tour_total_persons', get_the_ID());
 $totalReservations = get_field('guided_tour_total_reservations', get_the_ID());
 $constraints = get_the_terms(get_the_ID(), 'tour_constraint');
+
+$user = wp_get_current_user();
+
+$currentLocationId = 0;
+if (isset($args['currentTemplateSlug']) && $args['currentTemplateSlug'] == 'templates/account.php') {
+    $currentLocationId = get_page_id_by_template($args['currentTemplateSlug']);
+} else {
+    $currentLocationId = get_field('field_guided_tour_place', get_the_ID());
+}
 ?>
 
 <article class="bg-grey/20 mb-4 rounded-xl p-4 border border-black border-solid">
@@ -59,18 +68,34 @@ $constraints = get_the_terms(get_the_ID(), 'tour_constraint');
         </p>
     </div>
 
-    <form class="flex flex-wrap">
+    <form class="flex flex-wrap" action="<?= get_theme_file_uri('functions/reservations/reservations.php') ?>" method="post">
         <div class="w-full sm:w-auto">
             <?= ($totalReservations) ? $totalReservations : '0' ?>
             /
             <?= ($totalPersons) ? $totalPersons : '0' ?>
             &nbsp;places réservées
         </div>
+        <input type="hidden" name="current_location" value="<?= $currentLocationId; ?>">
+        <input type="hidden" name="guided_tour_id" value="<?= get_the_ID() ?>">
+
         <div class="w-full sm:w-auto">
-            <!-- // todo Reservation select nb_places or msg -->
+            <!-- // todo if already register ($currentMemberReservations) -->
+            <p>XX places réservées</p>
+            <!-- else -->
+            <input type="number" name="nb_places" id="nb_places" placeholder="0" max="<?= $totalPersons ?>" min="0">
         </div>
         <div class="w-full sm:w-auto">
-            <!-- // todo Reservation submit (inscrire/désinscrire) or links connexion/inscription -->
+            <?php if (!is_user_logged_in()) : ?>
+                <a class="btn" href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
+                <a class="btn" href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
+            <?php else : ?>
+                <!-- // todo if already register ($currentMemberReservations) -->
+                <input class="btn" type="submit" name="delete_reservations" value="Se désinscrire">
+                <!-- // else -->
+                <input class="btn" type="submit" name="register_reservations" value="S'inscrire">
+                <!-- else -->
+            <?php endif; ?>
+
         </div>
     </form>
 </article>
