@@ -6,13 +6,13 @@ $departments = get_departments();
 
 ?>
 
-<section class="px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
-    <span class="hidden max-h-52 -rotate-180"></span>
-    <button class="btn block mx-auto mb-2 lg:hidden" id="resp-filter-place">
+<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
+    <span class="hidden max-h-56 -rotate-180"></span>
+    <button class="accordion-btn btn block mx-auto mb-2 lg:hidden" id="resp-filter-place">
         Rechercher
         <i class="fa-solid fa-chevron-down transition-all"></i>
     </button>
-    <form method="get" class="flex flex-col lg:flex-row justify-between mb-8 max-h-0 lg:max-h-52
+    <form method="get" class="flex flex-col lg:flex-row justify-between mb-8 max-h-0 lg:max-h-56
     overflow-hidden lg:overflow-visible transition-all duration-500 ease-out">
         <fieldset class="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-2">
             <?php
@@ -40,7 +40,7 @@ $departments = get_departments();
     </form>
 </section>
 
-<section class="px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
+<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
     <ul class="archive-places-list grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center gap-4 lg:gap-6 mb-8">
         <?php if (have_posts()) {
             while (have_posts()) {

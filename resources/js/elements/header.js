@@ -1,4 +1,4 @@
-const breakpointMobile = 768;
+const breakpointMobile = 1024;
 let type = '';
 const menuDeskContainer = document.getElementById("deskMenu");
 const menuMobileContainer = document.getElementById("mobileMenu");
@@ -10,9 +10,9 @@ const navMenu = document.getElementById('navMenu');
 
 // Fonction qui place les menu dans le bon container
 const createMenu = (type) => {
-    if(type == 'desk'){
+    if (type == 'desk') {
         menuDeskContainer.append(menu);
-    }else if(type == 'mobile'){
+    } else if (type == 'mobile') {
         menuMobileContainer.append(menu);
     }
 }
@@ -24,9 +24,9 @@ const closeMenu = () => {
 }
 
 //get device type
-if(bodyWidth >= breakpointMobile){
+if (bodyWidth >= breakpointMobile) {
     type = 'desk';
-}else{
+} else {
     type = 'mobile';
 }
 
@@ -35,14 +35,14 @@ createMenu(type);
 window.addEventListener('resize', () => {
     bodyWidth = window.innerWidth;
 
-    if(bodyWidth >= breakpointMobile && type == 'mobile'){
+    if (bodyWidth >= breakpointMobile && type == 'mobile') {
         type = 'desk';
         closeMenu();
         createMenu(type);
         [...menu.querySelectorAll('.sub-menu')].forEach(sub => {
             sub.style.removeProperty('display');
         })
-    }else if(bodyWidth < breakpointMobile && type == 'desk'){
+    } else if (bodyWidth < breakpointMobile && type == 'desk') {
         type = 'mobile';
         createMenu(type);
         [...menu.querySelectorAll('.sub-menu')].forEach(sub => {
@@ -52,9 +52,9 @@ window.addEventListener('resize', () => {
 });
 
 menuOpen?.addEventListener('click', () => {
-    if(navMenu.classList.contains("open")){
+    if (navMenu.classList.contains("open")) {
         closeMenu();
-    }else{
+    } else {
         navMenu.classList.add('open')
     }
 
@@ -71,7 +71,7 @@ menuClose?.addEventListener('click', () => {
 // slide quand on va vers le submenu
 document.querySelectorAll('.menu-item-has-children').forEach(box => {
     let leftArrow = document.createElement('p');
-    leftArrow.classList.add('md:hidden'); // only display on mobile
+    leftArrow.classList.add('lg:hidden'); // only display on mobile
     leftArrow.textContent = '>';
     leftArrow.addEventListener('click', (e) => {
         menu.style.transform = 'translateX(-100%)';
@@ -97,12 +97,12 @@ document.querySelectorAll('.sub-menu-back').forEach(box => {
 /*===============================*/
 //https://blog.internet-formation.fr/2019/01/creer-un-menu-lateral-swipe-menu-avec-touch-events-et-click-en-css-3-et-javascript-natif/
 
-if(screen.width <= breakpointMobile) {
+if (screen.width <= breakpointMobile) {
     let startX = 0; // Position de départ
     let distance = 200; // 200 px de swipe pour afficher le menu
 
     // Au premier point de contact
-    window.addEventListener("touchstart", function(evt) {
+    window.addEventListener("touchstart", function (evt) {
         // Récupère les "touches" effectuées
         var touches = evt.changedTouches[0];
         startX = touches.pageX;
@@ -110,28 +110,28 @@ if(screen.width <= breakpointMobile) {
     }, false);
 
     // Quand les points de contact sont en mouvement
-    window.addEventListener("touchmove", function(evt) {
+    window.addEventListener("touchmove", function (evt) {
         // Limite les effets de bord avec le tactile...
         evt.preventDefault();
         evt.stopPropagation();
     }, false);
 
     // Quand le contact s'arrête
-    window.addEventListener("touchend", function(evt) {
+    window.addEventListener("touchend", function (evt) {
         var touches = evt.changedTouches[0];
         var between = touches.pageX - startX;
 
         // Détection de la direction
-        if(between > 0) {
+        if (between > 0) {
             var orientation = "ltr";
         } else {
             var orientation = "rtl";
         }
 
-        if(Math.abs(between) >= distance && orientation == "ltr" && navMenu.getAttribute("class") != "open") {
+        if (Math.abs(between) >= distance && orientation == "ltr" && navMenu.getAttribute("class") != "open") {
             navMenu.classList.add('open')
         }
-        if(Math.abs(between) >= distance && orientation == "rtl" && navMenu.getAttribute("class") == "open") {
+        if (Math.abs(between) >= distance && orientation == "rtl" && navMenu.getAttribute("class") == "open") {
             navMenu.classList.remove('open')
         }
 
