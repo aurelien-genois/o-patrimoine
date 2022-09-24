@@ -67,7 +67,7 @@ class ReservationsController
         wp_redirect($redirection);
     }
 
-    public function deleteByTourIdAndVisitorId($guidedTourId, $visitorId, $currentLocation)
+    public function deleteByTourIdAndVisitorId($guidedTourId, $visitorId, $currentLocationUrl)
     {
         global $router;
         $redirection = get_home_url();
@@ -75,11 +75,7 @@ class ReservationsController
         $guidedTour = get_post($guidedTourId);
         if ($guidedTour && $guidedTour->post_type === "guided-tour") {
 
-            if ($currentLocation === 'account') {
-                $redirection = 'account link'; // todo
-            } else if ($currentLocation === 'singleplace') {
-                $redirection = get_the_permalink($guidedTour->guided_tour_place);
-            }
+            $redirection = $currentLocationUrl;
 
             // decrement guidedTour
             $currentReservation = $this->reservationModel->getReservationByGuidedTourIdAndVisitorId($guidedTourId, $visitorId);

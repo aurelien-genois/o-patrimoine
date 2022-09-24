@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/wp/wp-load.php';
 require_once 'ReservationsController.php';
 $reservationsController = new ReservationsController();
 
-if (isset($_POST['register_reservations'])) {
+if (isset($_POST['register_reservations']) || isset($_POST['update_reservations'])) {
     if (empty($_POST['current_location'])) {
         wp_redirect(home_url());
         exit();
@@ -50,8 +50,7 @@ if (isset($_POST['delete_reservations'])) {
             $error = 'champs manquants';
             wp_redirect($page_url . '?error-reservation=' . $error);
         } else {
-            // (currentlocation = account / singleplace)
-            $reservationsController->deleteByTourIdAndVisitorId(htmlspecialchars($_POST['guided_tour_id']), $user->ID, htmlspecialchars($_POST['current_location']));
+            $reservationsController->deleteByTourIdAndVisitorId(htmlspecialchars($_POST['guided_tour_id']), $user->ID, $page_url);
         }
     }
 }
