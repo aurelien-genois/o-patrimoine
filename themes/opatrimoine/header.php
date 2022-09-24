@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,10 +8,9 @@
     <script src="https://kit.fontawesome.com/37b722787f.js" crossorigin="anonymous"></script>
     <!-- TODO add fonts links -->
 
-    <?php wp_head();?>
+    <?php wp_head(); ?>
 </head>
 
 <body id="opatrimoine">
-<?php get_template_part('templates/header'); ?>
+    <?php get_template_part('templates/header'); ?>
     <main>
-        

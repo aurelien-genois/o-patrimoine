@@ -1,9 +1,7 @@
 <?php
-if (is_front_page()) {
-    get_template_part('index');
-    exit();
-}
+// Template Name: Mot de passe oublié
 
+// ! todo
 get_header();
 the_post();
 ?>

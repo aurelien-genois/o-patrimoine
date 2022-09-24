@@ -1,9 +1,9 @@
 section {
-    @apply mx-4 mb-4 md:mb-8 ;
+    @apply mx-4 mb-4 md:mb-8;
     p {
-        @apply mb-2 md:mb-4;
+        // @apply mb-2 md:mb-4;
     }
-    a {
+    .link {
         @apply text-second hover:text-fourth hover:underline visited:text-third;
     }
     .titles {

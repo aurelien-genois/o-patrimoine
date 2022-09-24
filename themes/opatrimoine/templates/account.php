@@ -1,9 +1,8 @@
 <?php
-if (is_front_page()) {
-    get_template_part('index');
-    exit();
-}
+// Template Name: Mon compte
 
+// ! verify user login + role visitor
+// ! todo
 get_header();
 the_post();
 ?>

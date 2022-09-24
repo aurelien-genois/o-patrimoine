@@ -1,12 +1,12 @@
 <?php
 
-add_action( 'init',function(){
+add_action('init', function () {
     $cpts = [];
     $cpts[] = [
         'id'            => 'place',
         'name'          => 'lieu',
         'name_plural'   => 'lieux',
-        'supports'      => ['title','editor','author','thumbnail','excerpt','revisions','comments'],
+        'supports'      => ['title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions', 'comments'],
         'hierarchical'  => false,
         'public'        => true,
         'archive'       => true,
@@ -18,7 +18,7 @@ add_action( 'init',function(){
         'id'            => 'guided_tour',
         'name'          => 'visite',
         'name_plural'   => 'visites',
-        'supports'      => ['title','editor','author','revisions'],
+        'supports'      => ['title', 'editor', 'author', 'revisions'],
         'hierarchical'  => false,
         'public'        => true,
         'archive'       => true,
@@ -27,25 +27,25 @@ add_action( 'init',function(){
         'rewrite'       => true
     ];
 
-    if(count($cpts)) {
+    if (count($cpts)) {
         foreach ($cpts as $cpt) {
             $args = [
-                'label'               => __( $cpt['name'], 'opatrimoine' ),
-                'description'         => __( 'Gestion', 'opatrimoine' ),
+                'label'               => __($cpt['name'], 'opatrimoine'),
+                'description'         => __('Gestion', 'opatrimoine'),
                 'labels'              => [
-                                            'name' => ucfirst($cpt['name_plural']),
-                                            'singular_name' => ucfirst($cpt['name']),
-                                            'add_new' => __('Ajouter'),
-                                            'add_new_item' => __('Ajouter un ').$cpt['name'],
-                                            'edit_item' => __('Modifier'),
-                                            'new_item' => __('Nouveau ').$cpt['name'],
-                                            'view_item' => __('Voir le ').$cpt['name'],
-                                            'search_items' => __('Rechercher des ').$cpt['name_plural'],
-                                            'not_found' => __('Aucun élément trouvé'),
-                                            'not_found_in_trash' => __('Aucun élément trouvé'),
-                                            'parent_item_colon' =>ucfirst($cpt['name']).__(' parents :'),
-                                            'menu_name' => ucfirst($cpt['name_plural']),
-                                        ],
+                    'name' => ucfirst($cpt['name_plural']),
+                    'singular_name' => ucfirst($cpt['name']),
+                    'add_new' => __('Ajouter'),
+                    'add_new_item' => __('Ajouter un ') . $cpt['name'],
+                    'edit_item' => __('Modifier'),
+                    'new_item' => __('Nouveau ') . $cpt['name'],
+                    'view_item' => __('Voir le ') . $cpt['name'],
+                    'search_items' => __('Rechercher des ') . $cpt['name_plural'],
+                    'not_found' => __('Aucun élément trouvé'),
+                    'not_found_in_trash' => __('Aucun élément trouvé'),
+                    'parent_item_colon' => ucfirst($cpt['name']) . __(' parents :'),
+                    'menu_name' => ucfirst($cpt['name_plural']),
+                ],
                 'supports'            => $cpt['supports'],
                 'hierarchical'        => $cpt['hierarchical'],
                 'public'              => $cpt['public'],
@@ -63,7 +63,7 @@ add_action( 'init',function(){
                 'rewrite'             => $cpt['rewrite'],
                 // 'capability_type'     => $cpt['capability'], // ! wp-json 403 forbidden (API REST, only on Laragon ?)
             ];
-            $return = register_post_type( $cpt['id'], $args);
+            $return = register_post_type($cpt['id'], $args);
         }
     }
-},5,0);
+}, 5, 0);

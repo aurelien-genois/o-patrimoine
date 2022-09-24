@@ -2,7 +2,8 @@
 
 include_once 'duplicate-posts.php';
 
-function get_departments() {
+function get_departments()
+{
     // $resource = curl_init('https://geo.api.gouv.fr/departements');
     // curl_setopt_array($resource, [
     //     CURLOPT_RETURNTRANSFER => true,
@@ -127,11 +128,37 @@ function get_departments() {
     return $departments;
 }
 
-function limit_excerpt_length( $excerpt ) {
-    if(mb_strlen($excerpt) > 145) {
-        return mb_substr($excerpt,0,145).'...';
+function limit_excerpt_length($excerpt)
+{
+    if (mb_strlen($excerpt) > 145) {
+        return mb_substr($excerpt, 0, 145) . '...';
     } else {
         return $excerpt;
     }
 }
-add_filter( 'get_the_excerpt', 'limit_excerpt_length' );
+add_filter('get_the_excerpt', 'limit_excerpt_length');
+
+function get_page_id_by_template($template_name)
+{
+    global $wpdb;
+    $sql = "SELECT post_id FROM " . $wpdb->postmeta . " WHERE meta_key = '_wp_page_template' AND meta_value = '" . $template_name . "'";
+    $result = $wpdb->get_row($sql);
+    if (!empty($result)) {
+        return $result->post_id;
+    }
+    return false;
+}
+
+function get_page_url_by_template($template_name)
+{
+    $id = get_page_id_by_template($template_name);
+    if ($id) {
+        return get_page_link($id);
+    }
+    return false;
+}
+
+function cleanOutput(&$value)
+{
+    $value = htmlspecialchars($value);
+}
