@@ -2,7 +2,7 @@
 
 use function Env\env;
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 /**
  * CONFIG START
  */
@@ -65,7 +65,7 @@ define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
  * Debugging Settings
  */
 define('WP_ENV', env('WP_ENV'));
-if(env('WP_ENV') && env('WP_ENV') === 'local') {
+if (env('WP_ENV') && env('WP_ENV') === 'local') {
     define('WP_DEBUG', true);
     define('WP_DEBUG_DISPLAY', false);
     define('WP_DEBUG_LOG', true);
@@ -88,4 +88,4 @@ if (!defined('ABSPATH')) {
 /**
  * CONFIG END
  */
-require_once ABSPATH.'wp-settings.php';
+require_once ABSPATH . 'wp-settings.php';

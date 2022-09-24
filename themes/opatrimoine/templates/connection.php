@@ -9,7 +9,7 @@ the_post();
 ?>
 
 
-<section class="container mx-auto px-5 md:px-8 lg:px-12 xl:px-18 2xl:px-28mx-auto">
+<section class="container mx-auto px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28mx-auto">
     <h2 class="titles text-center"><?= the_title() ?></h2>
 
     <?php if (!empty(get_the_content())) : ?>

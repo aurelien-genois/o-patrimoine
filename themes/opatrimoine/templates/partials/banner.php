@@ -40,4 +40,4 @@ $slides = get_field('home_banner_slides', get_the_ID());
             </div>
         </div>
     <?php endif; ?>
-    </secti>
+</section>
