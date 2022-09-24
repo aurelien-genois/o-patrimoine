@@ -39,24 +39,34 @@ class ReservationsModel
 
     public function insert($data = [])
     {
-        if (isset($data['guidedTourId']) && isset($data['visitorId']) && isset($data['nbPlaces'])) {
+        if (isset($data['guided_tour_id']) && isset($data['visitor_id']) && isset($data['nb_of_reservations'])) {
+            $tz = new DateTimeZone('EUROPE/PARIS');
+            $d = new DateTime('now', $tz);
+
             $row = $this->wpdb->get_row('
                 SELECT * FROM ' . $this->tableName . '
-                    WHERE `guided_tour_id` = "' . $data['guidedTourId'] . '"
-                    AND `visitor_id` = "' . $data['visitorId'] . '"
-                    AND `nb_of_reservations` = "' . $data['nbPlaces'] . '"
+                    WHERE `guided_tour_id` = "' . $data['guided_tour_id'] . '"
+                    AND `visitor_id` = "' . $data['visitor_id'] . '"
             ');
             if ($row) {
-                $this->wpdb->update(
+                // if update the nb_of_reservations
+                $data['updated_at'] = $d->format("Y-m-d H:i:s");
+
+                $update = $this->wpdb->update(
                     $this->tableName,
                     $data,
                     ['id' => $row->id]
                 );
+                return $update;
             } else {
-                $this->wpdb->insert(
+                $data['created_at'] = $d->format("Y-m-d H:i:s");
+                $data['updated_at'] = $d->format("Y-m-d H:i:s");
+
+                $insert = $this->wpdb->insert(
                     $this->tableName,
                     $data
                 );
+                return $insert;
             }
         }
     }

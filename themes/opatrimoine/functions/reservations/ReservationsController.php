@@ -51,11 +51,16 @@ class ReservationsController
                 if ($this->reservationModel->canReserve($guidedTourId, $user)) {
 
                     // insert reservation in the custom-table
-                    $this->reservationModel->insert($guidedTourId, $visitorId, $npPlaces);
+                    $isInsert = $this->reservationModel->insert(['guided_tour_id' => $guidedTourId, 'visitor_id' => $visitorId, 'nb_of_reservations' => $npPlaces]);
 
-                    // increment totalreservations
-                    $newNbReservations = $currentNbReservations + $npPlaces;
-                    update_field('guided_tour_total_reservations', $newNbReservations, $guidedTourId);
+                    if ($isInsert) {
+                        // increment totalreservations
+                        $newNbReservations = $currentNbReservations + $npPlaces;
+                        update_field('guided_tour_total_reservations', $newNbReservations, $guidedTourId);
+                    } else {
+                        $error = 'Erreur en BDD';
+                        wp_redirect($redirection . '?error-reservation=' . $error);
+                    }
                 }
             }
         }
