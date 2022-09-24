@@ -164,7 +164,7 @@ class ReservationsModel
         if (!empty($idList)) {
             // return only the first reservation on this guided tour
             // because can only have one reservation at a time on a guided tour
-            return $results[0];
+            return $results[0]->nb_of_reservations;
         } else {
             return false;
         }

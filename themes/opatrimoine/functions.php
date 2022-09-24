@@ -101,3 +101,4 @@ include_once 'functions/config/admin.php'; // the include does'nt work in config
 include_once 'functions/queries/queries.php';
 include_once 'functions/user/roles.php';
 include_once 'functions/user/connection.php';
+include_once 'functions/reservations/functions.php';

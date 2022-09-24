@@ -26,6 +26,8 @@ if (isset($args['currentTemplateSlug']) && $args['currentTemplateSlug'] == 'temp
 } else {
     $currentLocationId = get_field('field_guided_tour_place', get_the_ID());
 }
+
+$currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_ID());
 ?>
 
 <article class="bg-grey/20 mb-4 rounded-xl p-4 border border-black border-solid">
@@ -78,22 +80,24 @@ if (isset($args['currentTemplateSlug']) && $args['currentTemplateSlug'] == 'temp
         <input type="hidden" name="current_location" value="<?= $currentLocationId; ?>">
         <input type="hidden" name="guided_tour_id" value="<?= get_the_ID() ?>">
 
+
         <div class="w-full sm:w-auto">
-            <!-- // todo if already register ($currentMemberReservations) -->
-            <p>XX places réservées</p>
-            <!-- else -->
-            <input type="number" name="nb_places" id="nb_places" placeholder="0" max="<?= $totalPersons ?>" min="0">
+            <?php if ($currentMemberReservations) : ?>
+                <p class="mx-2"><?= $currentMemberReservations ?> places réservées</p>
+            <?php else : ?>
+                <input class="border mx-2 min-w-[100px]" type="number" name="nb_places" id="nb_places" max="<?= $totalPersons ?>" min="0">
+            <?php endif ?>
         </div>
         <div class="w-full sm:w-auto">
             <?php if (!is_user_logged_in()) : ?>
-                <a class="btn" href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
-                <a class="btn" href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
+                <a class="btn mx-2" href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
+                <a class="btn mx-2" href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
             <?php else : ?>
-                <!-- // todo if already register ($currentMemberReservations) -->
-                <input class="btn" type="submit" name="delete_reservations" value="Se désinscrire">
-                <!-- // else -->
-                <input class="btn" type="submit" name="register_reservations" value="S'inscrire">
-                <!-- else -->
+                <?php if ($currentMemberReservations) : ?>
+                    <input class="btn mx-2" type="submit" name="delete_reservations" value="Se désinscrire">
+                <?php else : ?>
+                    <input class="btn mx-2" type="submit" name="register_reservations" value="S'inscrire">
+                <?php endif; ?>
             <?php endif; ?>
 
         </div>

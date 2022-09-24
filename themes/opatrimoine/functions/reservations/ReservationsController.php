@@ -87,4 +87,27 @@ class ReservationsController
         }
         wp_redirect($redirection);
     }
+
+    public function getReservationByGuidedTourIdForCurrentUser($guidedTourId)
+    {
+        $guidedTour = get_post($guidedTourId);
+        if ($guidedTour->post_type != 'guided_tour') {
+            // $error = 'non autorisé';
+            // wp_redirect(home_url() . '?error=' . $error);
+            exit();
+        }
+
+
+        $user = wp_get_current_user();
+
+        $roles = $user->roles;
+        if (!in_array('visitor', $roles)) {
+            $error = 'non autorisé';
+            // $url = get_the_permalink($guidedTour->guided_tour_place);
+            // wp_redirect($url . '?error=' . $error);
+            exit();
+        }
+
+        return $this->reservationModel->getReservationByGuidedTourIdAndVisitorId($guidedTourId, $user->ID);
+    }
 }
