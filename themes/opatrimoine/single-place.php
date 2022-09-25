@@ -120,7 +120,7 @@ $guidedToursQuery = new WP_Query([
             Voir plus de lieux
         </button>
     <?php else : ?>
-        <p>Pas encore de visites sur ce lieux.</p>
+        <p class="text-center text-third">Pas encore de visites sur ce lieux.</p>
     <?php endif; ?>
 </section>
 

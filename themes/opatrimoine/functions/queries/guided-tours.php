@@ -72,7 +72,7 @@ function filter_guided_tours()
         }
         wp_reset_postdata();
     } else {
-        echo '<p class="text-center">Aucune visite trouvé pour ses critères.</p>';
+        echo '<p class="text-center">Aucune visite trouvé pour ces critères.</p>';
     }
     $data = ob_get_clean();
 

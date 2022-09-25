@@ -34,7 +34,7 @@ function displayMoreGuidedTours(e) {
 
             if (response.data == '') {
                 this.classList.add('hidden');
-                document.querySelector('.guided_tours').insertAdjacentHTML('afterend', '<p id="not-found-guided-tours" class="text-center">Aucune autre visite trouvée pour ses critères.</p>');
+                document.querySelector('.guided_tours').insertAdjacentHTML('afterend', '<p id="not-found-guided-tours" class="text-center">Aucune autre visite trouvée pour ces critères.</p>');
             } else {
                 this.dataset.page = data.page;
                 document.querySelector('.guided_tours').insertAdjacentHTML('beforeend', response.data);
@@ -79,7 +79,7 @@ function displayMorePlaces() {
 
             if (response.data == '') {
                 this.classList.add('hidden');
-                document.querySelector('.archive-places-list').insertAdjacentHTML('afterend', '<p class="text-center">Aucun autre lieu trouvé pour ses critères.</p>');
+                document.querySelector('.archive-places-list').insertAdjacentHTML('afterend', '<p class="text-center">Aucun autre lieu trouvé pour ces critères.</p>');
             } else {
                 this.dataset.page = data.page;
                 document.querySelector('.archive-places-list').insertAdjacentHTML('beforeend', response.data);

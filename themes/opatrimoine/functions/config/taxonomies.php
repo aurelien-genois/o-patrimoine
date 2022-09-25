@@ -9,7 +9,6 @@ add_action('init', function () {
         'name_plural' => 'types',
         'hierarchical' => true,
         'public' => true,
-        'rewrite' => ['slug' => 'type_de_lieux']
     ];
     $taxonomies[] = [
         'cpt' => ['guided_tour'],
@@ -18,7 +17,6 @@ add_action('init', function () {
         'name_plural' => 'Thématiques',
         'hierarchical' => false,
         'public' => true,
-        'rewrite' => ['slug' => 'thematique']
     ];
     $taxonomies[] = [
         'cpt' => ['guided_tour'],
@@ -77,11 +75,22 @@ add_action('init', function () {
             );
         }
     }
+
+    add_rewrite_rule(
+        'place_type/([a-z0-9-]+)[/]?$',
+        'index.php?post_type=place&place_type=$matches[1]',
+        'top',
+    );
 }, 6, 0);
 
-// $options['capabilites'] = [
-//     'manage_terms' => 'manage_' . $this->identifier,
-//     'edit_terms' => 'edit_' . $this->identifier,
-//     'delete_terms' => 'delete_' . $this->identifier,
-//     'assign_terms' => 'assign_' . $this->identifier,
-// ];
+add_filter('query_vars', function ($query_vars) {
+    $query_vars[] = 'place_type';
+    return $query_vars;
+});
+
+add_action('template_include', function ($template) {
+    if (get_query_var('place_type') == false || get_query_var('place_type') == '') {
+        return $template;
+    }
+    return get_template_directory() . '/archive-place.php';
+});
