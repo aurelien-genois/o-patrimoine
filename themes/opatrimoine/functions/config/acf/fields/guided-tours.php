@@ -42,6 +42,7 @@ acf_add_local_field_group(
                 'name' => 'guided_tour_total_persons',
                 'type' => 'number',
                 'wrapper' => ['width' => '50'],
+                'min' => 0,
                 'required' => 1,
             ],
             [
@@ -52,6 +53,7 @@ acf_add_local_field_group(
                 'default_value' => 0,
                 'wrapper' => ['width' => '50'],
                 'required' => 0,
+                'min' => 0,
                 'readonly' => 1,
             ],
             [

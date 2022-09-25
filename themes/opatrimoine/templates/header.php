@@ -41,7 +41,7 @@ $nav = wp_get_nav_menu_items($menu_obj->slug, array());
         <div id="menuClose" class="absolute top-0 left-0 z-20 flex items-center justify-center h-7 w-7 p-0.5 text-white font-bold hover:border hover:rounded-3xl hover:border-white cursor-pointer">
             > </div>
         <?php if (is_user_logged_in()) : ?>
-            <a class="btn block mx-auto mb-2 btn-2" href="<?php get_page_url_by_template('templates/account.php') ?>">Mon compte</a>
+            <a class="btn block mx-auto mb-2 btn-2" href="<?= get_page_url_by_template('templates/account.php') ?>">Mon compte</a>
         <?php else : ?>
             <a class="btn block mx-auto mb-2 btn-2" href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
             <a class="btn block mx-auto mb-2 btn-2" href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>

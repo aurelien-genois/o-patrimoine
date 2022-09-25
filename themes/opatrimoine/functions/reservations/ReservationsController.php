@@ -69,17 +69,16 @@ class ReservationsController
 
     public function deleteByTourIdAndVisitorId($guidedTourId, $visitorId, $currentLocationUrl)
     {
-        global $router;
         $redirection = get_home_url();
 
         $guidedTour = get_post($guidedTourId);
-        if ($guidedTour && $guidedTour->post_type === "guided-tour") {
+        if ($guidedTour && $guidedTour->post_type == "guided_tour") {
 
             $redirection = $currentLocationUrl;
 
             // decrement guidedTour
             $currentReservation = $this->reservationModel->getReservationByGuidedTourIdAndVisitorId($guidedTourId, $visitorId);
-            $newNbReservations = $guidedTour->guided_tour_total_reservations - $currentReservation->nb_of_reservations;
+            $newNbReservations = $guidedTour->guided_tour_total_reservations - $currentReservation;
             update_field('guided_tour_total_reservations', $newNbReservations, $guidedTourId);
 
             // delete reservation
@@ -92,8 +91,7 @@ class ReservationsController
     {
         $guidedTour = get_post($guidedTourId);
         if ($guidedTour->post_type != 'guided_tour') {
-            // $error = 'non autorisé';
-            // wp_redirect(home_url() . '?error=' . $error);
+            wp_redirect(home_url());
             exit();
         }
 
@@ -102,12 +100,22 @@ class ReservationsController
 
         $roles = $user->roles;
         if (!in_array('visitor', $roles)) {
-            $error = 'non autorisé';
-            // $url = get_the_permalink($guidedTour->guided_tour_place);
-            // wp_redirect($url . '?error=' . $error);
-            exit();
+            return 0;
+        } else {
+            return $this->reservationModel->getReservationByGuidedTourIdAndVisitorId($guidedTourId, $user->ID);
         }
+    }
 
-        return $this->reservationModel->getReservationByGuidedTourIdAndVisitorId($guidedTourId, $user->ID);
+    public function getGuidedToursByCurrentUser()
+    {
+
+        $user = wp_get_current_user();
+
+        $roles = $user->roles;
+        if (!in_array('visitor', $roles)) {
+            return 0;
+        } else {
+            return $this->reservationModel->getGuidedToursByVisitorId($user->ID);
+        }
     }
 }

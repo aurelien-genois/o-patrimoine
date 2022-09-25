@@ -129,9 +129,8 @@ class ReservationsModel
 
         $guidedTours = [];
         if (!empty($guidedToursIdList)) {
-            $guidedTours = get_posts([
-                'include' => $guidedToursIdList,
-                'numberposts' => -1,
+            $guidedTours = new WP_Query([
+                'post__in' => $guidedToursIdList,
                 'post_type' => 'guided_tour',
             ]);
         }

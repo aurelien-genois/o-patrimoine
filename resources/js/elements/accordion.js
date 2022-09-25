@@ -5,7 +5,6 @@ if (accordions.length > 0) {
         accordion?.addEventListener("click", function () {
             this.querySelector('.fa-solid').classList.toggle("-rotate-180");
             const filterForm = this.nextElementSibling;
-            console.log(filterForm);
             if (filterForm.classList.contains("max-h-56")) {
                 filterForm.classList.remove("max-h-56");
                 filterForm.classList.add("max-h-0");

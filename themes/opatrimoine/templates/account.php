@@ -10,6 +10,10 @@ if (!is_user_logged_in() || $user->ID == 0 || !in_array('visitor', $roles)) {
 
 get_header();
 the_post();
+
+$guidedToursQuery = getGuidedToursByCurrentUser();
+
+$pageTemplateSlug = get_page_template_slug();
 ?>
 
 
@@ -91,8 +95,18 @@ the_post();
 </section>
 
 <section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
-    <!-- // todo list of reservation -->
-    <!-- ReservationsModel->getGuidedToursByVisitorId($visitorId) -->
+    <h3 class="titles text-center">Mes visites réservées</h3>
+    <?php if ($guidedToursQuery->have_posts()) : ?>
+        <div class="guided_tours">
+            <?php while ($guidedToursQuery->have_posts()) {
+                $guidedToursQuery->the_post();
+                get_template_part('templates/partials/guided-tour', null, ['currentTemplateSlug' => $pageTemplateSlug]);
+            }
+            wp_reset_postdata(); ?>
+        </div>
+    <?php else : ?>
+        <p>Pas encore de visites sur ce lieux.</p>
+    <?php endif; ?>
 </section>
 
 
