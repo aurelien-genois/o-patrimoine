@@ -1,6 +1,5 @@
 .btn {
-    @apply
-        bg-second
+    @apply bg-second
         text-white
         font-bold
         px-2 py-1
@@ -12,14 +11,15 @@
         hover:bg-fourth
         hover:text-white
 
-        md:text-base
-    ;
+        md:text-base;
 }
 
 .btn-2 {
     @extend .btn;
 
-    @apply
-        bg-third
-    ;
+    @apply bg-third;
+}
+
+input[type="submit"] {
+    @extend .btn;
 }

@@ -20,3 +20,14 @@ section {
         stroke: white;
     }
 }
+
+.wpcf7-form {
+    select,
+    input:not([type="submit"]),
+    textarea {
+        @apply border mb-4;
+    }
+    input[type="submit"] {
+        @apply block mx-auto;
+    }
+}
