@@ -32,7 +32,7 @@ if (isset($args['currentTemplateSlug']) && $args['currentTemplateSlug'] == 'temp
 $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_ID());
 ?>
 
-<article class="bg-grey/20 mb-4 rounded-xl p-4 border border-black border-solid">
+<article class="bg-grey/20 mb-4 rounded-xl p-4 border border-black border-solid <?php if (!($totalAvailable > 0) && !$isAccount) echo 'text-white bg-third' ?>">
     <div class="flex flex-wrap">
         <div class="w-1/2 sm:w-1/3 order-1 text-sm md:text-base">
             <?php if ($dateStr) echo '<span>' . $dateStr . '</span>&nbsp;' ?>
@@ -73,10 +73,12 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
     </div>
 
     <form class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 items-center" action="<?= get_theme_file_uri('functions/reservations/reservations.php') ?>" method="post">
-        <?php if (!$isAccount) : ?>
+        <?php if (!$isAccount && $totalAvailable > 0) : ?>
             <div class="">
                 <?= $totalAvailable ?>&nbsp;/&nbsp;<?= $totalPersons ?>&nbsp;places disponibles
             </div>
+        <?php elseif (!$isAccount) : ?>
+            <div class="font-bold">Aucune place disponible</div>
         <?php else : ?>
             <div>
                 à&nbsp;<a class="hover:underline text-second hover:text-third" href="<?= get_permalink(get_field('field_guided_tour_place', get_the_ID())) ?>"><?= get_the_title(get_field('field_guided_tour_place', get_the_ID())) ?></a>
@@ -88,19 +90,19 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
 
         <div class="">
             <?php if ($currentMemberReservations) : ?>
-                <p class="text-third font-bold"><?= $currentMemberReservations ?> places réservées</p>
+                <p class="font-bold  <?= ($totalAvailable > 0 || $isAccount) ? 'text-third' : 'text-white' ?>"><?= $currentMemberReservations ?> places réservées</p>
             <?php elseif (!$isAccount) : ?>
                 <input class="border min-w-[50px] text-center" type="number" name="nb_places" id="nb_places" max="<?= $totalPersons ?>" min="0">
             <?php endif ?>
         </div>
         <div class="">
-            <?php if (!is_user_logged_in()) : ?>
+            <?php if (!is_user_logged_in() && $totalAvailable > 0) : ?>
                 <a class="btn btn-2" href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
                 <a class="btn btn-2" href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
             <?php else : ?>
                 <?php if ($currentMemberReservations) : ?>
                     <input class="btn" type="submit" name="delete_reservations" value="Se désinscrire">
-                <?php elseif (!$isAccount) : ?>
+                <?php elseif (!$isAccount && $totalAvailable > 0) : ?>
                     <input class="btn" type="submit" name="register_reservations" value="S'inscrire">
                 <?php endif; ?>
             <?php endif; ?>

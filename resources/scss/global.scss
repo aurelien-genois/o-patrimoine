@@ -13,3 +13,10 @@ section {
         @apply text-second sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-4;
     }
 }
+
+.bg-third {
+    svg path {
+        fill: white;
+        stroke: white;
+    }
+}
