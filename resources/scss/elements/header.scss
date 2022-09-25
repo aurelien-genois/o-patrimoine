@@ -1,14 +1,11 @@
 #btnMenu {
-    @apply
-        h-8 w-8
-        flex md:hidden
+    @apply h-8 w-8
+        flex lg:hidden
         flex-col justify-between
-        cursor-pointer
-    ;
+        cursor-pointer;
 
     span {
-        @apply
-        w-full h-1
+        @apply w-full h-1
         bg-second;
     }
 }
@@ -18,39 +15,35 @@
         & > ul {
             @apply flex justify-between;
             transform: translateX(0) !important;
-    
+
             & > li {
                 @apply text-center;
-                &:hover{
+                &:hover {
                     .sub-menu {
                         @apply block;
                     }
                 }
             }
-    
+
             .sub-menu {
-                @apply
-                    hidden
+                @apply hidden
                     min-w-[180px]
                     absolute z-30
                     overflow-hidden
                     bg-third
                     normal-case
-                    py-4 px-2
-                ;
+                    py-4 px-2;
             }
         }
     }
 }
 
 #navMenu {
-    @apply
-        w-[320px] max-w-full
+    @apply w-[320px] max-w-full
         py-4 pr-4 pl-8
-        fixed left-0 inset-y-0 z-50
+        fixed right-0 inset-y-0 z-50
         bg-second
-        transform -translate-x-full transition-all duration-300 ease-in-out
-    ;
+        transform translate-x-full transition-all duration-300 ease-in-out;
 
     &.open {
         @apply translate-x-0;
@@ -58,11 +51,9 @@
 
     #mobileMenu {
         .header__menu {
-            @apply
-                pr-10
+            @apply pr-10
                 relative
-                transform transition-all duration-300 ease-in-out
-            ;
+                transform transition-all duration-300 ease-in-out;
 
             ul {
                 & > li {
@@ -73,33 +64,27 @@
                     &.menu-item-has-children {
                         @apply relative;
                         & > a {
-                            @apply
-                                relative
-                            ;
+                            @apply relative;
                         }
                         & > p {
-                            @apply
-                                content-['>']
+                            @apply content-['>']
                                 cursor-pointer
                                 flex justify-center items-center
                                 h-5 w-5
                                 hover:border hover:rounded-3xl hover:border-white
                                 font-bold
-                                absolute top-1/2 -translate-y-1/2 right-[20%]
-                            ;
+                                absolute top-1/2 -translate-y-1/2 right-[20%];
                         }
                     }
                 }
-                .sub-menu{
-                    @apply
-                        w-full
+                .sub-menu {
+                    @apply w-full
                         absolute top-0 left-0
                         hidden
 
-                        transition-all duration-300 ease-in-out transform translate-x-[120%]
-                    ;
+                        transition-all duration-300 ease-in-out transform translate-x-[120%];
 
-                    &.open{
+                    &.open {
                         @apply translate-x-0;
                     }
                 }

@@ -101,3 +101,4 @@ function load_places()
 
 add_action('wp_ajax_load_places', 'load_places');
 add_action('wp_ajax_nopriv_load_places', 'load_places');
+header("Access-Control-Allow-Origin: *");

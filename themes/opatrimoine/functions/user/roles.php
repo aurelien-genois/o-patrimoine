@@ -125,6 +125,9 @@ add_action('init', function () {
             'edit_place_types' => true,
             'delete_place_types' => true,
             'assign_place_types' => true,
+
+            // ? no capabilities to manage_tour_constraints tags
+            // because has icon
         ]
     );
 });
