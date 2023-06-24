@@ -57,7 +57,7 @@ add_action('init', function () {
                 'show_admin_column' => true,
                 'show_in_nav_menus' => true,
                 'show_in_rest'      => true,
-                'rewrite'           => $taxonomy['rewrite'],
+                'rewrite'           => (isset($taxonomy['rewrite'])) ? $taxonomy['rewrite'] : [],
                 'show_tagcloud'     => false,
                 'show_admin_column' => true,
                 'capabilities'      => [

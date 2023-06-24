@@ -47,10 +47,10 @@ services:
   maildev:
     image: maildev/maildev
     container_name: ${DOCKER_PROJECT_NAME}_maildev
-    command: bin/maildev --web 8081 --smtp 1025
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
     ports:
-      - "8081:8081"
-      - "1025:1025"
+      - "8081:80"
+      - "1025:25"
     restart: unless-stopped
     networks:
       - opatrimoine-network
@@ -73,14 +73,13 @@ services:
       - ./.docker/nginx/error.log:/var/log/nginx/error.log:cached
     networks:
       - opatrimoine-network
-      
+
   php:
     build:
       context: .docker/php
       args:
         - DOCKER_PHP_VERSION=${DOCKER_PHP_VERSION}
         - DOCKER_PHP_EXTENSIONS=${DOCKER_PHP_EXTENSIONS}
-        - DOCKER_NODE_VERSION=${DOCKER_NODE_VERSION}
     container_name: ${DOCKER_PROJECT_NAME}_php
     command: sh -c "${DOCKER_START_COMMANDS} && php-fpm"
     tty: true
@@ -106,8 +105,8 @@ services:
       - ./:/var/www/html:cached
       - node_modules:/var/www/html/node_modules:delegated
     working_dir: /var/www/html
-    user: 1000:1000 # Dans la plupart des cas, adaptez au besoin
-    # command: "npm run start"
+    user: root:root # Dans la plupart des cas, adaptez au besoin
+    # command: "npm run dev"
     tty: true
     ports:
       - 8089:8089 # Port pour webpack

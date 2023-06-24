@@ -54,7 +54,7 @@ function opatrimoine_initialize_theme()
 };
 
 add_action('wp_enqueue_scripts', function () {
-    
+
     // TODO Adapt
 
     if(WP_ENV === 'local'){
@@ -64,14 +64,14 @@ add_action('wp_enqueue_scripts', function () {
         // wp_enqueue_script('opatrimoine_js-defer_uri', get_theme_file_uri('assets/app.bundle.js'), '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
         wp_enqueue_script('opatrimoine_js-defer', get_theme_file_uri('assets/app.bundle.js'), '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
     }
-    
+
     // wp_enqueue_script('app-rest-defer');
 
 
     // TODO Adapt
     // for now (in dev mode) css is include in app.js
     // wp_enqueue_style('opatrimoine_css', get_theme_file_uri('assets/styles/app.css'), '', filemtime(get_template_directory().'/assets/styles/app.css'));
-    wp_enqueue_style('opatrimoine_custom_css', get_theme_file_uri('assets/test.css'), '', filemtime(get_template_directory().'/assets/test.css'));
+    // wp_enqueue_style('opatrimoine_custom_css', get_theme_file_uri('assets/test.css'), '', filemtime(get_template_directory().'/assets/test.css'));
 
     //custom style
     $colors = get_field('options_colors', 'option');

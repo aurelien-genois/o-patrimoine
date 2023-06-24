@@ -11,8 +11,8 @@
 }
 
 #deskMenu {
-    background-color: salmon; 
-    color: white; 
+    background-color: red;
+    color: white;
     .header__menu {
         & > ul {
             @apply flex justify-between;
