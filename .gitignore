@@ -1,13 +1,13 @@
-wp/*
-languages
-cache
-uploads
-upgrade
-plugins/*
-!plugins/opatrimoine
-themes/*
-!themes/opatrimoine
-themes/opatrimoine/assets/*
+public/wp/*
+public/languages
+public/cache
+public/uploads
+public/upgrade
+public/plugins/*
+!public/plugins/opatrimoine
+public/themes/*
+!public/themes/opatrimoine
+public/themes/opatrimoine/assets/*
 .htaccess
 
 ### Node ###

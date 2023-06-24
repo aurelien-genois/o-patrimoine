@@ -1,8 +1,7 @@
 <?php
-
 use function Env\env;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 /**
  * CONFIG START
  */
@@ -11,12 +10,12 @@ require_once __DIR__ . '/vendor/autoload.php';
  * Use Dotenv to set required environment variables and load .env file in root
  * .env.local will override .env if it exists
  */
-$env_files = file_exists(__DIR__ . '/.env.local')
-    ? ['.env', '.env.local']
-    : ['.env'];
+$env_files = file_exists(__DIR__ . '/../.env.local')
+? ['.env', '.env.local']
+: ['.env'];
 
-$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__, $env_files, false);
-if (file_exists(__DIR__ . '/.env')) {
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__.'/..', $env_files, false);
+if (file_exists(__DIR__ . '/../.env')) {
     $dotenv->load();
     $dotenv->required(['WP_HOME']);
     if (!env('DATABASE_URL')) {
@@ -43,7 +42,7 @@ define('DB_PASSWORD', env('DB_PASSWORD'));
 define('DB_HOST', env('DB_HOST') ?: 'localhost');
 const DB_CHARSET = 'utf8mb4';
 const DB_COLLATE = 'utf8mb4_general_ci';
-$table_prefix = env('DB_PREFIX') ?: 'wp_';
+$table_prefix = env('WP_PREFIX') ?: 'wp_';
 
 define('AUTH_KEY', env('AUTH_KEY'));
 define('SECURE_AUTH_KEY', env('SECURE_AUTH_KEY'));

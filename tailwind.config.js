@@ -1,8 +1,8 @@
 module.exports = {
     content: [
-        './themes/opatrimoine/templates/**/*.php',
-        './themes/opatrimoine/**/*.php',
-        './themes/opatrimoine/*.php',
+        './public/themes/opatrimoine/templates/**/*.php',
+        './public/themes/opatrimoine/**/*.php',
+        './public/themes/opatrimoine/*.php',
     ],
     theme: {
         colors: {

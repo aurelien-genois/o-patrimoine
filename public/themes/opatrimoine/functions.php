@@ -53,47 +53,41 @@ function opatrimoine_initialize_theme()
     update_option('blogdescription', 'Des visites chaque semaine'); // define site tagline
 };
 
-function includeCustomsAssets($entry = null): void
-{
-    if ($entry) {
-        // ---- ACF COLORS ----
-        $colors = get_field('options_colors', 'option');
-        if (is_array($colors) && count($colors)) {
-            $custom_css = "html{";
-            foreach ($colors as $name => $color) {
-                $custom_css .= "--color_" . $name . ": " . $color . ";";
-            }
-            $custom_css .= "}";
-            echo '<style>' . $custom_css . '</style>';
-        }
+add_action('wp_enqueue_scripts', function () {
+    
+    // TODO Adapt
 
-        //INCLUDE CSS / JS FILES
-        if (WP_ENV === 'local') {
-            //VITE LOCAL DEVELOPMENT (CSS & JS included)
-            echo '<script type="module" src="https://localhost:5173/' . $entry . '"></script>';
-        } else {
-            //VITE PRODUCTION FILES FROM MANIFEST
-            try {
-                $manifest = json_decode(file_get_contents(get_theme_file_path('assets/manifest.json')), true, 512, JSON_THROW_ON_ERROR);
-
-                // ---- JS ----
-                echo '<script type="module" src="' . get_theme_file_uri('assets/' . $manifest[$entry]['file']) . '" defer></script>';
-
-                // ---- CSS ----
-                if (!empty($manifest[$entry]['css'])) {
-                    foreach ($manifest[$entry]['css'] as $manifestCSS) {
-                        echo '<link rel="stylesheet" href="' . get_theme_file_uri('assets/' . $manifestCSS) . '">';
-                    }
-                }
-            } catch (JsonException $e) {/**/
-            }
-        }
+    if(WP_ENV === 'local'){
+        // wp_enqueue_script('opatrimoine_js-defer_uri', get_theme_file_uri('assets/app.bundle.js'), '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
+        wp_enqueue_script('opatrimoine_js-defer', 'http://localhost:3000/themes/opatrimoine/assets/app.bundle.js', '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
+    } else {
+        // wp_enqueue_script('opatrimoine_js-defer_uri', get_theme_file_uri('assets/app.bundle.js'), '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
+        wp_enqueue_script('opatrimoine_js-defer', get_theme_file_uri('assets/app.bundle.js'), '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
     }
-}
+    
+    // wp_enqueue_script('app-rest-defer');
 
-add_action('wp_head', function () {
-    includeCustomsAssets('resources/js/app.js');
-}, 5);
+
+    // TODO Adapt
+    // for now (in dev mode) css is include in app.js
+    // wp_enqueue_style('opatrimoine_css', get_theme_file_uri('assets/styles/app.css'), '', filemtime(get_template_directory().'/assets/styles/app.css'));
+    wp_enqueue_style('opatrimoine_custom_css', get_theme_file_uri('assets/test.css'), '', filemtime(get_template_directory().'/assets/test.css'));
+
+    //custom style
+    $colors = get_field('options_colors', 'option');
+    $array_color = ['main','second','third','fourth','five'];
+    if(is_array($colors) && count($colors)){
+        $custom_css = "html{";
+            foreach ($array_color as $i => $item){
+                $custom_css .= (!empty($colors[$item]))? "--color_".$item.": ".$colors[$item].";" : '';
+            }
+        $custom_css .="}";
+        // add css to existing enqueued css
+        wp_add_inline_style( 'opatrimoine_custom_css', $custom_css );
+    }
+
+});
+
 
 include_once 'functions/helpers.php';
 include_once 'functions/config/config.php';

@@ -12,10 +12,11 @@
 
     "extra": {
         "installer-paths": {
-            "plugins/{$name}/": ["type:wordpress-plugin"],
-            "themes/{$name}/": ["type:wordpress-theme"]
+            "public/mu-plugins/{$name}": ["type:wordpress-muplugin"],
+            "public/plugins/{$name}/": ["type:wordpress-plugin"],
+            "public/themes/{$name}/": ["type:wordpress-theme"]
         },
-        "wordpress-install-dir": "wp"
+        "wordpress-install-dir": "public/wp"
     },
 
     "require": {

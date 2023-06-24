@@ -8,7 +8,8 @@
     <script src="https://kit.fontawesome.com/37b722787f.js" crossorigin="anonymous"></script>
     <!-- TODO add fonts links -->
 
-    <?php wp_head(); ?>
+    <?php wp_head();  wp_styles(); ?>
+
 </head>
 
 <body id="opatrimoine">
