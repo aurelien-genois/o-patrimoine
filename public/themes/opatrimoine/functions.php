@@ -55,36 +55,31 @@ function opatrimoine_initialize_theme()
 
 add_action('wp_enqueue_scripts', function () {
 
-    // TODO Adapt
 
     if(WP_ENV === 'local'){
-        // wp_enqueue_script('opatrimoine_js-defer_uri', get_theme_file_uri('assets/app.bundle.js'), '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
-        wp_enqueue_script('opatrimoine_js-defer', 'http://localhost:3000/themes/opatrimoine/assets/app.bundle.js', '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
+        wp_enqueue_script('opatrimoine_js-defer', 'https://localhost:3000/assets/app.bundle.js', [], filemtime(get_template_directory().'/assets/app.bundle.js'), true);
     } else {
-        // wp_enqueue_script('opatrimoine_js-defer_uri', get_theme_file_uri('assets/app.bundle.js'), '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
-        wp_enqueue_script('opatrimoine_js-defer', get_theme_file_uri('assets/app.bundle.js'), '', filemtime(get_template_directory().'/assets/app.bundle.js'), true);
+        wp_enqueue_script('opatrimoine_js-defer', get_theme_file_uri('assets/app.bundle.js'), [], filemtime(get_template_directory().'/assets/app.bundle.js'), true);
+        wp_enqueue_style('opatrimoine_custom_css', get_theme_file_uri('assets/app.css'), [], filemtime(get_template_directory().'/assets/app.css'));
     }
 
-    // wp_enqueue_script('app-rest-defer');
+    //custom colors
+    add_action( 'wp_head', function () {
+        $colors = get_field('options_colors', 'option');
+        $array_color = ['main','second','third','fourth','five'];
 
+        if(is_array($colors) && count($colors)) {
+            $custom_css = "html{";
+                foreach ($array_color as $i => $item){
+                    $custom_css .= (!empty($colors[$item]))? "--color_".$item.": ".$colors[$item].";" : '';
+                }
+            $custom_css .="}";
+            echo '<style id="opatrimoine_custom_inline-css" >';
+            echo $custom_css;
+            echo '</style>';
+        }
+    });
 
-    // TODO Adapt
-    // for now (in dev mode) css is include in app.js
-    // wp_enqueue_style('opatrimoine_css', get_theme_file_uri('assets/styles/app.css'), '', filemtime(get_template_directory().'/assets/styles/app.css'));
-    // wp_enqueue_style('opatrimoine_custom_css', get_theme_file_uri('assets/test.css'), '', filemtime(get_template_directory().'/assets/test.css'));
-
-    //custom style
-    $colors = get_field('options_colors', 'option');
-    $array_color = ['main','second','third','fourth','five'];
-    if(is_array($colors) && count($colors)){
-        $custom_css = "html{";
-            foreach ($array_color as $i => $item){
-                $custom_css .= (!empty($colors[$item]))? "--color_".$item.": ".$colors[$item].";" : '';
-            }
-        $custom_css .="}";
-        // add css to existing enqueued css
-        wp_add_inline_style( 'opatrimoine_custom_css', $custom_css );
-    }
 
 });
 
