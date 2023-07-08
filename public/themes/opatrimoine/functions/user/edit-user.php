@@ -39,7 +39,8 @@ if (isset($_POST['edit_user'])) {
             }
         } else {
             $error = 'mail non valide';
-        };
+        }
+        ;
 
         if (($email != $user->user_email) && email_exists($email)) {
             $error = 'mail déjà existant';

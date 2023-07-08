@@ -3,7 +3,8 @@ function admin_default_page()
 {
     if (!empty($_POST['log'])) {
         $user = get_user_by('email', $_POST['log']);
-        if (!$user) $user = get_user_by('login', $_POST['log']);
+        if (!$user)
+            $user = get_user_by('login', $_POST['log']);
 
         if ($user && wp_check_password($_POST['pwd'], $user->data->user_pass, $user->ID)) {
             foreach ($user->roles as $role) {

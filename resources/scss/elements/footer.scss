@@ -6,11 +6,11 @@
                 transition: fill;
                 transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
                 transition-duration: 150ms;
-                fill : theme("colors.second") !important;
+                fill: theme("colors.second") !important;
             }
             &:hover {
                 path {
-                    fill : theme("colors.fourth") !important;
+                    fill: theme("colors.fourth") !important;
                 }
             }
         }

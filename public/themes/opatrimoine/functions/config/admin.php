@@ -41,7 +41,7 @@ function custom_guided_tour_column($column, $post_id)
         case 'place':
             $placeId = get_field('field_guided_tour_place', $post_id);
             if ($placeId) {
-                echo get_the_title($placeId) ?? '';
+                echo get_the_title($placeId) ?: '';
             }
             break;
     }

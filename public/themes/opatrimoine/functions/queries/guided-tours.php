@@ -24,22 +24,22 @@ function filter_guided_tours()
 
     $args = [
         'posts_per_page' => 5,
-        'post_type' => 'guided_tour',
-        'paged' => 1,
+        'post_type'      => 'guided_tour',
+        'paged'          => 1,
     ];
 
     $meta_query['relation'] = 'AND';
     $meta_query[] = [
-        'key' => 'guided_tour_place',
-        'value' => $placeId,
+        'key'     => 'guided_tour_place',
+        'value'   => $placeId,
         'compare' => '=',
     ];
     if (!empty($date)) {
         // $date format is 2022-09-29
         // guided_tour_date format is 20220929 in BDD
         $meta_query[] = [
-            'key' => 'guided_tour_date',
-            'value' => str_replace('-', '', $date),
+            'key'     => 'guided_tour_date',
+            'value'   => str_replace('-', '', $date),
             'compare' => '=',
         ];
     }
@@ -48,15 +48,15 @@ function filter_guided_tours()
     if (!empty($thematic)) {
         $tax_query[] = [
             'taxonomy' => 'tour_thematic',
-            'field' => 'slug',
-            'terms' => $thematic,
+            'field'    => 'slug',
+            'terms'    => $thematic,
         ];
     }
     if (!empty($constraint)) {
         $tax_query[] = [
             'taxonomy' => 'tour_constraint',
-            'field' => 'slug',
-            'terms' => $constraint,
+            'field'    => 'slug',
+            'terms'    => $constraint,
             'operator' => 'NOT IN',
         ];
     }
@@ -103,22 +103,22 @@ function load_guided_tours()
 
     $args = [
         'posts_per_page' => 5,
-        'post_type' => 'guided_tour',
-        'paged' => $page,
+        'post_type'      => 'guided_tour',
+        'paged'          => $page,
     ];
 
     $meta_query['relation'] = 'AND';
     $meta_query[] = [
-        'key' => 'guided_tour_place',
-        'value' => $placeId,
+        'key'     => 'guided_tour_place',
+        'value'   => $placeId,
         'compare' => '=',
     ];
     if (!empty($date)) {
         // $date format is 2022-09-29
         // guided_tour_date format is 20220929 in BDD
         $meta_query[] = [
-            'key' => 'guided_tour_date',
-            'value' => str_replace('-', '', $date),
+            'key'     => 'guided_tour_date',
+            'value'   => str_replace('-', '', $date),
             'compare' => '=',
         ];
     }
@@ -127,15 +127,15 @@ function load_guided_tours()
     if (!empty($thematic)) {
         $tax_query[] = [
             'taxonomy' => 'tour_thematic',
-            'field' => 'slug',
-            'terms' => $thematic,
+            'field'    => 'slug',
+            'terms'    => $thematic,
         ];
     }
     if (!empty($constraint)) {
         $tax_query[] = [
             'taxonomy' => 'tour_constraint',
-            'field' => 'slug',
-            'terms' => $constraint,
+            'field'    => 'slug',
+            'terms'    => $constraint,
             'operator' => 'NOT IN',
         ];
     }

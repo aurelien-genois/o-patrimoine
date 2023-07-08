@@ -80,7 +80,7 @@ class ReservationsModel
     {
         $where = [
             'guided_tour_id' => $guidedTourId,
-            'visitor_id' => $visitorId,
+            'visitor_id'     => $visitorId,
         ];
 
         $this->wpdb->delete(
@@ -130,7 +130,7 @@ class ReservationsModel
         $guidedTours = [];
         if (!empty($guidedToursIdList)) {
             $guidedTours = new WP_Query([
-                'post__in' => $guidedToursIdList,
+                'post__in'  => $guidedToursIdList,
                 'post_type' => 'guided_tour',
             ]);
         }

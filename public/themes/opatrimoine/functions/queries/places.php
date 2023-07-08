@@ -31,7 +31,7 @@ function custom_place_archive_query($query)
             if (!empty($_GET['place_department']) && $_GET['place_department'] > 0 && $_GET['place_department'] <= 3) {
                 $query->set('meta_query', [
                     [
-                        'key' => 'place_department',
+                        'key'   => 'place_department',
                         'value' => htmlspecialchars($_GET['place_department']),
                     ],
                 ]);
@@ -58,17 +58,17 @@ function load_places()
 
     $args = [
         'posts_per_page' => 9,
-        'post_type' => 'place',
-        'paged' => $page,
-        's' => $s,
+        'post_type'      => 'place',
+        'paged'          => $page,
+        's'              => $s,
     ];
 
     $meta_query['relation'] = 'AND';
     $meta_query[] = [];
     if (!empty($deparment)) {
         $meta_query[] = [
-            'key' => 'place_department',
-            'value' => $deparment,
+            'key'     => 'place_department',
+            'value'   => $deparment,
             'compare' => '=',
         ];
     }
@@ -78,8 +78,8 @@ function load_places()
     if (!empty($constraint)) {
         $tax_query[] = [
             'taxonomy' => 'place_type',
-            'field' => 'slug',
-            'terms' => $place_type,
+            'field'    => 'slug',
+            'terms'    => $place_type,
         ];
     }
     $args['meta_query'] = $meta_query;

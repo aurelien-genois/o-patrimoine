@@ -24,7 +24,7 @@ function rd_duplicate_post_link($actions, $post)
         add_query_arg(
             array(
                 'action' => 'rd_duplicate_post_as_draft',
-                'post' => $post->ID,
+                'post'   => $post->ID,
             ),
             'admin.php'
         ),
@@ -62,9 +62,9 @@ function rd_duplicate_post_as_draft()
     $post = get_post($post_id);
 
     /*
-	 * if you don't want current user to be the new post author,
-	 * then change next couple of lines to this: $new_post_author = $post->post_author;
-	 */
+     * if you don't want current user to be the new post author,
+     * then change next couple of lines to this: $new_post_author = $post->post_author;
+     */
     $current_user = wp_get_current_user();
     $new_post_author = $current_user->ID;
 
@@ -92,8 +92,8 @@ function rd_duplicate_post_as_draft()
         $new_post_id = wp_insert_post($args);
 
         /*
-		 * get all current post terms and set them to the new post draft
-		 */
+         * get all current post terms and set them to the new post draft
+         */
         $taxonomies = get_object_taxonomies(get_post_type($post)); // returns array of taxonomy names for post type, ex array("category", "post_tag");
         if ($taxonomies) {
             foreach ($taxonomies as $taxonomy) {
@@ -134,7 +134,7 @@ function rd_duplicate_post_as_draft()
             add_query_arg(
                 array(
                     'post_type' => ('post' !== get_post_type($post) ? get_post_type($post) : false),
-                    'saved' => 'post_duplication_created' // just a custom slug here
+                    'saved'     => 'post_duplication_created' // just a custom slug here
                 ),
                 admin_url('edit.php')
             )

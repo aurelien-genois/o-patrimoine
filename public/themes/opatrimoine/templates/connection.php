@@ -10,43 +10,56 @@ the_post();
 
 
 <section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
-    <h2 class="titles text-center"><?= the_title() ?></h2>
+    <h2 class="titles text-center">
+        <?= the_title() ?>
+    </h2>
 
-    <?php if (!empty(get_the_content())) : ?>
+    <?php if (!empty(get_the_content())): ?>
         <div class="editor px-4 xl:px-24">
             <?php the_content(); ?>
         </div>
     <?php endif; ?>
-    <form class="flex flex-col items-center xl:px-20 px-4 mb-8" name="loginform" id="loginform" action="<?php echo site_url('wp-login.php'); ?>" method="post">
+    <form class="flex flex-col items-center xl:px-20 px-4 mb-8" name="loginform" id="loginform"
+        action="<?php echo site_url('wp-login.php'); ?>" method="post">
 
         <input type="hidden" name="redirect_to" value="<?= $url_profil; ?>" />
-        <?php if (!empty($_GET['message']) && $_GET['message'] == 'errorconnexion') : ?>
+        <?php if (!empty($_GET['message']) && $_GET['message'] == 'errorconnexion'): ?>
             <div>
                 <div class="border border-fourth p-5 my-5 text-center">
-                    <p><b><?php _e('Erreur avec votre login ou mot de passe.', 'opatrimoine'); ?></b></p>
+                    <p><b>
+                            <?php _e('Erreur avec votre login ou mot de passe.', 'opatrimoine'); ?>
+                        </b></p>
                 </div>
             </div>
         <?php endif; ?>
-        <?php if (!empty($_GET['message']) && $_GET['message'] == 'inscrit') : ?>
+        <?php if (!empty($_GET['message']) && $_GET['message'] == 'inscrit'): ?>
             <div>
                 <div class="border border-fourth p-5 my-5 text-center">
-                    <p><b><?php _e('Vous êtes bien inscrit, vous pouvez vous connecter.', 'opatrimoine'); ?></b></p>
+                    <p><b>
+                            <?php _e('Vous êtes bien inscrit, vous pouvez vous connecter.', 'opatrimoine'); ?>
+                        </b></p>
                 </div>
             </div>
         <?php endif; ?>
 
         <div class="text-center w-auto">
-            <label class="block mb-2" for="user_login"><?php _e("Login / E-mail", 'opatrimoine'); ?> :</label>
+            <label class="block mb-2" for="user_login">
+                <?php _e("Login / E-mail", 'opatrimoine'); ?> :
+            </label>
             <input class="border border-grey px-4 py-2 mb-4" name="log" id="user_login" type="text" required>
         </div>
 
         <div class="text-center w-auto">
-            <label class="block mb-2" for="user_pass"><?php _e("Mot de passe", 'opatrimoine'); ?> :</label>
+            <label class="block mb-2" for="user_pass">
+                <?php _e("Mot de passe", 'opatrimoine'); ?> :
+            </label>
             <input class="border border-grey px-4 py-2 mb-4" type="password" name="pwd" id="user_pass" required>
         </div>
 
         <p class="text-center mb-3">
-            <button class="btn" type="submit" name="wp-submit"><span><?php _e('Connexion', 'opatrimoine'); ?></span></button>
+            <button class="btn" type="submit" name="wp-submit"><span>
+                    <?php _e('Connexion', 'opatrimoine'); ?>
+                </span></button>
         </p>
     </form>
 

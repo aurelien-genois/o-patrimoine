@@ -6,7 +6,8 @@
     </a>
     <div class="p-3 flex flex-col justify-between h-full">
         <div class="">
-            <a class="self-end hover:underline" href="<?php the_permalink(); ?>" alt="Lien vers <?= get_the_title() ?>" title="Lien vers <?= get_the_title() ?>">
+            <a class="self-end hover:underline" href="<?php the_permalink(); ?>" alt="Lien vers <?= get_the_title() ?>"
+                title="Lien vers <?= get_the_title() ?>">
                 <h3 class="md:text-lg font-bold text-third hover:text-second">
                     <?= get_the_title() ?>
                 </h3>
@@ -22,7 +23,8 @@
         <div class="flex flex-row-reverse justify-between">
             <!-- // todo note
             <span>note</span> -->
-            <a class="self-end hover:underline text-second hover:text-third" href="<?php the_permalink(); ?>" alt="Lien vers <?= get_the_title() ?>" title="Lien vers <?= get_the_title() ?>">
+            <a class="self-end hover:underline text-second hover:text-third" href="<?php the_permalink(); ?>"
+                alt="Lien vers <?= get_the_title() ?>" title="Lien vers <?= get_the_title() ?>">
                 Voir le lieu
             </a>
         </div>

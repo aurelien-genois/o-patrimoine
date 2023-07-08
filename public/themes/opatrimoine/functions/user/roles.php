@@ -48,7 +48,7 @@ add_action('init', function () {
         'Visiteur',
         [
 
-            'read_private_places' => true,
+            'read_private_places'       => true,
             'read_private_guided_tours' => true,
 
 
@@ -57,74 +57,77 @@ add_action('init', function () {
 
     // Rôle organisator
     add_role(
-        'organisator',    // idenfiant du rôle
-        'Organisateur',   // Libéllé du rôle
+        'organisator',
+        // idenfiant du rôle
+        'Organisateur',
+        // Libéllé du rôle
 
 
         // Liste des "capabilities" (droits) accordés au rôle "customer"
         [
-            'view_admin_as' => true,
-            'view_admin_as_role_defaults' => true,
+            'view_admin_as'                 => true,
+            'view_admin_as_role_defaults'   => true,
 
-            'read' => true, // important to access to the wordpress dashboard (backoffice)
-            'delete_others_pages' => true,
-            'delete_pages' => true,
-            'delete_private_pages' => true,
-            'delete_published_pages' => true,
-            'edit_others_pages' => true,
-            'edit_pages' => true,
-            'edit_private_pages' => true,
-            'edit_published_pages' => true,
-            'publish_pages' => true,
-            'read_private_pages' => true,
+            'read'                          => true,
+            // important to access to the wordpress dashboard (backoffice)
+            'delete_others_pages'           => true,
+            'delete_pages'                  => true,
+            'delete_private_pages'          => true,
+            'delete_published_pages'        => true,
+            'edit_others_pages'             => true,
+            'edit_pages'                    => true,
+            'edit_private_pages'            => true,
+            'edit_published_pages'          => true,
+            'publish_pages'                 => true,
+            'read_private_pages'            => true,
 
-            'delete_guided_tours' => true,
-            'delete_others_guided_tours' => true,
-            'delete_others_places' => true,
-            'delete_others_posts' => true,
+            'delete_guided_tours'           => true,
+            'delete_others_guided_tours'    => true,
+            'delete_others_places'          => true,
+            'delete_others_posts'           => true,
 
-            'delete_places' => true,
+            'delete_places'                 => true,
 
-            'delete_private_guided_tours' => true,
-            'delete_private_places' => true,
-            'delete_private_posts' => true,
+            'delete_private_guided_tours'   => true,
+            'delete_private_places'         => true,
+            'delete_private_posts'          => true,
 
             'delete_published_guided_tours' => true,
-            'delete_published_places' => true,
+            'delete_published_places'       => true,
 
-            'edit_guided_tours' => true,
-            'edit_others_guided_tours' => true,
-            'edit_others_places' => true,
+            'edit_guided_tours'             => true,
+            'edit_others_guided_tours'      => true,
+            'edit_others_places'            => true,
 
-            'edit_places' => true,
-            'edit_private_guided_tours' => true,
+            'edit_places'                   => true,
+            'edit_private_guided_tours'     => true,
 
-            'edit_published_guided_tours' => true,
-            'edit_published_places' => true,
+            'edit_published_guided_tours'   => true,
+            'edit_published_places'         => true,
 
-            'publish_guided_tours' => true,
-            'publish_places' => true,
+            'publish_guided_tours'          => true,
+            'publish_places'                => true,
 
-            'read_private_guided_tours' => true,
-            'read_private_places' => true,
-            'read_private_posts' => true,
-            'upload_files' => true,
+            'read_private_guided_tours'     => true,
+            'read_private_places'           => true,
+            'read_private_posts'            => true,
+            'upload_files'                  => true,
 
-            'create_users' => true,
-            'delete_users' => true,
-            'edit_users' => true,
-            'list_users' => true,
-            'promote_users' => true,
-            'remove_users' => true,
+            'create_users'                  => true,
+            'delete_users'                  => true,
+            'edit_users'                    => true,
+            'list_users'                    => true,
+            'promote_users'                 => true,
+            'remove_users'                  => true,
 
-            'manage_tour_thematics' => true,
-            'edit_tour_thematics' => true,
-            'delete_tour_thematics' => true,
-            'assign_tour_thematics' => true,
-            'manage_place_types' => true,
-            'edit_place_types' => true,
-            'delete_place_types' => true,
-            'assign_place_types' => true,
+            'manage_tour_thematics'         => true,
+            'edit_tour_thematics'           => true,
+            'delete_tour_thematics'         => true,
+            'assign_tour_thematics'         => true,
+            'manage_place_types'            => true,
+            'edit_place_types'              => true,
+            'delete_place_types'            => true,
+            'assign_place_types'            => true,
 
             // ? no capabilities to manage_tour_constraints tags
             // because has icon

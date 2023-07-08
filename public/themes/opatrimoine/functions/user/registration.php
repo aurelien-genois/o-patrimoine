@@ -34,7 +34,8 @@ if (empty($login) || empty($email) || empty($pwd) || empty($pwdConfirm)) {
         }
     } else {
         $error = 'mail non valide';
-    };
+    }
+    ;
 
     if (email_exists($email)) {
         $error = 'mail déjà existant';

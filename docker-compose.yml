@@ -11,18 +11,18 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql:cached
     environment:
-        MYSQL_DATABASE: ${DB_NAME}
-        # if = root error "Remove MYSQL_USER="root" and use one of the following to control the root user password:"
-        MYSQL_USER: ${DB_USER:-smogo}
-        MYSQL_PASSWORD: ${DB_PASSWORD:-opatrimoine}
-        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-opatrimoine}
-        MYSQL_TCP_PORT: ${DB_PORT:-3307}
-        MYSQL_QUERY_CACHE_TYPE: 1
-        MYSQL_QUERY_CACHE_SIZE: 64M
-        MYSQL_INNODB_BUFFER_POOL_SIZE: 128M
-        MYSQL_INNODB_FLUSH_LOG_AT_TRX_COMMIT: 0
-        MYSQL_INNODB_LOG_FILE_SIZE: 64M
-        MYSQL_INNODB_BUFFER_POOL_INSTANCES: 4
+      MYSQL_DATABASE: ${DB_NAME}
+      # if = root error "Remove MYSQL_USER="root" and use one of the following to control the root user password:"
+      MYSQL_USER: ${DB_USER:-smogo}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-opatrimoine}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-opatrimoine}
+      MYSQL_TCP_PORT: ${DB_PORT:-3307}
+      MYSQL_QUERY_CACHE_TYPE: 1
+      MYSQL_QUERY_CACHE_SIZE: 64M
+      MYSQL_INNODB_BUFFER_POOL_SIZE: 128M
+      MYSQL_INNODB_FLUSH_LOG_AT_TRX_COMMIT: 0
+      MYSQL_INNODB_LOG_FILE_SIZE: 64M
+      MYSQL_INNODB_BUFFER_POOL_INSTANCES: 4
     networks:
       - opatrimoine-network
 
@@ -113,7 +113,6 @@ services:
       - 3000:3000 # Port pour BrowserSync
     networks:
       - opatrimoine-network
-
 
 networks:
   opatrimoine-network:

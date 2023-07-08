@@ -12,4 +12,4 @@ import './elements/carousel';
 import './elements/filter-auto';
 import './elements/accordion';
 
-if(module.hot) module.hot.accept();
+if (module.hot) module.hot.accept();

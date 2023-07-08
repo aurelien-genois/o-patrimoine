@@ -1,50 +1,55 @@
 {
-    "repositories": [{
-        "type": "composer",
-        "url": "https://wpackagist.org",
-        "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
-    }],
-
-    "authors": [{
-        "name": "Aurelien",
-        "email": "aurelien.genois@gmail.com"
-    }],
-
-    "extra": {
-        "installer-paths": {
-            "public/mu-plugins/{$name}": ["type:wordpress-muplugin"],
-            "public/plugins/{$name}/": ["type:wordpress-plugin"],
-            "public/themes/{$name}/": ["type:wordpress-theme"]
-        },
-        "wordpress-install-dir": "public/wp"
-    },
-
-    "require": {
-        "johnpbloch/wordpress": "*",
-
-        "wpackagist-plugin/query-monitor": "*",
-        "wpackagist-plugin/user-role-editor": "*",
-        "wpackagist-plugin/view-admin-as": "*",
-        "wpackagist-plugin/advanced-custom-fields": "*",
-        "wpackagist-plugin/safe-svg": "*",
-        "wpackagist-plugin/better-search-replace": "*",
-        "wpackagist-plugin/tinymce-advanced": "*",
-        "wpackagist-plugin/autoptimize": "*",
-
-        "vlucas/phpdotenv": "*",
-        "oscarotero/env": "*",
-
-        "idleberg/wordpress-vite-assets": "^0.6.0"
-    },
-
-    "require-dev": {
-        "roave/security-advisories": "dev-latest"
-    },
-
-    "config": {
-        "allow-plugins": {
-            "composer/installers": true,
-            "johnpbloch/wordpress-core-installer": true
-        }
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
     }
+  ],
+  "authors": [
+    {
+      "name": "Aurelien",
+      "email": "aurelien.genois@gmail.com"
+    }
+  ],
+  "extra": {
+    "installer-paths": {
+      "public/mu-plugins/{$name}": [
+        "type:wordpress-muplugin"
+      ],
+      "public/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "public/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
+    },
+    "wordpress-install-dir": "public/wp"
+  },
+  "require": {
+    "johnpbloch/wordpress": "*",
+    "wpackagist-plugin/query-monitor": "*",
+    "wpackagist-plugin/user-role-editor": "*",
+    "wpackagist-plugin/view-admin-as": "*",
+    "wpackagist-plugin/advanced-custom-fields": "*",
+    "wpackagist-plugin/safe-svg": "*",
+    "wpackagist-plugin/better-search-replace": "*",
+    "wpackagist-plugin/tinymce-advanced": "*",
+    "wpackagist-plugin/autoptimize": "*",
+    "vlucas/phpdotenv": "*",
+    "oscarotero/env": "*",
+    "idleberg/wordpress-vite-assets": "^0.6.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "johnpbloch/wordpress-core-installer": true
+    }
+  }
 }

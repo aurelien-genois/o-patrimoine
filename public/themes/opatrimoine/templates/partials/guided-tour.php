@@ -14,8 +14,8 @@ $fmt = datefmt_create(
 $dateStr = datefmt_format($fmt, $dateTime);
 $hour = get_field('guided_tour_hour', get_the_ID());
 $duration = get_field('guided_tour_duration', get_the_ID());
-$totalPersons = get_field('guided_tour_total_persons', get_the_ID()) ?? '0';
-$totalReservations = get_field('guided_tour_total_reservations', get_the_ID()) ?? '0';
+$totalPersons = get_field('guided_tour_total_persons', get_the_ID()) ?: 0;
+$totalReservations = get_field('guided_tour_total_reservations', get_the_ID()) ?: 0;
 $totalAvailable = $totalPersons - $totalReservations;
 $constraints = get_the_terms(get_the_ID(), 'tour_constraint');
 
@@ -32,18 +32,24 @@ if (isset($args['currentTemplateSlug']) && $args['currentTemplateSlug'] == 'temp
 $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_ID());
 ?>
 
-<article class="bg-grey/20 mb-4 rounded-xl p-4 border border-black border-solid <?php if (!($totalAvailable > 0) && !$isAccount) echo 'text-white bg-third' ?>">
-    <div class="flex flex-wrap">
-        <div class="w-1/2 sm:w-1/3 order-1 text-sm md:text-base">
-            <?php if ($dateStr) echo '<span>' . $dateStr . '</span>&nbsp;' ?>
-            <?php if ($hour) echo '<span>à&nbsp;' . $hour . '</span>&nbsp;' ?>
-            <?php if ($duration) : ?>
-                <span class="block sm:inline whitespace-nowrap"><i class="fa-solid fa-hourglass-half"></i>&nbsp;<?= $duration ?></span>
+<article
+    class="bg-grey/20 mb-4 rounded-xl p-4 border border-black border-solid <?php if (!($totalAvailable > 0) && !$isAccount)
+        echo 'text-white bg-third' ?>">
+        <div class="flex flex-wrap">
+            <div class="w-1/2 sm:w-1/3 order-1 text-sm md:text-base">
+            <?php if ($dateStr)
+        echo '<span>' . $dateStr . '</span>&nbsp;' ?>
+            <?php if ($hour)
+        echo '<span>à&nbsp;' . $hour . '</span>&nbsp;' ?>
+            <?php if ($duration): ?>
+                <span class="block sm:inline whitespace-nowrap"><i class="fa-solid fa-hourglass-half"></i>&nbsp;
+                    <?= $duration ?>
+                </span>
             <?php endif; ?>
         </div>
 
         <div class="w-1/2 sm:w-1/3 order-2 sm:order-3 text-right text-sm md:text-base">
-            <?php if (is_array($constraints) && !empty($constraints)) : ?>
+            <?php if (is_array($constraints) && !empty($constraints)): ?>
                 <div class="flex justify-end">
                     Déconseillé&nbsp;:&nbsp;
                     <?php foreach ($constraints as $constraint) {
@@ -56,10 +62,13 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
                             echo wp_get_attachment_image($iconId, 'medium', false, ['class' => '']);
                         }
                         echo '</span>';
-                    }; ?>
+                    }
+                    ; ?>
                 </div>
             <?php endif; ?>
-            <div class="text-xs md:text-sm text-third hover:text-second hover:underline"><?= the_terms(get_the_ID(), 'tour_thematic'); ?></div>
+            <div class="text-xs md:text-sm text-third hover:text-second hover:underline">
+                <?= the_terms(get_the_ID(), 'tour_thematic'); ?>
+            </div>
         </div>
 
         <!-- contact organisateur
@@ -72,16 +81,19 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
         </p>
     </div>
 
-    <form class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 items-center" action="<?= get_theme_file_uri('functions/reservations/reservations.php') ?>" method="post">
-        <?php if (!$isAccount && $totalAvailable > 0) : ?>
+    <form class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 items-center"
+        action="<?= get_theme_file_uri('functions/reservations/reservations.php') ?>" method="post">
+        <?php if (!$isAccount && $totalAvailable > 0): ?>
             <div class="">
-                <?= $totalAvailable ?>&nbsp;/&nbsp;<?= $totalPersons ?>&nbsp;places disponibles
+                <?= $totalAvailable ?>&nbsp;/&nbsp;
+                <?= $totalPersons ?>&nbsp;places disponibles
             </div>
-        <?php elseif (!$isAccount) : ?>
+        <?php elseif (!$isAccount): ?>
             <div class="font-bold">Aucune place disponible</div>
-        <?php else : ?>
+        <?php else: ?>
             <div>
-                à&nbsp;<a class="hover:underline text-second hover:text-third" href="<?= get_permalink(get_field('field_guided_tour_place', get_the_ID())) ?>"><?= get_the_title(get_field('field_guided_tour_place', get_the_ID())) ?></a>
+                à&nbsp;<a class="hover:underline text-second hover:text-third"
+                    href="<?= get_permalink(get_field('field_guided_tour_place', get_the_ID())) ?>"><?= get_the_title(get_field('field_guided_tour_place', get_the_ID())) ?></a>
             </div>
         <?php endif; ?>
         <input type="hidden" name="current_location" value="<?= $currentLocationId; ?>">
@@ -89,20 +101,21 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
 
 
         <div class="">
-            <?php if ($currentMemberReservations) : ?>
+            <?php if ($currentMemberReservations): ?>
                 <p class="font-bold  <?= ($totalAvailable > 0 || $isAccount) ? 'text-third' : 'text-white' ?>"><?= $currentMemberReservations ?> places réservées</p>
-            <?php elseif (!$isAccount) : ?>
-                <input class="border min-w-[50px] text-center" type="number" name="nb_places" id="nb_places" max="<?= $totalPersons ?>" min="0">
+            <?php elseif (!$isAccount): ?>
+                <input class="border min-w-[50px] text-center" type="number" name="nb_places" id="nb_places"
+                    max="<?= $totalPersons ?>" min="0" value="0">
             <?php endif ?>
         </div>
         <div class="">
-            <?php if (!is_user_logged_in() && $totalAvailable > 0) : ?>
+            <?php if (!is_user_logged_in() && $totalAvailable > 0): ?>
                 <a class="btn btn-2" href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
                 <a class="btn btn-2" href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
-            <?php else : ?>
-                <?php if ($currentMemberReservations) : ?>
+            <?php else: ?>
+                <?php if ($currentMemberReservations): ?>
                     <input class="btn" type="submit" name="delete_reservations" value="Se désinscrire">
-                <?php elseif (!$isAccount && $totalAvailable > 0) : ?>
+                <?php elseif (!$isAccount && $totalAvailable > 0): ?>
                     <input class="btn" type="submit" name="register_reservations" value="S'inscrire">
                 <?php endif; ?>
             <?php endif; ?>
