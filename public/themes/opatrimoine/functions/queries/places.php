@@ -25,6 +25,12 @@ function custom_place_archive_query($query)
         $query->set('posts_per_page', 9);
         $query->set('paged', 1);
         if (!empty($_GET)) {
+
+            // todo listing by date
+            // => first query all guided-tours by date
+            // => then make an array of id from field_guided_tour_place field
+            // => finally include this array in 'post__in'
+
             if (isset($_GET['place_type'])) {
                 $_GET['place_type'] = htmlspecialchars($_GET['place_type']);
             }

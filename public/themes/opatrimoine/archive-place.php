@@ -1,6 +1,4 @@
 <?php
-
-
 get_header();
 $departments = get_departments();
 
@@ -15,6 +13,7 @@ $departments = get_departments();
     <form method="get" class="flex flex-col lg:flex-row justify-between items-center mb-8 max-h-0 lg:max-h-56
     overflow-hidden lg:overflow-visible transition-all duration-500 ease-out">
         <fieldset class="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-2">
+            <!-- // todo listing by date -->
             <?php
             wp_dropdown_categories([
                 'taxonomy'        => 'place_type',
