@@ -28,7 +28,7 @@ function custom_place_archive_query($query)
             if (isset($_GET['place_type'])) {
                 $_GET['place_type'] = htmlspecialchars($_GET['place_type']);
             }
-            if (!empty($_GET['place_department']) && $_GET['place_department'] > 0 && $_GET['place_department'] <= 3) {
+            if (!empty($_GET['place_department']) && $_GET['place_department'] > 0) {
                 $query->set('meta_query', [
                     [
                         'key'   => 'place_department',

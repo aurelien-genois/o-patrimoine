@@ -32,15 +32,14 @@ if (isset($args['currentTemplateSlug']) && $args['currentTemplateSlug'] == 'temp
 $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_ID());
 ?>
 
-<article
-    class="bg-grey/20 mb-4 rounded-xl p-4 border border-black border-solid <?php if (!($totalAvailable > 0) && !$isAccount)
-        echo 'text-white bg-third' ?>">
-        <div class="flex flex-wrap">
-            <div class="w-1/2 sm:w-1/3 order-1 text-sm md:text-base">
+<article class="bg-grey/20 mb-4 rounded-xl p-4 border border-black border-solid <?php if (!($totalAvailable > 0) && !$isAccount)
+    echo 'text-white bg-third' ?>">
+    <div class="flex flex-wrap">
+        <div class="w-1/2 sm:w-1/3 order-1 text-sm md:text-base">
             <?php if ($dateStr)
-        echo '<span>' . $dateStr . '</span>&nbsp;' ?>
+    echo '<span>' . $dateStr . '</span>&nbsp;' ?>
             <?php if ($hour)
-        echo '<span>à&nbsp;' . $hour . '</span>&nbsp;' ?>
+    echo '<span>à&nbsp;' . $hour . '</span>&nbsp;' ?>
             <?php if ($duration): ?>
                 <span class="block sm:inline whitespace-nowrap"><i class="fa-solid fa-hourglass-half"></i>&nbsp;
                     <?= $duration ?>

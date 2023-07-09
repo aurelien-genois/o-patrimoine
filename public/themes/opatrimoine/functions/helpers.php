@@ -2,7 +2,7 @@
 
 include_once 'duplicate-posts.php';
 
-function get_departments()
+function get_departments($number = null)
 {
     // $resource = curl_init('https://geo.api.gouv.fr/departements');
     // curl_setopt_array($resource, [
@@ -124,6 +124,10 @@ function get_departments()
         '974' => "La Réunion",
         '976' => "Mayotte",
     ];
+
+    if ($number && strlen((string) $number) > 0 && isset($departments[(string) $number])) {
+        return array_filter($departments, fn($k) => $k == (string) $number, ARRAY_FILTER_USE_KEY);
+    }
 
     return $departments;
 }
