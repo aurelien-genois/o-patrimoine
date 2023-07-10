@@ -166,3 +166,59 @@ function cleanOutput(&$value)
 {
     $value = htmlspecialchars($value);
 }
+
+function updateGuidedToursDate()
+{
+    $lastRegisteredDate = get_option('registered_date');
+    // to prevent update each reload
+    // update only if not today
+    if ($lastRegisteredDate != date('Ymd')) {
+
+        update_option('registered_date', date('Ymd'));
+
+
+        // get current date
+        $oneDay = new DateInterval('P1D');
+
+        $timeZone = new DateTimeZone('EUROPE/PARIS');
+        $todayDate = new DateTime('now', $timeZone);
+        $todayStr = $todayDate->format('Ymd');
+        $oneDayAfterTodayStr = $todayDate->add($oneDay)->format('Ymd');
+        $twoDayAfterTodayStr = $todayDate->add($oneDay)->format('Ymd');
+
+
+        // get all guidedTours
+        $allGuidedTours = new WP_Query(
+            [
+                'posts_per_page' => -1,
+                'post_type'      => 'guided_tour',
+            ]
+        );
+
+        // update date alternatively
+        if ($allGuidedTours->have_posts()) {
+            $i = 0;
+            while ($allGuidedTours->have_posts()) {
+                $allGuidedTours->the_post();
+                switch ($i % 3) {
+                    case 0:
+                        update_field('guided_tour_date', $todayStr, get_the_ID());
+                        break;
+                    case 1:
+                        update_field('guided_tour_date', $oneDayAfterTodayStr, get_the_ID());
+                        break;
+                    case 2:
+                        update_field('guided_tour_date', $twoDayAfterTodayStr, get_the_ID());
+                        break;
+                }
+                $i++;
+            }
+            wp_reset_postdata();
+        }
+    }
+
+
+}
+if (!is_admin()) {
+    updateGuidedToursDate();
+}
