@@ -15,8 +15,19 @@ $guidedToursQuery = new WP_Query([
     'posts_per_page' => 5,
     'paged'          => 1,
     'post_type'      => 'guided_tour',
-    'meta_key'       => 'guided_tour_place',
-    'meta_value'     => get_the_ID(),
+    'meta_query'     => [
+        'relation' => 'AND',
+        [
+            // do not show passed guided tours
+            'key'     => 'guided_tour_date',
+            'value'   => date('Ymd'),
+            'compare' => '>=',
+        ],
+        [
+            'key'   => 'guided_tour_place',
+            'value' => get_the_ID(),
+        ]
+    ]
 ]);
 ?>
 

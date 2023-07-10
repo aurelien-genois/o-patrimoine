@@ -42,6 +42,14 @@ function filter_guided_tours()
             'value'   => str_replace('-', '', $date),
             'compare' => '=',
         ];
+    } else {
+        // do not show passed guided tours
+        // (excepted if filter 'tour_date' wich will replace condition )
+        $meta_query[] = [
+            'key'     => 'guided_tour_date',
+            'value'   => date('Ymd'),
+            'compare' => '>=',
+        ];
     }
 
     $tax_query['relation'] = 'AND';
