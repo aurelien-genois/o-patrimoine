@@ -13,7 +13,8 @@ $departments = get_departments();
     <form method="get" class="flex flex-col lg:flex-row justify-between items-center mb-8 max-h-0 lg:max-h-56
     overflow-hidden lg:overflow-visible transition-all duration-500 ease-out">
         <fieldset class="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-2">
-            <!-- // todo listing by date -->
+            <input type="date" name="tour_date" id="tour_date" class="auto-filter-input border"
+                value="<?= filter_input(INPUT_GET, 'tour_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>">
             <?php
             wp_dropdown_categories([
                 'taxonomy'        => 'place_type',

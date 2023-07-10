@@ -55,8 +55,7 @@ if ($locationHighlight) {
         <h2 class="titles">
             <?= (get_field('home_visit_of_the_day_title', get_the_ID()) ?: 'Les visites du jour') ?>
         </h2>
-        <!-- // todo add query date for listing by date -->
-        <a class="link mb-2 md:mb-4" href="<?= get_post_type_archive_link('place') ?>">
+        <a class="link mb-2 md:mb-4" href="<?= get_post_type_archive_link('place') . '?tour_date=' . date('Y-m-d') ?>">
             <?= (get_field('home_visit_of_the_day_link_text', get_the_ID()) ?: 'Les autres visites du jour') ?>
         </a>
     </div>

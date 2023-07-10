@@ -26,11 +26,43 @@ function custom_place_archive_query($query)
         $query->set('paged', 1);
         if (!empty($_GET)) {
 
-            // todo listing by date
-            // => first query all guided-tours by date
-            // => then make an array of id from field_guided_tour_place field
-            // => finally include this array in 'post__in'
+            if (isset($_GET['tour_date']) && !empty($_GET['tour_date'])) {
+                // get all guided-tours by date
+                $date = sanitize_text_field($_GET['tour_date']);
+                $findGuidedTours = get_posts(
+                    [
+                        'posts_per_page' => -1,
+                        'post_type'      => 'guided_tour',
+                        'meta_query'     => [
+                            [
+                                // $date format is 2022-09-29
+                                // guided_tour_date format is 20220929 in BDD
+                                'key'     => 'guided_tour_date',
+                                'value'   => str_replace('-', '', $date),
+                                'compare' => '=',
+                            ],
+                        ],
+                    ]
+                );
+                // make an array of id from field_guided_tour_place field
+                $placesIds = [];
+                if (!empty($findGuidedTours) && is_array($findGuidedTours)) {
+                    foreach ($findGuidedTours as $guidedTour) {
+                        $placeId = get_field('field_guided_tour_place', $guidedTour->ID);
+                        if ($placeId) {
+                            $placesIds[] = $placeId;
+                        }
+                    }
+                }
 
+                if (count($placesIds)) {
+                    $query->set('post__in', $placesIds);
+                } else {
+                    $query->set('post__in', [0]);
+                }
+
+                // => finally include this array in 'post__in'
+            }
             if (isset($_GET['place_type'])) {
                 $_GET['place_type'] = htmlspecialchars($_GET['place_type']);
             }
