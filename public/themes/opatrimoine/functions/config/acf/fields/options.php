@@ -145,3 +145,44 @@ acf_add_local_field_group(
         'active'                => true,
     ]
 );
+
+// **********************************
+// ******** TEST OPTION PAGE ********
+// **********************************
+acf_add_local_field_group(
+    [
+        'key'                   => 'group_options_test',
+        'title'                 => 'Options de tests',
+        'fields'                => [
+            // [
+            //     'key'            => 'field_options_registered_date',
+            //     'label'          => 'Date',
+            //     'name'           => 'options_registered_date',
+            //     'instructions'   => '|| ! INUTILISE ! || Champs date utilisée pour générer automatiquement des dates des visites par rapport à aujourd\'hui',
+            //     'type'           => 'date_picker',
+            //     'wrapper'        => ['width' => '50'],
+            //     'required'       => 0,
+            //     'display_format' => 'd/m/Y',
+            //     'return_format'  => 'Y/m/d',
+            //     'first_day'      => 1,
+            //     'readonly'       => 1,
+            // ],
+        ],
+        'location'              => array(
+            array(
+                array(
+                    'param'    => 'options_page',
+                    'operator' => '==',
+                    'value'    => 'acf-options-test',
+                ),
+            ),
+        ),
+        'menu_order'            => 0,
+        'position'              => 'normal',
+        'style'                 => 'seamless',
+        'label_placement'       => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen'        => '',
+        'active'                => true,
+    ]
+);

@@ -16,8 +16,8 @@ add_action('acf/init', function () {
 
         $subpages_acf = array(
             [
-                'title' => 'Options générales',
-                'menu'  => 'Général',
+                'title' => 'Options de test',
+                'menu'  => 'Test',
             ],
         );
 
