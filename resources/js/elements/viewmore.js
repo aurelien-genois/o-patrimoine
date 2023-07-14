@@ -53,6 +53,8 @@ function displayMorePlaces() {
         nonce: this.dataset.nonce,
         place_type: this.dataset.place_type,
         deparment: this.dataset.deparment,
+        tour_date: this.dataset.tour_date,
+        tour_thematic: this.dataset.tour_thematic,
         s: this.dataset.s,
         page: Number(this.dataset.page) + 1,
     };

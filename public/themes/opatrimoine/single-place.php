@@ -143,7 +143,7 @@ $guidedToursQuery = new WP_Query([
             data-ajaxurl="<?php echo admin_url('admin-ajax.php'); ?>"
             data-nonce="<?php echo wp_create_nonce('opatrimoine_load_guided_tours'); ?>" data-action="load_guided_tours"
             data-place_id="<?= get_the_id() ?>" data-page="1">
-            Voir plus de lieux
+            Voir plus de visites
         </button>
     <?php else: ?>
         <p class="text-center text-third">Pas encore de visites sur ce lieux.</p>

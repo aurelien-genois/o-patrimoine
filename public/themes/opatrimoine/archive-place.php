@@ -1,8 +1,7 @@
 <?php
 get_header();
 $departments = get_departments();
-$tourThematics = get_terms(['taxonomy' => 'tour_thematic']);
-
+$tourThematics = get_terms(['taxonomy' => 'tour_thematic', 'hide_empty' => false]);
 ?>
 
 <section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
@@ -31,6 +30,7 @@ $tourThematics = get_terms(['taxonomy' => 'tour_thematic']);
                 'taxonomy'        => 'place_type',
                 'name'            => 'place_type',
                 'id'              => 'place_type_select_filter',
+                'hide_empty'      => false,
                 'value_field'     => 'slug',
                 'show_option_all' => __('Types de lieux', 'opatrimoine'),
                 'selected'        => filter_input(INPUT_GET, 'place_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: get_query_var('place_type'),
@@ -69,6 +69,8 @@ $tourThematics = get_terms(['taxonomy' => 'tour_thematic']);
             data-nonce="<?php echo wp_create_nonce('opatrimoine_load_places'); ?>" data-action="load_places"
             data-place_type="<?= filter_input(INPUT_GET, 'place_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>"
             data-deparment="<?= filter_input(INPUT_GET, 'place_department', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>"
+            data-tour_date="<?= filter_input(INPUT_GET, 'tour_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>"
+            data-tour_thematic="<?= filter_input(INPUT_GET, 'guided_tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>"
             data-s="<?= the_search_query() ?: '' ?>" data-page="<?= get_query_var('paged') ?>">
             Voir plus de lieux
         </button>
