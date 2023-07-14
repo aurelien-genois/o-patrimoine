@@ -1,6 +1,7 @@
 <?php
 get_header();
 $departments = get_departments();
+$tourThematics = get_terms(['taxonomy' => 'tour_thematic']);
 
 ?>
 
@@ -15,6 +16,16 @@ $departments = get_departments();
         <fieldset class="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-2">
             <input type="date" name="tour_date" id="tour_date" class="auto-filter-input border"
                 value="<?= filter_input(INPUT_GET, 'tour_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>">
+            <?php if (is_array($tourThematics) && !empty($tourThematics)): ?>
+                <select name="guided_tour_thematic" id="tour_thematic_select_filter"
+                    class="input mx-1 sm:mx-2 max-w-[150px]">
+                    <!-- no function wp_dropdown_categories() and name different from "tour_thematic" taxo name to prevent auto query arg to place query -->
+                    <option value="">Thèmatiques</option>
+                    <?php foreach ($tourThematics as $k => $tourThematic): ?>
+                        <option value="<?= $tourThematic->slug ?>" <?= (filter_input(INPUT_GET, 'guided_tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) == $tourThematic->slug) ? 'selected' : '' ?>><?= $tourThematic->name ?></option>
+                    <?php endforeach; ?>
+                </select>
+            <?php endif; ?>
             <?php
             wp_dropdown_categories([
                 'taxonomy'        => 'place_type',
@@ -33,9 +44,9 @@ $departments = get_departments();
                         <option value="<?= $k ?>" <?= (filter_input(INPUT_GET, 'place_department', FILTER_SANITIZE_FULL_SPECIAL_CHARS) == $k) ? 'selected' : '' ?>><?= $department ?></option>
                     <?php endforeach; ?>
                 </select>
-                <input type="text" id="place_name" class="max-w-[150px]" name="s" value="<?= the_search_query() ?>"
-                    placeholder="Ajoutez un mot clé">
             <?php endif; ?>
+            <input type="text" id="place_name" class="max-w-[150px]" name="s" value="<?= the_search_query() ?>"
+                placeholder="Ajoutez un mot clé">
         </fieldset>
 
         <input type="submit" class="btn mx-auto lg:mx-0 mt-2 lg:mt-0" value="Rechercher">

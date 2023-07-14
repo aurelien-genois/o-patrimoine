@@ -26,6 +26,7 @@ function custom_place_archive_query($query)
         $query->set('paged', 1);
         if (!empty($_GET)) {
 
+            $placesIdsFromTourDate = [];
             if (isset($_GET['tour_date']) && !empty($_GET['tour_date'])) {
                 // get all guided-tours by date
                 $date = sanitize_text_field($_GET['tour_date']);
@@ -45,24 +46,54 @@ function custom_place_archive_query($query)
                     ]
                 );
                 // make an array of id from field_guided_tour_place field
-                $placesIds = [];
                 if (!empty($findGuidedTours) && is_array($findGuidedTours)) {
                     foreach ($findGuidedTours as $guidedTour) {
                         $placeId = get_field('field_guided_tour_place', $guidedTour->ID);
-                        if ($placeId) {
-                            $placesIds[] = $placeId;
+                        if ($placeId && !in_array($placeId, $placesIdsFromTourDate)) {
+                            $placesIdsFromTourDate[] = $placeId;
+                        }
+                    }
+                }
+            }
+
+            $placesIdsFromTourThematic = [];
+            if (isset($_GET['guided_tour_thematic']) && !empty($_GET['guided_tour_thematic'])) {
+                // get all guided-tours by thematic
+                $thematic = sanitize_text_field($_GET['guided_tour_thematic']);
+                $findGuidedTours = get_posts(
+                    [
+                        'posts_per_page' => -1,
+                        'post_type'      => 'guided_tour',
+                        'tax_query'      => [
+                            [
+                                'taxonomy' => 'tour_thematic',
+                                'field'    => 'slug',
+                                'terms'    => $thematic,
+                            ]
+                        ],
+                    ]
+                );
+                // make an array of id from field_guided_tour_place field
+                if (!empty($findGuidedTours) && is_array($findGuidedTours)) {
+                    foreach ($findGuidedTours as $guidedTour) {
+                        $placeId = get_field('field_guided_tour_place', $guidedTour->ID);
+                        if ($placeId && !in_array($placeId, $placesIdsFromTourThematic)) {
+                            $placesIdsFromTourThematic[] = $placeId;
                         }
                     }
                 }
 
-                if (count($placesIds)) {
-                    $query->set('post__in', $placesIds);
-                } else {
-                    $query->set('post__in', [0]);
-                }
-
-                // => finally include this array in 'post__in'
             }
+
+            // two arrays => array_intersect for apply both filters on guided tour
+            if (count($placesIdsFromTourDate) || count($placesIdsFromTourThematic)) {
+                $placesIds = array_intersect($placesIdsFromTourDate, $placesIdsFromTourThematic);
+
+                $query->set('post__in', $placesIds);
+            } else {
+                $query->set('post__in', [0]);
+            }
+
             if (isset($_GET['place_type'])) {
                 $_GET['place_type'] = htmlspecialchars($_GET['place_type']);
             }
