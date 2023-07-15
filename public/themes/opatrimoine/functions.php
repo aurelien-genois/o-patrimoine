@@ -90,7 +90,6 @@ add_action('wp_enqueue_scripts', function () {
 
 include_once 'functions/helpers.php';
 include_once 'functions/config/config.php';
-include_once 'functions/config/admin.php'; // the include does'nt work in config.php ?
 include_once 'functions/queries/queries.php';
 include_once 'functions/user/roles.php';
 include_once 'functions/user/connection.php';

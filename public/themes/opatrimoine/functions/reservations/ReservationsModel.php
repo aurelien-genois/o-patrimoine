@@ -127,7 +127,7 @@ class ReservationsModel
             $numbersOfReservationsByGuidedToursId[$guidedTourId] = $reservationsResult->nb_of_reservations;
         }
 
-        $guidedTours = [];
+        $guidedTours = null;
         if (!empty($guidedToursIdList)) {
             $guidedTours = new WP_Query([
                 'post__in'  => $guidedToursIdList,

@@ -62,8 +62,6 @@ $tourThematics = get_terms(['taxonomy' => 'tour_thematic', 'hide_empty' => false
                 get_template_part('templates/partials/place-thumbnail');
             } ?>
         </ul>
-        <!-- //! does'nt work if not logged in (get admin-ajax redirect to login page) -->
-        <!-- //! maybe need an Authorization header added to the fetch in viewmore JS -->
         <!-- //todo text if only on local -->
         <button class="block btn mx-auto load-more-places-btn" data-ajaxurl="<?php echo admin_url('admin-ajax.php'); ?>"
             data-nonce="<?php echo wp_create_nonce('opatrimoine_load_places'); ?>" data-action="load_places"

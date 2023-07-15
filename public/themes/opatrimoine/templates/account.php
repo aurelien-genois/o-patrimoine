@@ -3,7 +3,7 @@
 
 $user = wp_get_current_user();
 $roles = $user->roles;
-if (!is_user_logged_in() || $user->ID == 0 || !in_array('visitor', $roles)) {
+if (!is_user_logged_in() || !in_array('visitor', $roles)) {
     wp_redirect(home_url());
     exit();
 }
@@ -124,7 +124,7 @@ $pageTemplateSlug = get_page_template_slug();
 
 <section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
     <h3 class="titles text-center">Mes visites réservées</h3>
-    <?php if ($guidedToursQuery->have_posts()): ?>
+    <?php if (is_a($guidedToursQuery, 'WP_Query') && $guidedToursQuery->have_posts()): ?>
         <div class="guided_tours">
             <?php while ($guidedToursQuery->have_posts()) {
                 $guidedToursQuery->the_post();
