@@ -15,6 +15,14 @@
             <p class="text-xs md:text-sm text-third hover:text-second hover:underline">
                 <?php the_terms(get_the_ID(), 'place_type'); ?>
             </p>
+            <?php
+            $departmentNumber = get_field('place_department', get_the_ID());
+            $department = get_departments($departmentNumber);
+            if (is_array($department) && count($department)): ?>
+                <p class="text-xs md:text-sm">
+                    <?= current($department) ?>
+                </p>
+            <?php endif; ?>
             <p class="text-sm md:text-base">
                 <?= get_the_excerpt(); ?>
             </p>

@@ -249,10 +249,6 @@ function load_places()
         $args['post__in'] = $placesIdsFromTourThematic;
     }
 
-
-    // TODO add tour_date, tour_thematics
-
-
     if (!empty($place_type)) {
         $tax_query[] = [
             'taxonomy' => 'place_type',
@@ -279,4 +275,3 @@ function load_places()
 }
 add_action('wp_ajax_load_places', 'load_places');
 add_action('wp_ajax_nopriv_load_places', 'load_places');
-header("Access-Control-Allow-Origin: *");
