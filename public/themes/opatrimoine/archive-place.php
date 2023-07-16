@@ -21,7 +21,10 @@ $tourThematics = get_terms(['taxonomy' => 'tour_thematic', 'hide_empty' => false
                     <!-- no function wp_dropdown_categories() and name different from "tour_thematic" taxo name to prevent auto query arg to place query -->
                     <option value="">Thèmatiques</option>
                     <?php foreach ($tourThematics as $k => $tourThematic): ?>
-                        <option value="<?= $tourThematic->slug ?>" <?= (filter_input(INPUT_GET, 'guided_tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) == $tourThematic->slug) ? 'selected' : '' ?>><?= $tourThematic->name ?></option>
+                        <option value="<?= $tourThematic->slug ?>" <?= (filter_input(INPUT_GET, 'guided_tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) == $tourThematic->slug) ? 'selected' : '' ?>
+                            <?= (get_query_var('guided_tour_thematic') == $tourThematic->slug) ? 'selected' : '' ?>>
+                            <?= $tourThematic->name ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             <?php endif; ?>
@@ -62,13 +65,12 @@ $tourThematics = get_terms(['taxonomy' => 'tour_thematic', 'hide_empty' => false
                 get_template_part('templates/partials/place-thumbnail');
             } ?>
         </ul>
-        <!-- //todo text if only on local -->
         <button class="block btn mx-auto load-more-places-btn" data-ajaxurl="<?php echo admin_url('admin-ajax.php'); ?>"
             data-nonce="<?php echo wp_create_nonce('opatrimoine_load_places'); ?>" data-action="load_places"
-            data-place_type="<?= filter_input(INPUT_GET, 'place_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>"
+            data-place_type="<?= filter_input(INPUT_GET, 'place_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: get_query_var('place_type') ?>"
             data-deparment="<?= filter_input(INPUT_GET, 'place_department', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>"
             data-tour_date="<?= filter_input(INPUT_GET, 'tour_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>"
-            data-tour_thematic="<?= filter_input(INPUT_GET, 'guided_tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>"
+            data-tour_thematic="<?= filter_input(INPUT_GET, 'guided_tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: get_query_var('guided_tour_thematic') ?>"
             data-s="<?= the_search_query() ?: '' ?>" data-page="<?= get_query_var('paged') ?>">
             Voir plus de lieux
         </button>

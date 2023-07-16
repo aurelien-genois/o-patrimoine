@@ -27,7 +27,7 @@ function custom_place_archive_query($query)
     if ($query->is_main_query() && !is_admin() && is_post_type_archive('place')) {
         $query->set('posts_per_page', 4);
         $query->set('paged', 1);
-        if (!empty($_GET)) {
+        if (!empty($_GET) || get_query_var('guided_tour_thematic') || get_query_var('place_type')) {
 
             $placesIdsFromTourDate = [];
             if (isset($_GET['tour_date']) && !empty($_GET['tour_date'])) {
@@ -63,9 +63,13 @@ function custom_place_archive_query($query)
             }
 
             $placesIdsFromTourThematic = [];
-            if (isset($_GET['guided_tour_thematic']) && !empty($_GET['guided_tour_thematic'])) {
+            if (
+                (isset($_GET['guided_tour_thematic']) && !empty($_GET['guided_tour_thematic'])) ||
+                get_query_var('guided_tour_thematic')
+            ) {
                 // get all guided-tours by thematic
-                $thematic = sanitize_text_field($_GET['guided_tour_thematic']);
+                $thematic = $_GET['guided_tour_thematic'] ?: get_query_var('guided_tour_thematic');
+                $thematic = sanitize_text_field($thematic);
                 $findGuidedTours = get_posts(
                     [
                         'posts_per_page' => -1,

@@ -81,15 +81,24 @@ add_action('init', function () {
         'index.php?post_type=place&place_type=$matches[1]',
         'top',
     );
+    add_rewrite_rule(
+        'tour_thematic/([a-z0-9-]+)[/]?$',
+        'index.php?post_type=place&guided_tour_thematic=$matches[1]',
+        'top',
+    );
 }, 6, 0);
 
 add_filter('query_vars', function ($query_vars) {
     $query_vars[] = 'place_type';
+    $query_vars[] = 'guided_tour_thematic';
     return $query_vars;
 });
 
 add_action('template_include', function ($template) {
-    if (get_query_var('place_type') == false || get_query_var('place_type') == '') {
+    if (
+        (get_query_var('place_type') == false || get_query_var('place_type') == '') ||
+        (get_query_var('guided_tour_thematic') == false || get_query_var('guided_tour_thematic') == '')
+    ) {
         return $template;
     }
     return get_template_directory() . '/archive-place.php';
