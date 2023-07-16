@@ -17,6 +17,7 @@ function filter_guided_tours()
     $date = sanitize_text_field($_POST['date']);
     $thematic = sanitize_text_field($_POST['thematic']);
     $constraint = sanitize_text_field($_POST['constraint']);
+    $availableOnly = sanitize_text_field($_POST['availableOnly']); // string "true" or "false"
 
     if (get_post_status($placeId) !== 'publish') {
         wp_send_json_error('Ce lieu n\'est pas publié.', 403);
@@ -51,6 +52,25 @@ function filter_guided_tours()
             'compare' => '>=',
         ];
     }
+    if (!empty($availableOnly) && $availableOnly == 'true') {
+        // Wordpress create innerjoin on postmeta (with alias) table for each meta
+        // if need to create another innerjoin :
+        // https://wordpress.stackexchange.com/questions/390191/compare-two-meta-fields-in-a-wp-query-where-meta-field-a-is-larger-than-meta-fi
+
+        add_filter('get_meta_sql', function ($sql, $queries, $type, $primary_table, $primary_id_column, $context) {
+            if ($context && is_a($context, 'WP_Query')) {
+                global $wpdb;
+                $pm = uniqid('pm_'); // unique table alias
+                $sql['join'] .= " INNER JOIN $wpdb->postmeta AS $pm ON {$pm}.post_id = {$wpdb->posts}.ID";
+                $pm2 = uniqid('pm_'); // unique table alias
+                $sql['join'] .= " INNER JOIN $wpdb->postmeta AS $pm2 ON {$pm2}.post_id = {$wpdb->posts}.ID";
+
+                $sql['where'] .= " AND ( {$pm}.meta_key = 'guided_tour_total_reservations' AND {$pm2}.meta_key = 'guided_tour_total_persons'" .
+                    " AND CAST({$pm}.meta_value AS DECIMAL) < CAST({$pm2}.meta_value AS DECIMAL) )";
+            }
+            return $sql;
+        }, 10, 6);
+    }
 
     $tax_query['relation'] = 'AND';
     if (!empty($thematic)) {
@@ -70,7 +90,9 @@ function filter_guided_tours()
     }
     $args['meta_query'] = $meta_query;
     $args['tax_query'] = $tax_query;
+
     $guidedTours = new WP_Query($args);
+
 
     ob_start();
     if ($guidedTours->have_posts()) {
@@ -103,6 +125,8 @@ function load_guided_tours()
     $date = sanitize_text_field($_POST['date']);
     $thematic = sanitize_text_field($_POST['thematic']);
     $constraint = sanitize_text_field($_POST['constraint']);
+    $availableOnly = sanitize_text_field($_POST['availableOnly']); // string "true" or "false"
+
     $page = sanitize_text_field($_POST['page']);
 
     if (get_post_status($placeId) !== 'publish') {
@@ -129,6 +153,21 @@ function load_guided_tours()
             'value'   => str_replace('-', '', $date),
             'compare' => '=',
         ];
+    }
+    if (!empty($availableOnly) && $availableOnly == 'true') {
+        add_filter('get_meta_sql', function ($sql, $queries, $type, $primary_table, $primary_id_column, $context) {
+            if ($context && is_a($context, 'WP_Query')) {
+                global $wpdb;
+                $pm = uniqid('pm_'); // unique table alias
+                $sql['join'] .= " INNER JOIN $wpdb->postmeta AS $pm ON {$pm}.post_id = {$wpdb->posts}.ID";
+                $pm2 = uniqid('pm_'); // unique table alias
+                $sql['join'] .= " INNER JOIN $wpdb->postmeta AS $pm2 ON {$pm2}.post_id = {$wpdb->posts}.ID";
+
+                $sql['where'] .= " AND ( {$pm}.meta_key = 'guided_tour_total_reservations' AND {$pm2}.meta_key = 'guided_tour_total_persons'" .
+                    " AND CAST({$pm}.meta_value AS DECIMAL) < CAST({$pm2}.meta_value AS DECIMAL) )";
+            }
+            return $sql;
+        }, 10, 6);
     }
 
     $tax_query['relation'] = 'AND';

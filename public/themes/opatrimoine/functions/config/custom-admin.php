@@ -30,6 +30,7 @@ add_filter('manage_place_posts_custom_column', 'custom_place_column', 10, 2);
 function set_custom_guided_tour_column($columns)
 {
     $columns['place'] = __('Lieu', 'opatrimoine');
+    $columns['nb_places'] = __('Disponibilité', 'opatrimoine');
 
     return $columns;
 }
@@ -43,6 +44,12 @@ function custom_guided_tour_column($column, $post_id)
             if ($placeId) {
                 echo get_the_title($placeId) ?: '';
             }
+            break;
+        case 'nb_places':
+            $totalPersons = get_field('guided_tour_total_persons', $post_id) ?: 0;
+            $totalReservations = get_field('guided_tour_total_reservations', $post_id) ?: 0;
+            $totalAvailable = $totalPersons - $totalReservations;
+            echo $totalAvailable . '&nbsp;/&nbsp;' . $totalPersons;
             break;
     }
 }

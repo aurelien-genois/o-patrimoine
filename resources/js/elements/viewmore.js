@@ -9,6 +9,7 @@ function displayMoreGuidedTours(e) {
         date: filterForm.querySelector('input[name=tour_date]').value,
         thematic: filterForm.querySelector('select[name=tour_thematic]').value,
         constraint: filterForm.querySelector('select[name=tour_constraint]').value,
+        availableOnly: filterForm.querySelector('input[name=available_only]').checked,
         page: Number(this.dataset.page) + 1,
     };
 

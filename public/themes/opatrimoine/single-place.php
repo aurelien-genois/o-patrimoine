@@ -129,7 +129,10 @@ $guidedToursQuery = new WP_Query([
                     'selected'        => filter_input(INPUT_GET, 'tour_constraint', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '',
                     'class'           => 'auto-filter-input border ml-1',
                 ]); ?>
-                <!-- // todo select disponibilité -->
+            </span>
+            <span>
+                Uniquement disponibles ?
+                <input type="checkbox" class="auto-filter-input" name="available_only" id="available_only">
             </span>
         </form>
         <div class="guided_tours">

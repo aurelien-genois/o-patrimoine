@@ -102,7 +102,7 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
         <div class="">
             <?php if ($currentMemberReservations): ?>
                 <p class="font-bold  <?= ($totalAvailable > 0 || $isAccount) ? 'text-third' : 'text-white' ?>"><?= $currentMemberReservations ?> places réservées</p>
-            <?php elseif (!$isAccount): ?>
+            <?php elseif (!$isAccount && $totalAvailable > 0): ?>
                 <input class="border min-w-[50px] text-center" type="number" name="nb_places" id="nb_places"
                     max="<?= $totalPersons ?>" min="0" value="0">
             <?php endif ?>
