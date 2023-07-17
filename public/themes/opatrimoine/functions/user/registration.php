@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/wp/wp-load.php';
 
 $url_creat_account = get_page_url_by_template('templates/registration.php');
-$url_connexion = get_page_url_by_template('templates/connexion.php');
+$url_connexion = get_page_url_by_template('templates/connection.php');
 
 $postValues = $_POST;
 array_walk_recursive($postValues, 'cleanOutput');
@@ -35,7 +35,8 @@ if (empty($login) || empty($email) || empty($pwd) || empty($pwdConfirm)) {
     } else {
         $error = 'mail non valide';
     }
-    ;
+
+    // ! $error will be replaced
 
     if (email_exists($email)) {
         $error = 'mail déjà existant';
