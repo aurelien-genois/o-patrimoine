@@ -1,25 +1,6 @@
 <?php
 // Template Name: Mot de passe oublié
 
-// todo
-// * => better in registration page ?
-
-// 1 - form with email
-// --- script call $results = retrieve_password( $user->user_login ); (return true if success, else return $errors)
-// --- if success display message, if error display errors
-
-// --- => can manage in ajax with action send_password_reset and create nonce " 'reset-password-for-' . $user_id " and user_id
-// --- wp_ajax_send_password_reset() call retrieve_password() then return in js json_success/json_error
-// --- if ajax, only form inputs (user_id, nonce, action) and JS is necessay for this step
-// * no user_id if lost password => cannot use this Ajax function
-
-// ! by default, retrieve_password() : link in email is to wp_login URL
-// (network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . '&wp_lang=' . $locale . "\r\n\r\n";)
-// => use filter 'retrieve_password_message' to customize
-
-// 2 - check the action 'resetpass' and token "user_activation_key" to display the reset password form
-// --- script : check check_password_reset_key() then reset_password() (similar to wp-login.php case 'resetpass'...)
-
 $url_lost = get_page_url_by_template('templates/lost_password.php');
 $url_connexion = get_page_url_by_template('templates/connection.php');
 $msg = isset($_GET['msg']) ? $_GET['msg'] : false;

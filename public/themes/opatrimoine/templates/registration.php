@@ -1,6 +1,8 @@
 <?php
 // Template Name: Inscription
 
+$msg = isset($_GET['msg']) ? $_GET['msg'] : false;
+
 get_header();
 the_post();
 ?>
@@ -18,13 +20,33 @@ the_post();
     <?php endif; ?>
     <form class="flex flex-col items-center xl:px-20 px-4 mb-8" name="registrationform" id="registrationform"
         action="<?= get_theme_file_uri('functions/user/registration.php') ?>" method="post">
-        <?php if (!empty($_GET['error-registration'])): ?>
+        <?php if ($msg): ?>
             <div>
-                <div class="border border-fourth p-5 my-5 text-center" style="color:darkred">
-                    <p><b>
-                            <?= $_GET['error-registration'] ?>
-                        </b></p>
-                </div>
+                <p class="border border-fourth p-5 my-5 text-center font-bold">
+                    <?php switch ($msg):
+                        case 'empty_field': ?>
+                            <span class="text-red-500">Champs obligatoire</span>
+                            <?php break;
+                        case 'invalid': ?>
+                            <span class="text-red-500">Erreur : adresse email non valide</span>
+                            <?php break;
+                        case 'email_exist': ?>
+                            <span class="text-red-500">Erreur : adresse email déjà existante</span>
+                            <?php break;
+                        case 'pass_not_complexe': ?>
+                            <span class="text-red-500">Le mot de passe n'est pas assez complexe</span>
+                            <?php break;
+                        case 'pass_empty_space': ?>
+                            <span class="text-red-500">Le mot de passe ne peut pas être des espaces</span>
+                            <?php break;
+                        case 'pass_mismatch': ?>
+                            <span class="text-red-500">Les mots de passe ne correspondent pas</span>
+                            <?php break;
+                        case 'error_bdd': ?>
+                            <span class="text-red-500">Erreur lors de la création du compte</span>
+                            <?php break;
+                    endswitch; ?>
+                </p>
             </div>
         <?php endif; ?>
 

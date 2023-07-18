@@ -71,8 +71,8 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
         </div>
 
         <!-- contact organisateur
-        => get_the_author_meta('user_email',$user_id)
-        ou seulement $user_id (car sélection du mail sur formulaire de contact)
+        => get_the_author_meta('user_email',$userId)
+        ou seulement $userId (car sélection du mail sur formulaire de contact)
         si on peut cacher l'adresse mail pour plus de confidentialité -->
 
         <p class="w-full sm:w-1/3 order-3 sm:order-2 text-center font-bold text-lg md:text-xl">

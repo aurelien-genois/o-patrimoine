@@ -52,7 +52,7 @@ if (isset($_POST['edit_user'])) {
         } else {
             wp_update_user(['ID' => $user->ID, 'display_name' => $login]);
             wp_update_user(['ID' => $user->ID, 'user_email' => $email]);
-            // todo send email to user
+            // Wordpress automatically send email if user_email is changed
             wp_redirect($url_account . '?message=edited');
         }
     }
@@ -93,7 +93,7 @@ if (isset($_POST['edit_pass'])) {
             exit();
         } else {
             wp_update_user(['ID' => $user->ID, 'user_pass' => $pwd]);
-            // todo send email to user
+            // Wordpress automatically send email if password is changed
             wp_redirect($url_account . '?message=pass_edited');
         }
     }

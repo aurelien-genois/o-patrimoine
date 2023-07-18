@@ -12,10 +12,8 @@ $email = $postValues['email'];
 $pwd = $postValues['pwd'];
 $pwdConfirm = $postValues['pwd_confirm'];
 
-$error = false;
 if (empty($login) || empty($email) || empty($pwd) || empty($pwdConfirm)) {
-    $error = 'champs non remplis';
-    wp_redirect($url_creat_account . '?error-registration=' . $error);
+    wp_redirect($url_creat_account . '?msg=empty_field');
     exit();
 } else {
     // verify email
@@ -25,47 +23,57 @@ if (empty($login) || empty($email) || empty($pwd) || empty($pwdConfirm)) {
         if (isset($domainExp[1])) {
             $domain = $domainExp[1];
             if (!checkdnsrr($domain, 'MX')) {
-                $error = 'DNS non valide';
+                wp_redirect($url_creat_account . '?msg=invalid');
+                exit();
             } else {
                 // ok
             }
         } else {
-            $error = 'mail non valide';
+            wp_redirect($url_creat_account . '?msg=invalid');
+            exit();
         }
     } else {
-        $error = 'mail non valide';
+        wp_redirect($url_creat_account . '?msg=invalid');
+        exit();
     }
 
     // ! $error will be replaced
 
     if (email_exists($email)) {
-        $error = 'mail déjà existant';
+        wp_redirect($url_creat_account . '?msg=email_exist');
+        exit();
+    }
+
+    // Check if password is one or all empty spaces.
+    if (!empty($pwd)) {
+        $pwd = trim($pwd);
+        if (empty($pwd)) {
+            wp_redirect(add_query_arg('msg', 'pass_empty_space'));
+            exit();
+        }
     }
 
     if ($pwd != $pwdConfirm) {
-        $error = 'Mots de passe différents';
+        wp_redirect($url_creat_account . '?msg=pass_mismatch');
+        exit();
     }
 
     if (!preg_match('/^(?=.*[A-Z])(?=.*[!?\/\\;:%@#\-_&*])(?=.*[0-9])(?=.*[a-z]).{8,20}$/', $pwd)) {
-        $error = 'Mot de passe pas assez complexe';
+        wp_redirect($url_creat_account . '?msg=pass_not_complexe');
+        exit();
     }
 
-    if ($error) {
-        wp_redirect($url_creat_account . '?error-registration=' . $error);
+
+    $userId = wp_create_user($login, $pwd, $email);
+    if ($userId) {
+        $user = new WP_User($userId);
+        $user->remove_role('subscriber');
+        $user->add_role('visitor');
+        // todo send email to user
+        wp_redirect($url_connexion . '?message=inscrit');
         exit();
     } else {
-        $user_id = wp_create_user($login, $pwd, $email);
-        if ($user_id) {
-            $user = new WP_User($userId);
-            $user->remove_role('subscriber');
-            $user->add_role('visitor');
-            // todo send email to user
-            wp_redirect($url_connexion . '?message=inscrit');
-            exit();
-        } else {
-            $error = "Erreur BDD";
-            wp_redirect($url_creat_account . '?error-registration=' . $error);
-            exit();
-        }
+        wp_redirect($url_creat_account . '?msg=error_bdd');
+        exit();
     }
 }

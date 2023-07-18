@@ -99,9 +99,7 @@ function check_lost_password()
             // Check if password is one or all empty spaces.
             if (!empty($_POST['pass1'])) {
                 $_POST['pass1'] = trim($_POST['pass1']);
-
                 if (empty($_POST['pass1'])) {
-                    // $_SERVER['HTTP_REFERER'] to keep get parameters
                     wp_redirect(add_query_arg('msg', 'pass_empty_space'));
                     exit();
                 }
@@ -109,14 +107,12 @@ function check_lost_password()
 
             // check password complexity
             if (!preg_match('/^(?=.*[A-Z])(?=.*[!?\/\\;:%@#\-_&*])(?=.*[0-9])(?=.*[a-z]).{8,20}$/', $_POST['pass1'])) {
-                // $_SERVER['HTTP_REFERER'] to keep get parameters
                 wp_redirect(add_query_arg('msg', 'pass_not_complexe'));
                 exit();
             }
 
             // Check if password fields do not match.
             if (!empty($_POST['pass1']) && trim($_POST['pass2']) !== $_POST['pass1']) {
-                // $_SERVER['HTTP_REFERER'] to keep get parameters
                 wp_redirect(add_query_arg('msg', 'pass_mismatch'));
                 exit();
             }
