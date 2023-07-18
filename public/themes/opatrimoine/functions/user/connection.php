@@ -25,20 +25,3 @@ function admin_default_page()
     }
 }
 add_filter('login_redirect', 'admin_default_page');
-
-// replace default link to reset password
-add_filter('retrieve_password_message', function ($message, $key, $user_login, $user_data) {
-    $url_lost = get_page_url_by_template('templates/lost_password.php');
-
-    // if from front lost_password page, $link in message to same front template
-    if (str_contains($_SERVER['HTTP_REFERER'], $url_lost)) {
-        $linkBegin = strpos($message, 'http');
-
-        $locale = get_user_locale($user_data);
-
-        $link = $url_lost . '?action=rp&key=' . $key . '&login=' . rawurlencode($user_login) . '&wp_lang=' . $locale . "\r\n\r\n";
-        ;
-        $message = substr_replace($message, $link, $linkBegin);
-    }
-    return $message;
-}, 10, 4);

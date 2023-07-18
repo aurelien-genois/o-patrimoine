@@ -93,4 +93,5 @@ include_once 'functions/config/config.php';
 include_once 'functions/queries/queries.php';
 include_once 'functions/user/roles.php';
 include_once 'functions/user/connection.php';
+include_once 'functions/user/lost_password.php';
 include_once 'functions/reservations/functions.php';
