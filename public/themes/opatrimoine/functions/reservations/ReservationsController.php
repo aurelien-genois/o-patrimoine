@@ -40,7 +40,8 @@ class ReservationsController
             // acf function get_field() isn't necessary to get a custom field => WP automatically check for custom field
             $maxPersons = $guidedTour->guided_tour_total_persons;
             $currentNbReservations = $guidedTour->guided_tour_total_reservations;
-            $availablePlacesReservations = $maxPersons - $currentNbReservations;
+            $availablePlacesReservations = (int) $maxPersons - (int) $currentNbReservations;
+
 
             if (
                 is_int(+$npPlaces) &&
@@ -55,7 +56,7 @@ class ReservationsController
 
                     if ($isInsert) {
                         // increment totalreservations
-                        $newNbReservations = $currentNbReservations + $npPlaces;
+                        $newNbReservations = (int) $currentNbReservations + (int) $npPlaces;
                         update_field('guided_tour_total_reservations', $newNbReservations, $guidedTourId);
                     } else {
                         $error = 'Erreur en BDD';
@@ -78,7 +79,7 @@ class ReservationsController
 
             // decrement guidedTour
             $currentReservation = $this->reservationModel->getReservationByGuidedTourIdAndVisitorId($guidedTourId, $visitorId);
-            $newNbReservations = $guidedTour->guided_tour_total_reservations - $currentReservation;
+            $newNbReservations = (int) $guidedTour->guided_tour_total_reservations - (int) $currentReservation;
             update_field('guided_tour_total_reservations', $newNbReservations, $guidedTourId);
 
             // delete reservation
