@@ -63,7 +63,8 @@ acf_add_local_field_group(
                 'type'          => 'post_object',
                 'wrapper'       => ['width' => '50'],
                 'required'      => 1,
-                'post_type'     => [0 => 'place',
+                'post_type'     => [
+                    0 => 'place',
                 ],
                 'allow_null'    => 0,
                 'multiple'      => 0,

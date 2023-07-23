@@ -11,8 +11,8 @@ the_post();
 ?>
 
 
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
-    <h2 class="titles text-center">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
+    <h2 class="text-center titles">
         <?= the_title() ?>
     </h2>
     <div>
@@ -38,27 +38,27 @@ the_post();
                 <p class="text-center text-red-500">Les mots de passe ne correspondent pas</p>
                 <?php break;
         endswitch; ?>
-        <form class="flex flex-col items-center xl:px-20 px-4 mb-8" name="renew_password_form" id="renew_password_form"
-            action="" method="post">
+        <form class="flex flex-col items-center gap-4 px-4 mb-8 xl:px-20" name="renew_password_form"
+            id="renew_password_form" action="" method="post">
             <input type="hidden" name="rp_key" value="<?php echo esc_attr($rp_key); ?>" />
-            <label class="block mb-2" for="pass1">
+            <label class="block" for="pass1">
                 <?php _e("Mot de passe*", 'opatrimoine'); ?> :
             </label>
-            <input class="border border-grey px-4 py-2 mb-4" type="password" name="pass1" id="pass1" required
+            <input class="px-4 py-2 border border-grey" type="password" name="pass1" id="pass1" required
                 autocomplete="new-password" spellcheck="false">
-            <label class="block mb-2" for="pass2">
+            <label class="block" for="pass2">
                 <?php _e("Confirmer votre mot de passe", 'opatrimoine'); ?> :
             </label>
-            <input class="border border-grey px-4 py-2 mb-4" type="password" name="pass2" id="pass2" required
+            <input class="px-4 py-2 border border-grey" type="password" name="pass2" id="pass2" required
                 autocomplete="new-password" spellcheck="false" data-reveal="1">
-            <button class="btn mx-auto" type="submit" name="new_pass">Valider</button>
+            <button class="mx-auto btn" type="submit" name="new_pass">Valider</button>
         </form>
 
     <?php elseif ($action == 'new_pass_set'): ?>
 
         <!-- // *** Confirm change password *** -->
         <p class="text-center">Votre mot de passe a été renouvelé</p>
-        <a class="btn block mx-auto" href="<?= $url_connexion ?>">
+        <a class="block mx-auto btn" href="<?= $url_connexion ?>">
             <?php _e('Se connecter', 'opatrimoine'); ?>
         </a>
 
@@ -84,13 +84,13 @@ the_post();
                 <p class="text-center text-green-500">Un mail de renouvellement vous a été envoyé</p>
                 <?php break;
         endswitch; ?>
-        <form class="flex flex-col items-center xl:px-20 px-4 mb-8" name="lost_password_form" id="lost_password_form"
+        <form class="flex flex-col items-center gap-4 px-4 mb-8 xl:px-20" name="lost_password_form" id="lost_password_form"
             action="" method="post">
-            <label class="block mb-2" for="user_login">
+            <label class="block" for="user_login">
                 <?php _e("E-mail*", 'opatrimoine'); ?> :
             </label>
-            <input class="border border-grey px-4 py-2 mb-4" name="user_login" id="user_login" type="email" required>
-            <button class="btn mx-auto" type="submit" name="check_email">Valider</button>
+            <input class="px-4 py-2 border border-grey" name="user_login" id="user_login" type="email" required>
+            <button class="mx-auto btn" type="submit" name="check_email">Valider</button>
         </form>
 
     <?php endif; ?>

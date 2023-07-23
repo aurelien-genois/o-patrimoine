@@ -15,21 +15,21 @@ $nav = wp_get_nav_menu_items($menu_obj->slug, array());
         <a class="block max-w-[50px]" href="<?= home_url() ?>">
             <?= $logo ?>
         </a>
-        <h1 class="lg:block xl:block ml-4">
+        <h1 class="ml-4 lg:block xl:block">
             <?= $blogTitle ?>
         </h1>
     </div>
 
-    <div id="deskMenu" class="hidden lg:block z-50">
+    <div id="deskMenu" class="z-50 hidden lg:block">
         <!-- menu append in JS on desktop from #mobileMenu -->
     </div>
 
-    <div class="hidden lg:flex flex-col xl:flex-row space-y-2 xl:space-y-0 xl:space-x-4">
+    <div class="flex-col hidden gap-2 lg:flex xl:flex-row xl:gap-4">
         <?php if (is_user_logged_in()): ?>
-            <a class="btn ml-2 btn-2" href="<?= get_page_url_by_template('templates/account.php') ?>">Mon compte</a>
+            <a class="btn btn-third" href="<?= get_page_url_by_template('templates/account.php') ?>">Mon compte</a>
         <?php else: ?>
-            <a class="btn ml-2 btn-2" href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
-            <a class="btn ml-2 btn-2" href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
+            <a class="btn btn-third " href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
+            <a class="btn btn-third " href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
         <?php endif; ?>
     </div>
 
@@ -41,20 +41,22 @@ $nav = wp_get_nav_menu_items($menu_obj->slug, array());
 <nav id="navMenu">
     <div id="mobileMenu" class="relative">
         <div id="menuClose"
-            class="absolute top-0 left-0 z-20 flex items-center justify-center h-7 w-7 p-0.5 text-white font-bold hover:border hover:rounded-3xl hover:border-white cursor-pointer">
+            class="absolute top-0 left-0 z-20 flex items-center justify-center h-7 w-7 rounded-full border border-white p-0.5 text-white font-bold hover:bg-white hover:text-second cursor-pointer">
             > </div>
         <?php if (is_user_logged_in()): ?>
-            <a class="btn block mx-auto mb-2 btn-2" href="<?= get_page_url_by_template('templates/account.php') ?>">Mon
+            <a class="mb-2 btn btn-third btn-small" href="<?= get_page_url_by_template('templates/account.php') ?>">Mon
                 compte</a>
         <?php else: ?>
-            <a class="btn block mx-auto mb-2 btn-2"
-                href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
-            <a class="btn block mx-auto mb-2 btn-2"
-                href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
+            <div class="flex justify-end gap-2 mb-2">
+                <a class="btn btn-third btn-small"
+                    href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
+                <a class="btn btn-third btn-small"
+                    href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
+            </div>
         <?php endif; ?>
         <?php if (is_array($nav) && !empty($nav)): ?>
-            <nav class="header__menu mx-4">
-                <ul class="flex flex-col lg:flex-row justify-between space-y-4 lg:space-y-0 lg:space-x-4">
+            <nav class="mx-4 header__menu">
+                <ul class="flex flex-col justify-between gap-4 lg:flex-row">
                     <?php foreach ($nav as $k => $menuItem):
                         if ($menuItem->menu_item_parent)
                             continue;
@@ -75,12 +77,12 @@ $nav = wp_get_nav_menu_items($menu_obj->slug, array());
                                 <?= $menuItem->title ?>
                             </a>
                             <?php if (!empty($subMenuItems)): ?>
-                                <ul class="sub-menu">
+                                <ul class="flex flex-col gap-4 sub-menu lg:gap-2">
                                     <li
-                                        class="sub-menu-back text-base cursor-pointer p-0.5 flex items-center justify-center lg:hidden h-7 w-7 font-bold hover:border hover:rounded-3xl hover:border-white">
+                                        class="sub-menu-back lg:hidden text-base flex items-center justify-center h-7 w-7 rounded-full border border-white p-0.5 text-white font-bold hover:bg-white hover:text-second cursor-pointer">
                                         < </li>
                                             <?php foreach ($subMenuItems as $c => $subItem): ?>
-                                        <li class="menu-item text-white text-base text-left lg:text-main">
+                                        <li class="text-sm text-left text-white menu-item lg:text-main lg:text-base">
                                             <a href="<?= $subItem->url ?>" title="<?= $subItem->title ?>" alt="<?= $subItem->title ?>"
                                                 class="<?php if ($subItem->object_id == get_the_ID())
                                                     echo 'underline'; ?> hover:underline my-3 text-white  <?= implode(' ', $subItem->classes) ?>">
@@ -89,6 +91,7 @@ $nav = wp_get_nav_menu_items($menu_obj->slug, array());
                                         </li>
                                     <?php endforeach ?>
                                 </ul>
+                                <!-- arrow appended in JS -->
                             <?php endif ?>
                         </li>
                     <?php endforeach ?>

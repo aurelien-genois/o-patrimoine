@@ -9,14 +9,14 @@ $adress = get_field('options_adress', 'option');
 ?>
 </main>
 
-<footer class="footer flex justify-between items-center flex-wrap p-4 md:py-8">
+<footer class="flex flex-wrap items-center justify-between p-4 footer md:py-8">
 
     <?php if (is_array($socialsLinks) && !empty($socialsLinks)): ?>
-        <div class="footer__socials flex justify-evenly mx-auto max-w-lg w-full mb-4 md:w-1/3 md:order-2 md:mb-0">
+        <div class="flex justify-center w-full max-w-lg gap-4 mx-auto mb-4 footer__socials md:w-1/3 md:order-2 md:mb-0">
             <?php foreach ($socialsLinks as $socialsLink):
                 $iconUrl = wp_get_attachment_image_url($socialsLink['icon'], 'medium', false);
                 ?>
-                <a class="block w-11 transition-transform hover:scale-110" href="<?= $socialsLink['link']['url'] ?>"
+                <a class="block w-8 transition-transform md:w-11 hover:scale-110" href="<?= $socialsLink['link']['url'] ?>"
                     target="<?= $socialsLink['link']['target'] ?>" title="<?= $socialsLink['link']['title'] ?>"
                     alt="<?= $socialsLink['link']['title'] ?>">
                     <?php
@@ -32,14 +32,13 @@ $adress = get_field('options_adress', 'option');
     <?php endif; ?>
 
     <?php if (is_array($nav) && !empty($nav)): ?>
-        <nav class="footer__menu w-full mb-4 md:w-1/3 md:order-1 md:mb-0">
+        <nav class="w-full mb-4 text-sm footer__menu md:w-1/3 md:order-1 md:mb-0">
             <ul class="grid md:grid-cols-2 justify-items-center md:justify-items-start">
                 <!-- <span class="hidden md:col-start-2 md:row-start-1 md:row-start-2 md:row-start-3"></span> -->
                 <?php foreach ($nav as $k => $menuItem): ?>
-                    <li
-                        class="menu-item relative text-md lg:text-base mx-4 text-main col-start-1 <?php if ($k > 2)
-                            echo 'md:col-start-2 md:row-start-' . ($k - 2) ?>">
-                            <a href="<?= $menuItem->url ?>" title="<?= $menuItem->title ?>" alt="<?= $menuItem->title ?>"
+                    <li class="menu-item relative text-md lg:text-base text-main col-start-1 <?php if ($k > 2)
+                        echo 'md:col-start-2 md:row-start-' . ($k - 2) ?>">
+                        <a href="<?= $menuItem->url ?>" title="<?= $menuItem->title ?>" alt="<?= $menuItem->title ?>"
                             class="<?php if ($menuItem->object_id == get_the_ID())
                                 echo 'underline'; ?> hover:underline whitespace-nowrap <?= implode(' ', $menuItem->classes) ?>">
                             <?= $menuItem->title ?>
@@ -53,18 +52,18 @@ $adress = get_field('options_adress', 'option');
 
 
     <?php if (!empty($adress)): ?>
-        <div class="w-full text-center mb-4 md:w-1/3 order-3 md:mb-0">
+        <div class="order-3 w-full mb-4 text-sm text-center md:w-1/3 md:mb-0">
             <p class="text-main">
                 <?= $adress ?>
             </p>
         </div>
     <?php endif; ?>
 
-    <div class="w-full flex justify-center flex-wrap space-y-2 md:space-x-2 md:space-y-0 order-4">
-        <a class="w-full md:w-auto text-center" href="<?= get_privacy_policy_url() ?>" title="Page de mentions légales"
+    <div class="flex flex-wrap justify-center order-4 w-full text-sm gap-x-2">
+        <a class="w-full text-center md:w-auto" href="<?= get_privacy_policy_url() ?>" title="Page de mentions légales"
             alt="Page de mentions légales">Mentions légales</a>
-        <p class="w-full md:w-auto text-center">©O'Patrimoine</p>
-        <p class="w-full md:w-auto text-center">Site réalisé par <a href="https://wugenois.com/" target="_blank"
+        <p class="w-full text-center md:w-auto">©O'Patrimoine</p>
+        <p class="w-full text-center md:w-auto">Site réalisé par <a href="https://wugenois.com/" target="_blank"
                 title="Lien vers Wugenois.com" alt="Lien vers Wugenois.com">Aurélien Genois</a></p>
     </div>
 

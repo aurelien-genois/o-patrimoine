@@ -40,7 +40,7 @@ if ($locationHighlight) {
 <?php get_template_part('templates/partials/banner') ?>
 
 <!-- //* title présentation -->
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
     <h2 class="titles">
         <?= (get_field('home_presentation_title', get_the_ID()) ?: 'Présentation') ?>
     </h2>
@@ -50,17 +50,17 @@ if ($locationHighlight) {
 </section>
 
 <!-- //* title visites du jour -->
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
-    <div class="w-full flex justify-between items-end">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
+    <div class="flex items-end justify-between w-full">
         <h2 class="titles">
             <?= (get_field('home_visit_of_the_day_title', get_the_ID()) ?: 'Les visites du jour') ?>
         </h2>
-        <a class="link mb-2 md:mb-4" href="<?= get_post_type_archive_link('place') . '?tour_date=' . date('Y-m-d') ?>">
+        <a class="mb-2 link md:mb-4" href="<?= get_post_type_archive_link('place') . '?tour_date=' . date('Y-m-d') ?>">
             <?= (get_field('home_visit_of_the_day_link_text', get_the_ID()) ?: 'Les autres visites du jour') ?>
         </a>
     </div>
     <?php if ($todayGuidedTours->have_posts()): ?>
-        <ul class="grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-4 lg:gap-6 mb-8">
+        <ul class="grid justify-center gap-4 mb-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             <?php
             $count = 0;
             while ($todayGuidedTours->have_posts()) {
@@ -82,18 +82,18 @@ if ($locationHighlight) {
 
 <!-- //* title highlight lieux -->
 <?php if ($locationHighlight): ?>
-    <section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
-        <div class="w-full flex justify-between items-end">
+    <section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
+        <div class="flex items-end justify-between w-full">
             <h2 class="titles">
                 <?= (get_field('home_location_highlight_title', get_the_ID()) ?: 'Les visites du lieu') ?>
             </h2>
-            <a class="link mb-2 md:mb-4" href="<?= get_permalink($locationHighlight) ?>">
+            <a class="mb-2 link md:mb-4" href="<?= get_permalink($locationHighlight) ?>">
                 <?= (get_field('home_location_highlight_link_text', get_the_ID()) ?: 'Les autres visites du lieu') ?>
             </a>
         </div>
 
         <?php if ($locationHighlightGuidedTours->have_posts()): ?>
-            <ul class="grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-4 lg:gap-6 mb-8">
+            <ul class="grid justify-center gap-4 mb-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
                 <?php
                 $count = 0;
                 while ($locationHighlightGuidedTours->have_posts()) {

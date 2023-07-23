@@ -14,12 +14,21 @@
         md:text-base;
 }
 
-.btn-2 {
-    @extend .btn;
-
-    @apply bg-third;
-}
-
 input[type="submit"] {
     @extend .btn;
+}
+.btn-small,
+input[type="submit"].btn-small {
+    @apply text-xs;
+}
+
+.btn-third,
+input[type="submit"].btn-third {
+    @apply bg-third hover:bg-second;
+}
+
+.btn-white,
+input[type="submit"].btn-white {
+    @apply bg-white hover:bg-second
+        text-second hover:text-white;
 }

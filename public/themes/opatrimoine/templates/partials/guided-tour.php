@@ -35,7 +35,7 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
 <article class="bg-grey/20 mb-4 rounded-xl p-4 border border-black border-solid <?php if (!($totalAvailable > 0) && !$isAccount)
     echo 'text-white bg-third' ?>">
     <div class="flex flex-wrap">
-        <div class="w-1/2 sm:w-1/3 order-1 text-sm md:text-base">
+        <div class="order-1 w-1/2 text-sm sm:w-1/3 md:text-base">
             <?php if ($dateStr)
     echo '<span>' . $dateStr . '</span>&nbsp;' ?>
             <?php if ($hour)
@@ -47,7 +47,7 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
             <?php endif; ?>
         </div>
 
-        <div class="w-1/2 sm:w-1/3 order-2 sm:order-3 text-right text-sm md:text-base">
+        <div class="order-2 w-1/2 text-sm text-right sm:w-1/3 sm:order-3 md:text-base">
             <?php if (is_array($constraints) && !empty($constraints)): ?>
                 <div class="flex justify-end">
                     Déconseillé&nbsp;:&nbsp;
@@ -70,17 +70,17 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
             </div>
         </div>
 
-        <!-- contact organisateur
+        <!-- // todo contact organisateur
         => get_the_author_meta('user_email',$userId)
         ou seulement $userId (car sélection du mail sur formulaire de contact)
         si on peut cacher l'adresse mail pour plus de confidentialité -->
 
-        <p class="w-full sm:w-1/3 order-3 sm:order-2 text-center font-bold text-lg md:text-xl">
+        <p class="order-3 w-full text-lg font-bold text-center sm:w-1/3 sm:order-2 md:text-xl">
             <?= get_the_title() ?>
         </p>
     </div>
 
-    <form class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 items-center"
+    <form class="flex flex-col items-center gap-4 sm:flex-row"
         action="<?= get_theme_file_uri('functions/reservations/reservations.php') ?>" method="post">
         <?php if (!$isAccount && $totalAvailable > 0): ?>
             <div class="">
@@ -109,8 +109,9 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
         </div>
         <div class="">
             <?php if (!is_user_logged_in() && $totalAvailable > 0): ?>
-                <a class="btn btn-2" href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
-                <a class="btn btn-2" href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
+                <a class="btn btn-third" href="<?= get_page_url_by_template('templates/connection.php') ?>">Connexion</a>
+                <a class="btn btn-third"
+                    href="<?= get_page_url_by_template('templates/registration.php') ?>">Inscription</a>
             <?php else: ?>
                 <?php if ($currentMemberReservations): ?>
                     <input class="btn" type="submit" name="delete_reservations" value="Se désinscrire">

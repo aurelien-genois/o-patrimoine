@@ -20,6 +20,7 @@ module.exports = {
         fontFamily: {
             'sans': ['Helvetica', 'Arial', 'sans-serif'],
         },
+        safelist: [],
     },
     plugins: []
 }

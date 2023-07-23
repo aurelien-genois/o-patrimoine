@@ -3,7 +3,6 @@ get_header();
 the_post();
 
 $image = get_the_post_thumbnail(get_the_ID(), 'large', ['class' => 'w-full object-cover transition-all max-h-32 sm:max-h-52 lg:max-h-96']);
-$desc = get_the_content();
 $tel = get_field('place_phone', get_the_ID());
 $urlSite = get_field('place_site', get_the_ID());
 $adress = get_field('place_adress', get_the_ID());
@@ -31,10 +30,10 @@ $guidedToursQuery = new WP_Query([
 ]);
 ?>
 
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
     <?php if (!empty($_GET['error-reservation'])): ?>
         <div>
-            <div class="border border-fourth p-5 my-5 text-center" style="color:darkred">
+            <div class="p-5 my-5 text-center border border-fourth" style="color:darkred">
                 <p><b>
                         <?= $_GET['error-reservation'] ?>
                     </b></p>
@@ -44,13 +43,13 @@ $guidedToursQuery = new WP_Query([
     <?= $image ?>
 </section>
 
-<section class="flex flex-col container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
-    <h2 class="titles text-center sm:text-left">
+<section class="container flex flex-col px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
+    <h2 class="text-center titles sm:text-left">
         <?= get_the_title() ?>
     </h2>
 
-    <div class="flex flex-col sm:flex-row justify-between">
-        <p class="text-center sm:text-left text-sm sm:text-base">
+    <div class="flex flex-col justify-between sm:flex-row">
+        <p class="text-sm text-center sm:text-left sm:text-base">
             <?= the_terms(get_the_ID(), 'place_type'); ?>
         </p>
 
@@ -64,22 +63,23 @@ $guidedToursQuery = new WP_Query([
 
 </section>
 
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
     <h3 class="titles">Description</h3>
     <div>
         <?= the_content() ?>
     </div>
 </section>
 
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
     <!-- map -->
 </section>
 
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
     <h3 class="titles">Contact</h3>
     <!-- telephone -->
     <p>
         <?php if ($tel)
+            // todo format phone
             echo '<span>' . $tel . '</span><br/>' ?>
         <?php if ($adress)
             echo '<span>' . nl2br($adress) . '</span><br/>' ?>
@@ -93,32 +93,39 @@ $guidedToursQuery = new WP_Query([
     <!-- url -->
 </section>
 
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
+<!-- Listing Guided Tours -->
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
     <h3 class="titles">Visites</h3>
     <?php if ($guidedToursQuery->have_posts()): ?>
-        <button class="accordion-btn btn block mx-auto mb-2 lg:hidden" id="resp-filter-place">
+
+
+        <button class="block mx-auto mb-2 accordion-btn btn lg:hidden" id="resp-filter-place">
             Filter
-            <i class="fa-solid fa-chevron-down transition-all"></i>
+            <i class="transition-all fa-solid fa-chevron-down"></i>
         </button>
-        <form action="<?= admin_url('admin-ajax.php') ?>" method="get" class="filter-auto mb-4 flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 items-center max-h-0 lg:max-h-56
-    overflow-hidden lg:overflow-visible transition-all duration-500 ease-out">
+        <form action="<?= admin_url('admin-ajax.php') ?>" method="get"
+            class="flex flex-col items-center gap-4 px-4 mx-auto mb-4 overflow-hidden text-white transition-all duration-500 ease-out filter-auto w-max bg-second rounded-xl lg:flex-row max-h-0 lg:max-h-56 lg:overflow-visible lg:py-4">
 
             <input type="hidden" name="place_id" value="<?= get_the_id() ?>">
             <input type="hidden" name="nonce" value="<?= wp_create_nonce('opatrimoine_filter_guided_tours') ?>">
             <input type="hidden" name="action" value="filter_guided_tours">
 
-            <input type="date" name="tour_date" id="tour_date" class="auto-filter-input border"
-                value="<?= filter_input(INPUT_GET, 'tour_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>">
-            <?php wp_dropdown_categories([
-                'taxonomy'        => 'tour_thematic',
-                'name'            => 'tour_thematic',
-                'id'              => 'tour_thematic_select_filter',
-                'value_field'     => 'slug',
-                'show_option_all' => __('Thèmatiques', 'opatrimoine'),
-                'selected'        => filter_input(INPUT_GET, 'tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '',
-                'class'           => 'auto-filter-input border mx-1',
-            ]); ?>
-            <span>
+            <label for="tour_date" class="max-lg:mt-4">
+                <input type="date" name="tour_date" id="tour_date" class="border auto-filter-input"
+                    value="<?= filter_input(INPUT_GET, 'tour_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '' ?>">
+            </label>
+            <label for="tour_thematic_select_filter">
+                <?php wp_dropdown_categories([
+                    'taxonomy'        => 'tour_thematic',
+                    'name'            => 'tour_thematic',
+                    'id'              => 'tour_thematic_select_filter',
+                    'value_field'     => 'slug',
+                    'show_option_all' => __('Thèmatiques', 'opatrimoine'),
+                    'selected'        => filter_input(INPUT_GET, 'tour_thematic', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '',
+                    'class'           => 'auto-filter-input border',
+                ]); ?>
+            </label>
+            <label for="tour_constraint_select_filter">
                 Accessible pour :
                 <?php wp_dropdown_categories([
                     'taxonomy'        => 'tour_constraint',
@@ -127,14 +134,16 @@ $guidedToursQuery = new WP_Query([
                     'value_field'     => 'slug',
                     'show_option_all' => __('Accessibilité', 'opatrimoine'),
                     'selected'        => filter_input(INPUT_GET, 'tour_constraint', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '',
-                    'class'           => 'auto-filter-input border ml-1',
+                    'class'           => 'auto-filter-input border',
                 ]); ?>
-            </span>
-            <span>
+            </label>
+            <label for="available_only" class="max-lg:mb-4">
                 Uniquement disponibles ?
                 <input type="checkbox" class="auto-filter-input" name="available_only" id="available_only">
-            </span>
+            </label>
         </form>
+
+
         <div class="guided_tours">
             <?php while ($guidedToursQuery->have_posts()) {
                 $guidedToursQuery->the_post();
@@ -142,7 +151,7 @@ $guidedToursQuery = new WP_Query([
             }
             wp_reset_postdata(); ?>
         </div>
-        <button class="block btn mx-auto load-more-guided-tours-btn"
+        <button class="block mx-auto btn load-more-guided-tours-btn"
             data-ajaxurl="<?php echo admin_url('admin-ajax.php'); ?>"
             data-nonce="<?php echo wp_create_nonce('opatrimoine_load_guided_tours'); ?>" data-action="load_guided_tours"
             data-place_id="<?= get_the_id() ?>" data-page="1">
@@ -153,7 +162,7 @@ $guidedToursQuery = new WP_Query([
     <?php endif; ?>
 </section>
 
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
     <!-- // todo commentaires
             <h3 class="titles">Commentaires</h3> -->
     <form>

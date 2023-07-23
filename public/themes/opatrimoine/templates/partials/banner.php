@@ -3,28 +3,27 @@ $slides = get_field('home_banner_slides', get_the_ID());
 
 ?>
 
-<section class="home-banner mb-4">
+<section class="mb-4 home-banner">
     <?php if (is_array($slides) && !empty($slides)): ?>
         <div class="glide slider-homepage" data-autoplay='5000'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <?php foreach ($slides as $slide): ?>
-                        <li class="glide__slide page-banner relative -z-40 py-8">
+                        <li class="relative py-8 glide__slide page-banner -z-40">
                             <?php if ($slide['bg_mobile']): ?>
                                 <img src="<?= ($slide['bg_mobile']['url']) ?>"
-                                    class="absolute inset-0 w-full h-full object-cover -z-30" alt="Image de bannière"
+                                    class="absolute inset-0 object-cover w-full h-full -z-30" alt="Image de bannière"
                                     title="Image de bannière" aria-label="Image de bannière">
                             <?php endif; ?>
                             <?php if ($slide['bg']): ?>
-                                <img src="<?= ($slide['bg']['url']) ?>"
-                                    class="absolute inset-0 w-full h-full object-cover -z-20 <?php if ($slide['bg_mobile'])
-                                        echo 'hidden md:block' ?>"
-                                        alt="Image de bannière" title="Image de bannière" aria-label="Image de bannière">
-                                <?php endif; ?>
-                            <div class="absolute bottom-0 inset-x-0 -z-10 w-full h-1/2"
+                                <img src="<?= ($slide['bg']['url']) ?>" class="absolute inset-0 w-full h-full object-cover -z-20 <?php if ($slide['bg_mobile'])
+                                      echo 'hidden md:block' ?>" alt="Image de bannière" title="Image de bannière"
+                                      aria-label="Image de bannière">
+                              <?php endif; ?>
+                            <div class="absolute inset-x-0 bottom-0 w-full -z-10 h-1/2"
                                 style="background: linear-gradient(0deg, rgba(0,0,0,0.7441112187062324) 0%, rgba(0,0,0,0.6880888097426471) 33%, rgba(0,0,0,0.43318684895833337) 70%, rgba(0,0,0,0) 100%);">
                             </div>
-                            <div class="container__inner px-4 z-0">
+                            <div class="z-0 px-4 container__inner">
                                 <?php if ($slide['title']): ?>
                                     <h1
                                         class="text-<?= $slide['text_color'] ?> text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2">

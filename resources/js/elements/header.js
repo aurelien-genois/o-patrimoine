@@ -75,7 +75,7 @@ document.querySelectorAll('.menu-item-has-children').forEach(box => {
     leftArrow.textContent = '>';
     leftArrow.addEventListener('click', (e) => {
         menu.style.transform = 'translateX(-100%)';
-        box.querySelector('.sub-menu').style.display = 'block';
+        box.querySelector('.sub-menu').style.display = 'flex';
     });
     box.append(leftArrow);
 });

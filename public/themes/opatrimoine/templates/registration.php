@@ -8,21 +8,21 @@ the_post();
 ?>
 
 
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
-    <h2 class="titles text-center">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
+    <h2 class="text-center titles">
         <?= the_title() ?>
     </h2>
 
     <?php if (!empty(get_the_content())): ?>
-        <div class="editor px-4 xl:px-24">
+        <div class="px-4 editor xl:px-24">
             <?php the_content(); ?>
         </div>
     <?php endif; ?>
-    <form class="flex flex-col items-center xl:px-20 px-4 mb-8" name="registrationform" id="registrationform"
+    <form class="flex flex-col items-center gap-4 px-4 mb-8 xl:px-20" name="registrationform" id="registrationform"
         action="<?= get_theme_file_uri('functions/user/registration.php') ?>" method="post">
         <?php if ($msg): ?>
             <div>
-                <p class="border border-fourth p-5 my-5 text-center font-bold">
+                <p class="p-5 my-5 font-bold text-center border border-fourth">
                     <?php switch ($msg):
                         case 'empty_field': ?>
                             <span class="text-red-500">Champs obligatoire</span>
@@ -50,36 +50,36 @@ the_post();
             </div>
         <?php endif; ?>
 
-        <div class="text-center w-auto">
-            <label class="block mb-2" for="user_login">
+        <div class="w-auto text-center">
+            <label class="block" for="user_login">
                 <?php _e("Login", 'opatrimoine'); ?> :
             </label>
-            <input class="border border-grey px-4 py-2 mb-4" name="login" id="user_login" type="text" required>
+            <input class="px-4 py-2 border border-grey" name="login" id="user_login" type="text" required>
         </div>
 
-        <div class="text-center w-auto">
-            <label class="block mb-2" for="user_email">
+        <div class="w-auto text-center">
+            <label class="block" for="user_email">
                 <?php _e("Email", 'opatrimoine'); ?> :
             </label>
-            <input class="border border-grey px-4 py-2 mb-4" name="email" id="user_email" type="email" required>
+            <input class="px-4 py-2 border border-grey" name="email" id="user_email" type="email" required>
         </div>
 
-        <div class="text-center w-auto">
-            <label class="block mb-2" for="user_pass">
+        <div class="w-auto text-center">
+            <label class="block" for="user_pass">
                 <?php _e("Mot de passe", 'opatrimoine'); ?> :
             </label>
-            <input class="border border-grey px-4 py-2 mb-4" type="password" name="pwd" id="user_pass" required>
+            <input class="px-4 py-2 border border-grey" type="password" name="pwd" id="user_pass" required>
         </div>
 
-        <div class="text-center w-auto">
-            <label class="block mb-2" for="user_pass_confirm">
+        <div class="w-auto text-center">
+            <label class="block" for="user_pass_confirm">
                 <?php _e("Confirmer votre mot de passe", 'opatrimoine'); ?> :
             </label>
-            <input class="border border-grey px-4 py-2 mb-4" type="password" name="pwd_confirm" id="user_pass_confirm"
+            <input class="px-4 py-2 border border-grey" type="password" name="pwd_confirm" id="user_pass_confirm"
                 required>
         </div>
 
-        <button class="btn mx-auto" type="submit">Valider</button>
+        <button class="mx-auto btn" type="submit">Valider</button>
     </form>
 </section>
 

@@ -18,7 +18,7 @@ add_action('init', function () {
         'id'           => 'guided_tour',
         'name'         => 'visite',
         'name_plural'  => 'visites',
-        'supports'     => ['title', 'editor', 'author', 'revisions'],
+        'supports'     => ['title', 'author', 'revisions'],
         'hierarchical' => false,
         'public'       => true,
         'archive'      => true,

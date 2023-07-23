@@ -11,8 +11,6 @@
 }
 
 #deskMenu {
-    background-color: red;
-    color: white;
     .header__menu {
         & > ul {
             @apply flex justify-between;
@@ -22,7 +20,7 @@
                 @apply text-center;
                 &:hover {
                     .sub-menu {
-                        @apply block;
+                        @apply flex;
                     }
                 }
             }
@@ -73,7 +71,9 @@
                                 cursor-pointer
                                 flex justify-center items-center
                                 h-5 w-5
-                                hover:border hover:rounded-3xl hover:border-white
+                                rounded-full
+                                border border-white
+                                hover:bg-white hover:text-second
                                 font-bold
                                 absolute top-1/2 -translate-y-1/2 right-[20%];
                         }

@@ -9,8 +9,8 @@ the_post();
 ?>
 
 
-<section class="container px-6 md:px-8 lg:px-12 xl:px-18 2xl:px-28 mx-auto">
-    <h2 class="titles text-center">
+<section class="container px-6 mx-auto md:px-8 lg:px-12 xl:px-18 2xl:px-28">
+    <h2 class="text-center titles">
         <?= the_title() ?>
     </h2>
 

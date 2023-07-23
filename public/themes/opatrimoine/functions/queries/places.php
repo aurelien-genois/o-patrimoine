@@ -25,7 +25,7 @@ function custom_place_archive_query($query)
 {
 
     if ($query->is_main_query() && !is_admin() && is_post_type_archive('place')) {
-        $query->set('posts_per_page', 4);
+        $query->set('posts_per_page', 8);
         $query->set('paged', 1);
         if (!empty($_GET) || get_query_var('guided_tour_thematic') || get_query_var('place_type')) {
 
@@ -159,7 +159,7 @@ function load_places()
     $page = sanitize_text_field($_POST['page']);
 
     $args = [
-        'posts_per_page' => 4,
+        'posts_per_page' => 8,
         'post_type'      => 'place',
         'paged'          => $page,
         's'              => $s,

@@ -33,10 +33,10 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
             <?= get_the_post_thumbnail($placeId, 'medium', ['class' => 'h-32 w-full object-cover transition-all duration-200 hover:scale-110']); ?>
         </figure>
     </a>
-    <div class="p-3 flex flex-col justify-between h-full">
+    <div class="flex flex-col justify-between h-full p-3">
 
         <div class="">
-            <h3 class="text-center max-md:text-sm font-bold text-third">
+            <h3 class="font-bold text-center max-md:text-sm text-third">
                 <?= get_the_title(get_the_ID()) ?>
             </h3>
             <p class="text-center">
@@ -48,7 +48,7 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
                 </p>
             <?php endif; ?>
 
-            <div class="text-sm md:text-base mt-4">
+            <div class="mt-4 text-sm md:text-base">
                 <?php if ($dateStr) {
                     echo '<span>' . $dateStr . '</span>&nbsp;';
                 }
@@ -67,7 +67,7 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
                         </span>
                     <?php endif; ?>
                     <?php if (is_array($constraints) && !empty($constraints)): ?>
-                        <div class="text-xs md:text-sm flex items-center justify-end">
+                        <div class="flex items-center justify-end text-xs md:text-sm">
                             Déconseillé&nbsp;:&nbsp;
                             <?php foreach ($constraints as $constraint) {
                                 $iconId = get_field('constraint_icon', $constraint);
@@ -88,7 +88,7 @@ $currentMemberReservations = getReservationByGuidedTourIdForCurrentUser(get_the_
 
 
 
-            <p class="text-center p-4 text-xs md:text-sm text-third hover:text-second hover:underline">
+            <p class="p-4 text-xs text-center md:text-sm text-third hover:text-second hover:underline">
                 <?php the_terms(get_the_ID(), 'tour_thematic'); ?>
             </p>
 

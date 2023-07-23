@@ -1,0 +1,11 @@
+.wpcf7-form,
+form {
+    select,
+    input:not([type="submit"]),
+    textarea {
+        @apply border bg-white text-black;
+    }
+    input[type="submit"] {
+        @apply block mx-auto;
+    }
+}
