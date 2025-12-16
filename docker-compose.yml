@@ -1,125 +1,74 @@
-version: "3.9"
 services:
-  mysql:
-    image: mysql:8.0.32
-    container_name: ${DOCKER_PROJECT_NAME}_db
+  opatrimoine-db:
+    image: mariadb:10.6
+    container_name: opatrimoine-db
     restart: unless-stopped
-    ports:
-      - 3307:${DB_PORT:-3307}
-    expose:
-      - ${DB_PORT}
-    volumes:
-      - mysql-data:/var/lib/mysql:cached
     environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
-      # if = root error "Remove MYSQL_USER="root" and use one of the following to control the root user password:"
-      MYSQL_USER: ${DB_USER:-smogo}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-opatrimoine}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-opatrimoine}
-      MYSQL_TCP_PORT: ${DB_PORT:-3307}
-      MYSQL_QUERY_CACHE_TYPE: 1
-      MYSQL_QUERY_CACHE_SIZE: 64M
-      MYSQL_INNODB_BUFFER_POOL_SIZE: 128M
-      MYSQL_INNODB_FLUSH_LOG_AT_TRX_COMMIT: 0
-      MYSQL_INNODB_LOG_FILE_SIZE: 64M
-      MYSQL_INNODB_BUFFER_POOL_INSTANCES: 4
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
     networks:
-      - opatrimoine-network
+      - proxy_default
 
-  phpmyadmin:
-    depends_on:
-      - mysql
-    image: phpmyadmin
-    container_name: ${DOCKER_PROJECT_NAME}_pma
+  opatrimoine-node:
+    image: node:18
+    container_name: opatrimoine-node
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ['npm', 'run', 'build']
+  # "build" for production or "dev" for development
+
+  opatrimoine-wp:
+    build:
+      context: .
+      dockerfile: ./docker/wordpress/Dockerfile
+    container_name: opatrimoine-wp
     restart: unless-stopped
     ports:
-      - 8080:80
+      - '8090:80'
     environment:
-      PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-opatrimoine}
-      # PMA_ARBITRARY: 1
-      # PMA_USER: ${DB_USER:-smogo}
-      # PMA_PASSWORD: ${DB_PASSWORD:-opatrimoine}
-      UPLOAD_LIMIT: 20M
-    networks:
-      - opatrimoine-network
-
-  maildev:
-    image: maildev/maildev
-    container_name: ${DOCKER_PROJECT_NAME}_maildev
-    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
-    ports:
-      - "8081:80"
-      - "1025:25"
-    restart: unless-stopped
-    networks:
-      - opatrimoine-network
-
-  nginx:
-    build:
-      context: .docker/nginx
-      args:
-        - DOCKER_PROJECT_NAME=${DOCKER_PROJECT_NAME}
-        - DOCKER_PROJECT_DIR=${DOCKER_PROJECT_DIR}
-    container_name: ${DOCKER_PROJECT_NAME}_nginx
+      WORDPRESS_DB_HOST: ${DB_HOST}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_TABLE_PREFIX: ${WP_TABLE_PREFIX}
+      VIRTUAL_HOST: opatrimoine.wugenois.com
+      LETSENCRYPT_HOST: opatrimoine.wugenois.com
+      LETSENCRYPT_EMAIL: aurelien.genois@gmail.com
+      WP_ENV: ${WP_ENV}
+      WP_HOME: ${WP_HOME}
+      WP_THEME: ${WP_THEME}
+    volumes:
+      # Mount your theme for live development
+      - ./public/themes/opatrimoine:/var/www/html/wp-content/themes/opatrimoine
+      # Persist uploads/media
+      - wp_data:/var/www/html/wp-content/uploads
     depends_on:
-      - php
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./:/var/www/html:cached
-      - ./.docker/nginx/certs:/etc/nginx/ssl:cached
-      - ./.docker/nginx/error.log:/var/log/nginx/error.log:cached
+      opatrimoine-db:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost/wp/wp-login.php']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
-      - opatrimoine-network
-
-  php:
-    build:
-      context: .docker/php
-      args:
-        - DOCKER_PHP_VERSION=${DOCKER_PHP_VERSION}
-        - DOCKER_PHP_EXTENSIONS=${DOCKER_PHP_EXTENSIONS}
-    container_name: ${DOCKER_PROJECT_NAME}_php
-    command: sh -c "${DOCKER_START_COMMANDS} && php-fpm"
-    tty: true
-    depends_on:
-      - mysql
-      - maildev
-    ports:
-      - "9000:9000"
-    volumes:
-      - ./:/var/www/html:cached
-      - vendor:/var/www/html/vendor:delegated
-      - ./.docker/php/.zshrc:/root/.zshrc:cached
-      - ./.docker/php/.p10k.zsh:/root/.p10k.zsh:cached
-      - ./.docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini:cached
-      - ${DOCKER_SSH_DIR}:/root/.ssh:cached
-    networks:
-      - opatrimoine-network
-
-  node:
-    image: node:${DOCKER_NODE_VERSION}
-    container_name: ${DOCKER_PROJECT_NAME}_node
-    volumes:
-      - ./:/var/www/html:cached
-      - node_modules:/var/www/html/node_modules:delegated
-    working_dir: /var/www/html
-    user: root:root # Dans la plupart des cas, adaptez au besoin
-    # command: "npm run dev"
-    tty: true
-    ports:
-      - 8089:8089 # Port pour webpack
-      - 3000:3000 # Port pour BrowserSync
-    networks:
-      - opatrimoine-network
-
-networks:
-  opatrimoine-network:
-    driver: bridge
+      - proxy_default
 
 volumes:
-  mysql-data:
-  certs:
-  vendor:
-  node_modules:
+  db_data:
+  wp_data:
+
+networks:
+  proxy_default:
+    external: true

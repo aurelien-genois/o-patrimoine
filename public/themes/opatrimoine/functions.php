@@ -60,7 +60,7 @@ function opatrimoine_initialize_theme()
 add_action('wp_enqueue_scripts', function () {
 
 
-    if (WP_ENV === 'local') {
+    if (WP_ENV === 'development') {
         wp_enqueue_script('opatrimoine_js-defer', 'https://localhost:3000/assets/app.bundle.js', [], filemtime(get_template_directory() . '/assets/app.bundle.js'), true);
     } else {
         wp_enqueue_script('opatrimoine_js-defer', get_theme_file_uri('assets/app.bundle.js'), [], filemtime(get_template_directory() . '/assets/app.bundle.js'), true);

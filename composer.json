@@ -17,17 +17,17 @@
   ],
   "extra": {
     "installer-paths": {
-      "public/mu-plugins/{$name}": [
+      "mu-plugins/{$name}": [
         "type:wordpress-muplugin"
       ],
-      "public/plugins/{$name}/": [
+      "plugins/{$name}/": [
         "type:wordpress-plugin"
       ],
-      "public/themes/{$name}/": [
+      "themes/{$name}/": [
         "type:wordpress-theme"
       ]
     },
-    "wordpress-install-dir": "public/wp"
+    "wordpress-install-dir": "wp"
   },
   "require": {
     "johnpbloch/wordpress": "*",
