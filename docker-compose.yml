@@ -10,6 +10,7 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
     volumes:
       - db_data:/var/lib/mysql
+      - ./opatrimoine.sql:/opatrimoine.sql
     healthcheck:
       test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
       interval: 30s
@@ -50,9 +51,9 @@ services:
       WP_THEME: ${WP_THEME}
     volumes:
       # Mount your theme for live development
-      - ./public/themes/opatrimoine:/var/www/html/wp-content/themes/opatrimoine
+      - ./public/themes/opatrimoine:/var/www/html/wp/wp-content/themes/opatrimoine
       # Persist uploads/media
-      - wp_data:/var/www/html/wp-content/uploads
+      - wp_data:/var/www/html/wp/wp-content/uploads
     depends_on:
       opatrimoine-db:
         condition: service_healthy

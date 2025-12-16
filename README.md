@@ -22,3 +22,10 @@ Avant le développement technique, j’ai conçu quelques wireframes afin d’an
 O’Patrimoine a été également une bonne occasion d’approfondir l’Ajax avec WordPress : ces requêtes via Javascript sans rechargement de page. C’est notamment le cas pour le bouton “voir plus” au bas des listes des lieux et des visites. Au clique sur ce dernier, on récupère en Javascript le numéro de “la page à charger” et les valeurs des filtres de recherche pour lancer une nouvelle requête en Ajax avec les mêmes filtres mais pour “la page suivante”. Plutôt qu’une pagination classique prévue par WordPress, j’utilise donc ce système de pagination pour afficher la suite des résultats sous les précédents sans rechargement de page.
 
 Une autre difficulté a été le formatage de la date en français. J’ai dû tout d’abord séparer dans mon esprit la timezone de la langue puis ensuite j’ai dû diviser en deux champs ACF date et heure le champ “datetime” des visites. J’ai utilisé la fonction “datefmt_create()” qui est je crois un raccourci de la méthode “create()” de la classe ”IntlDateFormatter” pour créer un format de date. Mais la syntaxe du format n’est pas celle plus courante pour le PHP, elle est définie par le projet International Components for Unicode (ICU) pour une meilleure internationalisation. Dans mon cas, “d F Y” est devenu “dd LLLL y” puis j’ai obtenu le format en français en utilisant ensuite la fonction “datefmt_format()” en lui passant la date et le format.
+
+## Import BDD
+
+docker exec -it opatrimoine-db \
+ mysql -h ${DB_HOST} -u ${DB_USER} -p ${DB_NAME}
+
+source opatrimoine.sql
