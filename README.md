@@ -25,7 +25,29 @@ Une autre difficulté a été le formatage de la date en français. J’ai dû t
 
 ## Import BDD
 
+(search/replace before if necessary)
+
 docker exec -it opatrimoine-db \
  mysql -h ${DB_HOST} -u ${DB_USER} -p ${DB_NAME}
 
 source opatrimoine.sql
+
+## update Composer & vendor without local PHP + Composer
+
+docker run --rm -it \
+ -v $(pwd):/app \
+ -w /app \
+ composer:2 \
+ update --no-dev
+
+- This spins up a temporary container with Composer installed.
+- Mounts your project into /app.
+- Runs composer update inside the container.
+- Updates composer.lock in your local project directory.
+- No need to install PHP or Composer on your host.
+
+docker run --rm -it \
+ -v $(pwd):/app \
+ -w /app \
+ composer:2 \
+ install --no-dev
