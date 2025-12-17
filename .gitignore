@@ -10,6 +10,8 @@ public/themes/*
 public/themes/opatrimoine/assets/*
 .htaccess
 
+mu-plugins
+
 ### Node ###
 # Logs
 logs

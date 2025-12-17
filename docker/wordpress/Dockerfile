@@ -1,9 +1,13 @@
-# Start from official WordPress image with Apache + PHP
-# FROM node:18 AS build
-# WORKDIR /app
-# COPY ./public/themes/opatrimoine ./opatrimoine
-# RUN cd opatrimoine && npm install && npm run build
+FROM node:18 AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY resources ./resources
+COPY webpack.config.js tailwind.config.js postcss.config.js ./
+COPY public/themes/opatrimoine ./public/themes/opatrimoine
+RUN npm run build
 
+# From official WordPress image with Apache + PHP
 FROM wordpress:php8.2-apache
 
 # Install Composer
@@ -23,11 +27,18 @@ COPY composer.json composer.lock ./
 # Install WordPress + plugins via Composer
 RUN composer install --no-dev --prefer-dist --no-interaction
 
+COPY --from=build /app/public/themes/opatrimoine ./wp/wp-content/themes/opatrimoine/
+
 # Copy everything except themes (since you mount them)
 COPY public/wp-config.php .
 COPY public/index.php .
 COPY public/favicon.ico .
-COPY opatrimoine.sql .
-# COPY --from=build /app/opatrimoine/assets ./wp-content/themes/opatrimoine/assets
 
-RUN mv plugins/* wp/wp-content/plugins
+RUN mv plugins/* wp/wp-content/plugins/
+RUN rmdir plugins
+
+RUN if [ -d "mu-plugins" ] && [ "$(ls -A mu-plugins)" ]; then \
+      mv mu-plugins/* wp/wp-content/mu-plugins/; \
+    fi
+
+RUN rmdir wp-content/cache wp-content/plugins wp-content/themes wp-content

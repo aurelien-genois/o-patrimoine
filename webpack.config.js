@@ -12,8 +12,8 @@ const theme = process.env.WP_THEME;
 // NODE_ENV defined in npm script command, can also use WP_ENV defined in .env
 const devmode = process.env.NODE_ENV !== "production";
 
-const wpThemeJsDir = `./resources/js/`;
-const wpThemeFontsDir = `./public/themes/${theme}/assets/fonts/`;
+const resourcesJsDir = `./resources/js`;
+const wpThemeFontsDir = `./public/themes/${theme}/assets/fonts`;
 const wpThemeDir = `./public/themes/${theme}/`;
 const wpThemeDistDir = `./public/themes/${theme}/assets/`;
 
@@ -24,8 +24,8 @@ const pubThemeDir = `http://localhost:3000/public/themes/${theme}/assets/`;
 module.exports = {
     mode: devmode ? "development" : "production",
     entry: {
-        app: `${wpThemeJsDir}app.js`,
-        vendor: `${wpThemeJsDir}vendor.js`,
+        app: `${resourcesJsDir}/app.js`,
+        vendor: `${resourcesJsDir}/vendor.js`,
     },
     watchOptions: {
         ignored: [

@@ -20,13 +20,14 @@ services:
     networks:
       - proxy_default
 
-  opatrimoine-node:
-    image: node:18
-    container_name: opatrimoine-node
-    working_dir: /app
-    volumes:
-      - .:/app
-    command: ['npm', 'run', 'build']
+  # opatrimoine-node:
+  #   image: node:18
+  #   container_name: opatrimoine-node
+  #   working_dir: /app
+  #   volumes:
+  #     - .:/app
+  #   command: >
+  #     bash -c "npm ci && npm run dev"
   # "build" for production or "dev" for development
 
   opatrimoine-wp:
