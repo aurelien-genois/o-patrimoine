@@ -51,3 +51,8 @@ docker run --rm -it \
  -w /app \
  composer:2 \
  install --no-dev
+
+# Uploads
+
+Use updraft backup to restore uploads
+
