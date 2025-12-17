@@ -41,3 +41,8 @@ COPY mu-plugins wp/wp-content/mu-plugins
 
 
 RUN rmdir wp-content/cache wp-content/plugins wp-content/themes wp-content
+
+RUN mkdir -p wp/wp-content/uploads \
+    && chown -R www-data:www-data wp/
+
+RUN echo "LimitRequestBody 536870912" > /etc/apache2/conf-enabled/upload.conf

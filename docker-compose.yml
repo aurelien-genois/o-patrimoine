@@ -47,6 +47,7 @@ services:
       VIRTUAL_HOST: opatrimoine.wugenois.com
       LETSENCRYPT_HOST: opatrimoine.wugenois.com
       LETSENCRYPT_EMAIL: aurelien.genois@gmail.com
+      CLIENT_MAX_BODY_SIZE: 512m
       WP_ENV: ${WP_ENV}
       WP_HOME: ${WP_HOME}
       WP_THEME: ${WP_THEME}
@@ -55,6 +56,7 @@ services:
       - ./themes/opatrimoine:/var/www/html/wp/wp-content/themes/opatrimoine
       # Persist uploads/media
       - wp_data:/var/www/html/wp/wp-content/uploads
+      - ./php.ini:/usr/local/etc/php/conf.d/uploads.ini
     depends_on:
       opatrimoine-db:
         condition: service_healthy
