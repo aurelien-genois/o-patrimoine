@@ -13,11 +13,11 @@ const theme = process.env.WP_THEME;
 const devmode = process.env.NODE_ENV !== "production";
 
 const resourcesJsDir = `./resources/js`;
-const wpThemeFontsDir = `./public/themes/${theme}/assets/fonts`;
-const wpThemeDir = `./public/themes/${theme}/`;
-const wpThemeDistDir = `./public/themes/${theme}/assets/`;
+const wpThemeFontsDir = `./themes/${theme}/assets/fonts`;
+const wpThemeDir = `./themes/${theme}/`;
+const wpThemeDistDir = `./themes/${theme}/assets/`;
 
-const pubThemeDir = `http://localhost:3000/public/themes/${theme}/assets/`;
+const pubThemeDir = `http://localhost:3000/themes/${theme}/assets/`;
 
 // TODO verify tailwind config
 
@@ -101,7 +101,7 @@ module.exports = {
             proxy: 'localhost:8089',
             open: false,
             files: [
-                `./public/themes/${theme}/**/*.php`,
+                `./themes/${theme}/**/*.php`,
             ],
             reloadThrottle: 2000,
             reloadOnRestart: true,

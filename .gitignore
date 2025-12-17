@@ -1,16 +1,17 @@
-public/wp/*
-public/languages
-public/cache
-public/uploads
-public/upgrade
-public/plugins/*
-!public/plugins/opatrimoine
-public/themes/*
-!public/themes/opatrimoine
-public/themes/opatrimoine/assets/*
+wp/*
+languages
+cache
+uploads
+upgrade
+plugins/*
+!plugins/opatrimoine
+themes/*
+!themes/opatrimoine
+themes/opatrimoine/assets/*
 .htaccess
 
-mu-plugins
+mu-plugins/*
+!mu-plugins/load.php
 
 ### Node ###
 # Logs

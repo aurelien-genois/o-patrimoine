@@ -52,7 +52,7 @@ services:
       WP_THEME: ${WP_THEME}
     volumes:
       # Mount your theme for live development
-      - ./public/themes/opatrimoine:/var/www/html/wp/wp-content/themes/opatrimoine
+      - ./themes/opatrimoine:/var/www/html/wp/wp-content/themes/opatrimoine
       # Persist uploads/media
       - wp_data:/var/www/html/wp/wp-content/uploads
     depends_on:
