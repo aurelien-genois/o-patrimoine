@@ -72,7 +72,7 @@ services:
     command: >
       sh -c "if [ \"$WP_ENV\" = \"production\" ]; then npm run build; else npm run dev; fi"
     environment:
-      - WP_ENV=${WP_ENV}
+      WP_ENV: ${WP_ENV}
     depends_on:
       - opatrimoine-wp
     networks:
