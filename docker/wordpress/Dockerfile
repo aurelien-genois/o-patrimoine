@@ -1,3 +1,12 @@
+FROM node:18 AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY resources ./resources
+COPY webpack.config.js tailwind.config.js postcss.config.js ./
+COPY themes/opatrimoine ./themes/opatrimoine
+RUN npm run build   # generates assets
+
 # From official WordPress image with Apache + PHP
 FROM wordpress:php8.2-apache
 
@@ -33,6 +42,7 @@ RUN rmdir wp-content/cache wp-content/plugins wp-content/themes wp-content
 
 COPY themes/opatrimoine wp/wp-content/themes/opatrimoine
 RUN mkdir -p wp/wp-content/themes/opatrimoine/assets
+COPY --from=build /app/themes/opatrimoine/assets ./wp/wp-content/themes/opatrimoine/assets
 
 RUN mkdir -p wp/wp-content/uploads \
     && chown -R www-data:www-data wp/
