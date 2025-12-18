@@ -21,7 +21,7 @@ jobs:
 
       - name: Write .env file
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh  -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd /var/www/html/opatrimoine
             cat > .env <<EOL
             DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}
