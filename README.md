@@ -25,10 +25,12 @@ Une autre difficulté a été le formatage de la date en français. J’ai dû t
 
 ## Import BDD
 
-(search/replace before if necessary)
+(search/replace with wp-cli before if necessary)
+docker exec -it --user www-data opatrimoine-wp \
+ wp search-replace 'opatrimoine.test' 'opatrimoine.wugenois.com' --skip-columns=guid
 
 docker exec -it opatrimoine-db \
- mysql -h ${DB_HOST} -u ${DB_USER} -p ${DB_NAME}
+ mysql -h opatrimoine-db -u ${DB_USER} -p ${DB_NAME}
 
 source opatrimoine.sql
 

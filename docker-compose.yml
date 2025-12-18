@@ -34,8 +34,8 @@ services:
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
       WORDPRESS_DB_NAME: ${DB_NAME}
       WORDPRESS_TABLE_PREFIX: ${WP_TABLE_PREFIX}
-      VIRTUAL_HOST: opatrimoine.test
-      LETSENCRYPT_HOST: opatrimoine.test
+      VIRTUAL_HOST: ${SSL_DOMAIN}
+      LETSENCRYPT_HOST: ${SSL_DOMAIN}
       LETSENCRYPT_EMAIL: aurelien.genois@gmail.com
       CLIENT_MAX_BODY_SIZE: 512m
       WP_ENV: ${WP_ENV}
