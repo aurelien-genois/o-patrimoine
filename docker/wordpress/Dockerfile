@@ -31,6 +31,9 @@ COPY mu-plugins wp/wp-content/mu-plugins
 
 RUN rmdir wp-content/cache wp-content/plugins wp-content/themes wp-content
 
+COPY themes/opatrimoine wp/wp-content/themes/opatrimoine
+RUN mkdir -p wp/wp-content/themes/opatrimoine/assets
+
 RUN mkdir -p wp/wp-content/uploads \
     && chown -R www-data:www-data wp/
 
