@@ -74,7 +74,8 @@ services:
     environment:
       WP_ENV: ${WP_ENV}
     depends_on:
-      - opatrimoine-wp
+      opatrimoine-wp:
+        condition: service_healthy
     networks:
       - proxy_default
 
