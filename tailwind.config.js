@@ -1,8 +1,8 @@
 module.exports = {
     content: [
-        './public/themes/opatrimoine/templates/**/*.php',
-        './public/themes/opatrimoine/**/*.php',
-        './public/themes/opatrimoine/*.php',
+        './themes/opatrimoine/templates/**/*.php',
+        './themes/opatrimoine/**/*.php',
+        './themes/opatrimoine/*.php',
     ],
     theme: {
         extend: {

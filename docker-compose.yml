@@ -20,16 +20,6 @@ services:
     networks:
       - proxy_default
 
-  # opatrimoine-node:
-  #   image: node:18
-  #   container_name: opatrimoine-node
-  #   working_dir: /app
-  #   volumes:
-  #     - .:/app
-  #   command: >
-  #     bash -c "npm ci && npm run dev"
-  # "build" for production or "dev" for development
-
   opatrimoine-wp:
     build:
       context: .
@@ -66,6 +56,25 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    networks:
+      - proxy_default
+
+  opatrimoine-node:
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    container_name: opatrimoine-node
+    ports:
+      - 8089:8089 # Port pour webpack
+      - 3000:3000 # Port pour BrowserSync
+    volumes:
+      - .:/app
+    command: >
+      sh -c "if [ \"$WP_ENV\" = \"production\" ]; then npm run build; else npm run dev; fi"
+    environment:
+      - WP_ENV=${WP_ENV}
+    depends_on:
+      - opatrimoine-wp
     networks:
       - proxy_default
 

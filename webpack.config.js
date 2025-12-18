@@ -29,7 +29,7 @@ module.exports = {
     },
     watchOptions: {
         ignored: [
-            "/node_modules/**", "/vendor/**", "/.docker/**", "/documentation/**"
+            "/node_modules/**", "/vendor/**", "/docker/**", "/documentation/**", "/mu-plugins/**"
         ],
         poll: 1000, // Check for changes every second
         aggregateTimeout: 300
@@ -49,17 +49,25 @@ module.exports = {
     },
     devServer: {
         allowedHosts: 'all',
-        host: 'localhost',
+        host: '0.0.0.0',
         port: 8089,
         liveReload: true,
         hot: true,
-        // proxy: {
-        //   '*': 'http://nginx',
-        //   autoRewrite: true,
-        //   changeOrigin: true,
-        //   ignorePath: false,
-        //   secure: false,
-        // },
+        client: {
+            webSocketURL: {
+                hostname: 'localhost',
+                port: 8089,
+                protocol: 'ws',
+                pathname: '/ws',
+            },
+        },
+        proxy: {
+            '*': 'http://opatrimoine-wp:80',
+            autoRewrite: true,
+            changeOrigin: true,
+            ignorePath: false,
+            secure: false,
+        },
         static: {
             directory: path.resolve(__dirname, wpThemeDir),
         },
@@ -67,13 +75,10 @@ module.exports = {
             writeToDisk: true,
         },
         compress: true,
-        hot: true,
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET , POST, PUT, DELETE, PATCH; OPTIONS',
             'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Author',
-        },
-        client: {
         },
     },
     plugins: [
@@ -92,22 +97,24 @@ module.exports = {
             // TODO options
         ),
         new BrowserSyncPlugin({
-            host: 'localhost',
+            host: '0.0.0.0',
             port: 3000,
-            https: {
-                key: process.env.SSL_KEY_PATH,
-                cert: process.env.SSL_CERT_PATH,
-            },
-            proxy: 'localhost:8089',
+            // https: {
+            //     key: process.env.SSL_KEY_PATH,
+            //     cert: process.env.SSL_CERT_PATH,
+            // },
+            proxy: 'http://localhost:8089',
             open: false,
             files: [
                 `./themes/${theme}/**/*.php`,
+                `./themes/${theme}/assets/**/*.{css,js}`
             ],
-            reloadThrottle: 2000,
-            reloadOnRestart: true,
+            reloadDelay: 1000,
+            // reloadThrottle: 2000,
+            // reloadOnRestart: true,
         }, {
-            reload: false,
-            // injectCss: true,
+            reload: true,
+            injectCss: true,
         }),
         new MiniCssExtractPlugin({
             filename: "[name].css",

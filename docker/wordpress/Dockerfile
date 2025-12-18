@@ -1,12 +1,3 @@
-FROM node:18 AS build
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
-COPY resources ./resources
-COPY webpack.config.js tailwind.config.js postcss.config.js ./
-COPY themes/opatrimoine ./themes/opatrimoine
-RUN npm run build
-
 # From official WordPress image with Apache + PHP
 FROM wordpress:php8.2-apache
 
@@ -26,8 +17,6 @@ COPY composer.json composer.lock ./
 
 # Install WordPress + plugins via Composer
 RUN composer install --no-dev --prefer-dist --no-interaction
-
-COPY --from=build /app/themes/opatrimoine ./wp/wp-content/themes/opatrimoine/
 
 # Copy everything except themes (since you mount them)
 COPY wp-config.php .

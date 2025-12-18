@@ -56,3 +56,7 @@ docker run --rm -it \
 
 Use updraft backup to restore uploads
 
+# Production / Develpment mode
+
+Reload Nginx if 502 Bad Gateway fater switching mode
+"docker exec proxy nginx -s reload"
