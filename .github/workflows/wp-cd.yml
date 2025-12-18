@@ -33,10 +33,10 @@ jobs:
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             DB_NAME=${{ secrets.DB_NAME }}
             WP_TABLE_PREFIX=${{ secrets.WP_TABLE_PREFIX }}
-            SSL_DOMAIN={{ vars.SSL_DOMAIN}}
-            WP_THEME={{ vars.WP_THEME}}
+            SSL_DOMAIN=${{ vars.SSL_DOMAIN}}
+            WP_THEME=${{ vars.WP_THEME}}
             WP_ENV=production
-            WP_HOME={{ vars.WP_HOME}}
+            WP_HOME=${{ vars.WP_HOME}}
             EOL
           EOF
 
