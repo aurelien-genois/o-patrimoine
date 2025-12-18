@@ -19,9 +19,26 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Write .env file
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd /var/www/html/opatrimoine
+            cat > .env <<EOL
+            DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_NAME=${{ secrets.DB_NAME }}
+            WP_TABLE_PREFIX=${{ secrets.WP_TABLE_PREFIX }}
+            WP_THEME={{ vars.WP_THEME}}
+            WP_ENV=production
+            WP_HOME={{ vars.WP_HOME}}
+            EOL
+          EOF
+
       - name: Deploy to server
         run: |
           rsync -avz --delete \
+            --exclude '.env' \
             -e "ssh -o StrictHostKeyChecking=no" \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/opatrimoine
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
