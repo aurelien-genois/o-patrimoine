@@ -6,3 +6,4 @@ COPY resources ./resources
 COPY webpack.config.js tailwind.config.js postcss.config.js ./
 COPY themes/opatrimoine ./themes/opatrimoine
 RUN mkdir -p ./themes/opatrimoine/assets
+RUN npm run build
