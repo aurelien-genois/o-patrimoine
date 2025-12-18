@@ -1,0 +1,1 @@
+(function(){var __webpack_modules__={162:function(){eval("// import 'tailwindcss';\n\n//# sourceURL=webpack://opatrimmoine/./resources/js/vendor.js?")}},__webpack_exports__={};__webpack_modules__[162]()})();

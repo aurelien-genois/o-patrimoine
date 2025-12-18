@@ -7,8 +7,7 @@ plugins/*
 !plugins/opatrimoine
 themes/*
 !themes/opatrimoine
-themes/opatrimoine/assets/*
-!themes/opatrimoine/assets/temp.md
+# themes/opatrimoine/assets/
 .htaccess
 
 mu-plugins/*
