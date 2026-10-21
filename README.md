@@ -5,6 +5,10 @@ NODE : `18`
 
 <h2 align="center">O'patrimoine</h2>
 
+<h2 align="center"><a  href="https://opatrimoine.wugenois.com/">Live Demo</a></h2>
+
+## Introduction
+
 Projet fictif, O’Patrimoine a été développé en autonomie après une formation spécialisée sur le développement avec WordPress pour passer un titre professionnel devant un jury.
 
 O’Patrimoine a pour objectif de centraliser des visites guidées de différents lieux sur une seule plateforme et ainsi faciliter l’accès aux sites historiques hors Journées du Patrimoine. Les organisateurs (via un compte au rôle spécifique) peuvent gérer des fiches “lieux” et d’y associer des visites avec thème, horaires et nombre de places. Les internautes peuvent consulter ces fiches “lieux” et les visites qui y sont prévues, et s’y inscrire via un compte “visiteur” (en précisant le nombre de places).
